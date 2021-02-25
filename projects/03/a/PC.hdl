@@ -11,10 +11,27 @@
  * else                    out[t+1] = out[t]
  */
 
+
+
+/**
+* A w-bit counter consists of two main elements: 
+* a regular w-bit register, and combinational logic. 
+* The combinational logic is designed to 
+* (a) compute the counting function, and 
+* (b) put the counter in the right operating mode, 
+* as mandated by the values of its three control bits. 
+* Tip: Most of this logic was already built in chapter 2
+*/
+
 CHIP PC {
     IN in[16],load,inc,reset;
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    Inc16(in=saved, out=inced);
+    Mux16(a=saved, b=inced, sel=inc, out=muxedinc);
+    Mux16(a=muxedinc, b=in, sel=load, out=muxedload);
+    Mux16(a=muxedload, b=false, sel=reset, out=muxedreset);
+
+    Register(in=muxedreset, load=true, out=out, out=saved);
 }
