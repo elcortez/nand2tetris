@@ -51,13 +51,13 @@ CHIP CPU {
   And(a=instruction[10], b=instruction[10], out=c5);
   And(a=instruction[11], b=instruction[11], out=c6);
   And(a=instruction[12], b=instruction[12], out=a);
-  And(a=instruction[15], b=instruction[15], out=instructionType);
+  And(a=instruction[15], b=instruction[15], out=cInstructionType);
 
-  Mux16(a[15]=false, a[0..14]=instruction[0..14], b=outALU, sel=instructionType, out=mux1);
+  Mux16(a[15]=false, a[0..14]=instruction[0..14], b=outALU, sel=cInstructionType, out=mux1);
 
   ARegister(in=mux1, load=d1, out=RegisterA, out[0..14]=addressM);
   DRegister(in=outALU, load=d2, out=RegisterD);
-  And(a=true, b=d3, out=writeM);
+  And(a=cInstructionType, b=d3, out=writeM);
 
   Mux16(a=RegisterA, b=inM, sel=a, out=mux2);
 
