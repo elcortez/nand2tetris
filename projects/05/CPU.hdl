@@ -52,11 +52,16 @@ CHIP CPU {
   And(a=instruction[11], b=instruction[11], out=c1);
   And(a=instruction[12], b=instruction[12], out=a);
   And(a=instruction[15], b=instruction[15], out=cInstructionType);
+  Not(in=cInstructionType, out=aInstructionType);
 
   Mux16(a[15]=false, a[0..14]=instruction[0..14], b=outALU, sel=cInstructionType, out=mux1);
 
-  ARegister(in=mux1, load=d1, out=RegisterA, out[0..14]=addressM);
-  DRegister(in=outALU, load=d2, out=RegisterD);
+  Or(a=d1, b=aInstructionType, out=loadRegisterA);
+  ARegister(in=mux1, load=loadRegisterA, out=RegisterA, out[0..14]=addressM);
+
+  And(a=cInstructionType, b=d2, out=loadRegisterD);
+  DRegister(in=outALU, load=loadRegisterD, out=RegisterD);
+
   And(a=cInstructionType, b=d3, out=writeM);
 
   Mux16(a=RegisterA, b=inM, sel=a, out=mux2);
@@ -89,18 +94,19 @@ CHIP CPU {
   And(a=notj1, b=notj3, out=notj13);
   And(a=notj2, b=notj3, out=notj23);
 
-  And(a=j1, b=notj23, out=jgt);
+  And(a=j3, b=notj12, out=jgt);
   And(a=j2, b=notj13, out=jeq);
-  And(a=j3, b=notj23, out=jlt);
-  And(a=j12, b=notj3, out=jle);
-  And(a=j13, b=notj2, out=jne);
   And(a=j23, b=notj1, out=jge);
+  And(a=j1, b=notj23, out=jlt);
+  And(a=j13, b=notj2, out=jne);
+  And(a=j12, b=notj3, out=jle);
   And(a=j12, b=j3, out=jmp);
 
   Not(in=zr, out=notZero);
-  Not(in=ng, out=positive);
-  Or(a=notZero, b=positive, out=greaterOrEqual);
-  Or(a=notZero, b=ng, out=lowerOrEqual);
+  Not(in=ng, out=notNegative);
+  And(a=notZero, b=notNegative, out=positive);
+  Or(a=zr, b=positive, out=greaterOrEqual);
+  Or(a=zr, b=ng, out=lowerOrEqual);
 
   And(a=zr, b=jeq, out=jeqCheck);
   And(a=notZero, b=jne, out=jneCheck);
@@ -118,8 +124,10 @@ CHIP CPU {
     in[5]=jleCheck,
     in[6]=jmp,
     in[7]=false,
-    out=load
+    out=loadIfCInstruction
   );
+
+  And(a=loadIfCInstruction, b=cInstructionType, out=load);
 
   Not(in=load, out=inc);
   PC(reset=reset, load=load, inc=inc, in=RegisterA, out[0..14]=pc);
