@@ -33,10 +33,21 @@ end
 
 File.open("#{ARGV[0].sub('vm', 'asm')}", "w") do |asm_file|
   File.open(ARGV[0]) do |vm_file|
+    if ARGV[0].include?('PersonalTest') # setting stack pointer on my own tests
+      asm_file.puts("@256")
+      asm_file.puts("D = A")
+      asm_file.puts("@0")
+      asm_file.puts("M = D")
+    end
+
     vm_file.each_line.map(&:strip).reject { |l| l.start_with?('//') || l.empty? }.each do |line|
       translated_command(line).each do |asm_command|
         asm_file.puts(asm_command)
       end
     end
+
+    asm_file.puts('(END)')
+    asm_file.puts('@END')
+    asm_file.puts('0;JMP')
   end
 end
