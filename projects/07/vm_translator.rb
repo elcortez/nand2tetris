@@ -25,6 +25,13 @@ def sub
 end
 
 def neg
+  [
+    '@SP',
+    'A = M - 1',
+    'D = M',
+    'M = M - D',
+    'M = M -D'
+  ]
 end
 
 def and
@@ -144,6 +151,7 @@ def translated_command(command)
   return lt if command == 'lt'
   return gt if command == 'gt'
   return sub if command == 'sub'
+  return neg if command == 'neg'
   return []
 end
 
