@@ -2,7 +2,7 @@
 D = A
 @0
 M = D
-@7
+@9
 D = A
 @SP
 A = M
@@ -20,10 +20,25 @@ M = M + 1
 A = M - 1
 D = M
 A = A - 1
-D = M + D
-M = D
+D = M - D
+@LT
+D;JLT
+@NOT_LT
+D;JGE
+(LT)
 @SP
-M = M - 1
+A = M - 1
+A = A - 1
+M = -1
+@END
+0;JMP
+(NOT_LT)
+@SP
+A = M - 1
+A = A - 1
+M = 0
+@END
+0;JMP
 (END)
 @END
 0;JMP
