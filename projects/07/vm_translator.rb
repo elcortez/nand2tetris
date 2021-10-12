@@ -47,10 +47,28 @@ def and_m
   ]
 end
 
-def or
+def or_m
+  [
+    '@SP',
+    'A = M - 1',
+    'D = M',
+    'A = A - 1',
+    'D = M | D',
+    'M = D',
+    '@SP',
+    'M = M - 1'
+  ]
 end
 
-def not
+def not_m
+  [
+    '@SP',
+    'A = M - 1',
+    'D = -M',
+    'M = D',
+    '@SP',
+    'M = M - 1'
+  ]
 end
 
 def eq
@@ -70,6 +88,8 @@ def eq
     'A = M - 1',
     'A = A - 1',
     'M = -1',
+    '@SP',
+    'M = M - 1',
     '@END',
     '0;JMP',
     '(NOT_EQ)',
@@ -77,6 +97,8 @@ def eq
     'A = M - 1',
     'A = A - 1',
     'M = 0',
+    '@SP',
+    'M = M - 1',
     '@END',
     '0;JMP',
   ]
@@ -163,6 +185,8 @@ def translated_command(command)
   return sub if command == 'sub'
   return neg if command == 'neg'
   return and_m if command == 'and'
+  return or_m if command == 'or'
+  return not_m if command == 'not'
   return []
 end
 
