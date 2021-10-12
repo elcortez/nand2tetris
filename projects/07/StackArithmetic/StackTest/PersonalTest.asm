@@ -2,14 +2,14 @@
 D = A
 @0
 M = D
-@9
+@2
 D = A
 @SP
 A = M
 M = D
 @SP
 M = M + 1
-@8
+@2
 D = A
 @SP
 A = M
@@ -19,8 +19,11 @@ M = M + 1
 @SP
 A = M - 1
 D = M
-M = M - D
-M = M -D
+A = A - 1
+D = M & D
+M = D
+@SP
+M = M - 1
 (END)
 @END
 0;JMP

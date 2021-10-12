@@ -34,7 +34,17 @@ def neg
   ]
 end
 
-def and
+def and_m
+  [
+    '@SP',
+    'A = M - 1',
+    'D = M',
+    'A = A - 1',
+    'D = M & D',
+    'M = D',
+    '@SP',
+    'M = M - 1'
+  ]
 end
 
 def or
@@ -152,6 +162,7 @@ def translated_command(command)
   return gt if command == 'gt'
   return sub if command == 'sub'
   return neg if command == 'neg'
+  return and_m if command == 'and'
   return []
 end
 
