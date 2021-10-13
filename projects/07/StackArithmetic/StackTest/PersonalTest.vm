@@ -1,6 +1,6 @@
 push constant 17
-push constant 17
-eq
+// push constant 17
+// eq
 // push constant 17
 // push constant 16
 // eq
@@ -35,4 +35,4 @@ eq
 // and
 // push constant 82
 // or
-// not
+not

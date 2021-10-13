@@ -17,24 +17,29 @@ A = M - 1
 D = M
 A = A - 1
 D = M - D
-@EQ
+@EQ_HPVTOZQK
 D;JEQ
-@NOT_EQ
+@NOT_EQ_HPVTOZQK
 D;JNE
-(EQ)
+(EQ_HPVTOZQK)
 @SP
 A = M - 1
 A = A - 1
 M = -1
-@END
+@SP
+M = M - 1
+@END_HPVTOZQK
 0;JMP
-(NOT_EQ)
+(NOT_EQ_HPVTOZQK)
 @SP
 A = M - 1
 A = A - 1
 M = 0
-@END
+@SP
+M = M - 1
+@END_HPVTOZQK
 0;JMP
+(END_HPVTOZQK)
 @17
 D = A
 @SP
@@ -54,24 +59,29 @@ A = M - 1
 D = M
 A = A - 1
 D = M - D
-@EQ
+@EQ_OEPMEAPG
 D;JEQ
-@NOT_EQ
+@NOT_EQ_OEPMEAPG
 D;JNE
-(EQ)
+(EQ_OEPMEAPG)
 @SP
 A = M - 1
 A = A - 1
 M = -1
-@END
+@SP
+M = M - 1
+@END_OEPMEAPG
 0;JMP
-(NOT_EQ)
+(NOT_EQ_OEPMEAPG)
 @SP
 A = M - 1
 A = A - 1
 M = 0
-@END
+@SP
+M = M - 1
+@END_OEPMEAPG
 0;JMP
+(END_OEPMEAPG)
 @16
 D = A
 @SP
@@ -91,24 +101,29 @@ A = M - 1
 D = M
 A = A - 1
 D = M - D
-@EQ
+@EQ_CNUGNMLO
 D;JEQ
-@NOT_EQ
+@NOT_EQ_CNUGNMLO
 D;JNE
-(EQ)
+(EQ_CNUGNMLO)
 @SP
 A = M - 1
 A = A - 1
 M = -1
-@END
+@SP
+M = M - 1
+@END_CNUGNMLO
 0;JMP
-(NOT_EQ)
+(NOT_EQ_CNUGNMLO)
 @SP
 A = M - 1
 A = A - 1
 M = 0
-@END
+@SP
+M = M - 1
+@END_CNUGNMLO
 0;JMP
+(END_CNUGNMLO)
 @892
 D = A
 @SP
@@ -128,24 +143,29 @@ A = M - 1
 D = M
 A = A - 1
 D = M - D
-@LT
+@LT_URUPWNWW
 D;JLT
-@NOT_LT
+@NOT_LT_URUPWNWW
 D;JGE
-(LT)
+(LT_URUPWNWW)
 @SP
 A = M - 1
 A = A - 1
 M = -1
-@END
+@SP
+M = M - 1
+@END_URUPWNWW
 0;JMP
-(NOT_LT)
+(NOT_LT_URUPWNWW)
 @SP
 A = M - 1
 A = A - 1
 M = 0
-@END
+@SP
+M = M - 1
+@END_URUPWNWW
 0;JMP
+(END_URUPWNWW)
 @891
 D = A
 @SP
@@ -165,24 +185,29 @@ A = M - 1
 D = M
 A = A - 1
 D = M - D
-@LT
+@LT_QQDLLWLR
 D;JLT
-@NOT_LT
+@NOT_LT_QQDLLWLR
 D;JGE
-(LT)
+(LT_QQDLLWLR)
 @SP
 A = M - 1
 A = A - 1
 M = -1
-@END
+@SP
+M = M - 1
+@END_QQDLLWLR
 0;JMP
-(NOT_LT)
+(NOT_LT_QQDLLWLR)
 @SP
 A = M - 1
 A = A - 1
 M = 0
-@END
+@SP
+M = M - 1
+@END_QQDLLWLR
 0;JMP
+(END_QQDLLWLR)
 @891
 D = A
 @SP
@@ -202,24 +227,29 @@ A = M - 1
 D = M
 A = A - 1
 D = M - D
-@LT
+@LT_JIEKNLYR
 D;JLT
-@NOT_LT
+@NOT_LT_JIEKNLYR
 D;JGE
-(LT)
+(LT_JIEKNLYR)
 @SP
 A = M - 1
 A = A - 1
 M = -1
-@END
+@SP
+M = M - 1
+@END_JIEKNLYR
 0;JMP
-(NOT_LT)
+(NOT_LT_JIEKNLYR)
 @SP
 A = M - 1
 A = A - 1
 M = 0
-@END
+@SP
+M = M - 1
+@END_JIEKNLYR
 0;JMP
+(END_JIEKNLYR)
 @32767
 D = A
 @SP
@@ -239,24 +269,29 @@ A = M - 1
 D = M
 A = A - 1
 D = M - D
-@GT
+@GT_CBMPEUBD
 D;JGT
-@NOT_GT
+@NOT_GT_CBMPEUBD
 D;JLE
-(GT)
+(GT_CBMPEUBD)
 @SP
 A = M - 1
 A = A - 1
 M = -1
-@END
+@SP
+M = M - 1
+@END_CBMPEUBD
 0;JMP
-(NOT_GT)
+(NOT_GT_CBMPEUBD)
 @SP
 A = M - 1
 A = A - 1
 M = 0
-@END
+@SP
+M = M - 1
+@END_CBMPEUBD
 0;JMP
+(END_CBMPEUBD)
 @32766
 D = A
 @SP
@@ -276,24 +311,29 @@ A = M - 1
 D = M
 A = A - 1
 D = M - D
-@GT
+@GT_CHPTURXX
 D;JGT
-@NOT_GT
+@NOT_GT_CHPTURXX
 D;JLE
-(GT)
+(GT_CHPTURXX)
 @SP
 A = M - 1
 A = A - 1
 M = -1
-@END
+@SP
+M = M - 1
+@END_CHPTURXX
 0;JMP
-(NOT_GT)
+(NOT_GT_CHPTURXX)
 @SP
 A = M - 1
 A = A - 1
 M = 0
-@END
+@SP
+M = M - 1
+@END_CHPTURXX
 0;JMP
+(END_CHPTURXX)
 @32766
 D = A
 @SP
@@ -313,24 +353,29 @@ A = M - 1
 D = M
 A = A - 1
 D = M - D
-@GT
+@GT_TTZOZLXW
 D;JGT
-@NOT_GT
+@NOT_GT_TTZOZLXW
 D;JLE
-(GT)
+(GT_TTZOZLXW)
 @SP
 A = M - 1
 A = A - 1
 M = -1
-@END
+@SP
+M = M - 1
+@END_TTZOZLXW
 0;JMP
-(NOT_GT)
+(NOT_GT_TTZOZLXW)
 @SP
 A = M - 1
 A = A - 1
 M = 0
-@END
+@SP
+M = M - 1
+@END_TTZOZLXW
 0;JMP
+(END_TTZOZLXW)
 @57
 D = A
 @SP
@@ -406,9 +451,7 @@ M = M - 1
 @SP
 A = M - 1
 D = -M
-M = D
-@SP
-M = M - 1
+M = D - 1
 (END)
 @END
 0;JMP

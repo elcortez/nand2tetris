@@ -1,3 +1,7 @@
+def random_string
+  (0...8).map { (65 + rand(26)).chr }.join
+end
+
 def add
   [
     '@SP',
@@ -65,100 +69,112 @@ def not_m
     '@SP',
     'A = M - 1',
     'D = -M',
-    'M = D',
-    '@SP',
-    'M = M - 1'
-  ]
-end
-
-def eq
-  # 0 if not equal, -1 if equal
-  [
-    '@SP',
-    'A = M - 1',
-    'D = M',
-    'A = A - 1',
-    'D = M - D',
-    '@EQ',
-    'D;JEQ',
-    '@NOT_EQ',
-    'D;JNE',
-    '(EQ)',
-    '@SP',
-    'A = M - 1',
-    'A = A - 1',
-    'M = -1',
-    '@SP',
-    'M = M - 1',
-    '@END',
-    '0;JMP',
-    '(NOT_EQ)',
-    '@SP',
-    'A = M - 1',
-    'A = A - 1',
-    'M = 0',
-    '@SP',
-    'M = M - 1',
-    '@END',
-    '0;JMP',
-  ]
-end
-
-def lt
-  # 0 if not lower, -1 if lower
-  [
-    '@SP',
-    'A = M - 1',
-    'D = M',
-    'A = A - 1',
-    'D = M - D',
-    '@LT',
-    'D;JLT',
-    '@NOT_LT',
-    'D;JGE',
-    '(LT)',
-    '@SP',
-    'A = M - 1',
-    'A = A - 1',
-    'M = -1',
-    '@END',
-    '0;JMP',
-    '(NOT_LT)',
-    '@SP',
-    'A = M - 1',
-    'A = A - 1',
-    'M = 0',
-    '@END',
-    '0;JMP',
+    'M = D - 1'
   ]
 end
 
 def gt
   # 0 if not greater, -1 if greater
+  this_method = random_string
   [
     '@SP',
     'A = M - 1',
     'D = M',
     'A = A - 1',
     'D = M - D',
-    '@GT',
+    "@GT_#{this_method}",
     'D;JGT',
-    '@NOT_GT',
+    "@NOT_GT_#{this_method}",
     'D;JLE',
-    '(GT)',
+    "(GT_#{this_method})",
     '@SP',
     'A = M - 1',
     'A = A - 1',
     'M = -1',
-    '@END',
+    '@SP',
+    'M = M - 1',
+    "@END_#{this_method}",
     '0;JMP',
-    '(NOT_GT)',
+    "(NOT_GT_#{this_method})",
     '@SP',
     'A = M - 1',
     'A = A - 1',
     'M = 0',
-    '@END',
+    '@SP',
+    'M = M - 1',
+    "@END_#{this_method}",
     '0;JMP',
+    "(END_#{this_method})"
+  ]
+end
+
+def lt
+  # 0 if not lower, -1 if lower
+  this_method = random_string
+  [
+    '@SP',
+    'A = M - 1',
+    'D = M',
+    'A = A - 1',
+    'D = M - D',
+    "@LT_#{this_method}",
+    'D;JLT',
+    "@NOT_LT_#{this_method}",
+    'D;JGE',
+    "(LT_#{this_method})",
+    '@SP',
+    'A = M - 1',
+    'A = A - 1',
+    'M = -1',
+    '@SP',
+    'M = M - 1',
+    "@END_#{this_method}",
+    '0;JMP',
+    "(NOT_LT_#{this_method})",
+    '@SP',
+    'A = M - 1',
+    'A = A - 1',
+    'M = 0',
+    '@SP',
+    'M = M - 1',
+    "@END_#{this_method}",
+    '0;JMP',
+    "(END_#{this_method})"
+  ]
+end
+
+def eq
+  # 0 if not equal, -1 if equal
+  this_method = random_string
+  [
+    '@SP',
+    'A = M - 1',
+    'D = M',
+    'A = A - 1',
+    'D = M - D',
+    "@EQ_#{this_method}",
+    'D;JEQ',
+    "@NOT_EQ_#{this_method}",
+    'D;JNE',
+    "(EQ_#{this_method})",
+    '@SP',
+    'A = M - 1',
+    'A = A - 1',
+    'M = -1',
+    '@SP',
+    'M = M - 1',
+    "@END_#{this_method}",
+    '0;JMP',
+    "(NOT_EQ_#{this_method})",
+    '@SP',
+    'A = M - 1',
+    'A = A - 1',
+    'M = 0',
+    '@SP',
+    'M = M - 1',
+    "@END_#{this_method}",
+    '0;JMP',
+    "(END_#{this_method})"
   ]
 end
 
