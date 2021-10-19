@@ -178,7 +178,7 @@ def eq
   ]
 end
 
-def translated_push_command(command)
+def push_constant(command)
   splitted = command.split(' ')
   raise "Wrong push command #{splitted}" unless splitted.length == 3
   [
@@ -192,8 +192,47 @@ def translated_push_command(command)
   ]
 end
 
+SEGMENTS = {
+  'stack_pointer' => [256, 0, 'SP'],
+  'local' => [300, 1, 'LCL'],
+  'argument' => [400, 2, 'ARG'],
+  'this' => [3000, 3, 'THIS'],
+  'that' => [3010, 4, 'THAT']
+}
+
+def pop(command)
+  segment = SEGMENTS[command.split(' ')[1]]
+  seg_base_value = segment[0]
+  seg_position = segment[1]
+
+  seg_iteration = command.split(' ').last.to_i
+
+  commands = [
+    '@SP',
+    'A = M - 1',
+    'D = M',
+    "@#{seg_position}"
+  ]
+
+  (0..seg_iteration).each { |step| commands << 'M = M + 1' } if seg_iteration > 0
+
+  commands << 'A = M'
+  commands << 'M = D'
+
+  if seg_iteration > 0 # rolling back segment
+    commands << '@LCL'
+    (0..seg_iteration).each { |step| commands << 'M = M - 1' }
+  end
+
+  commands << '@SP'
+  commands << 'M = M - 1'
+
+  return commands
+end
+
 def translated_command(command)
-  return translated_push_command(command) if command.start_with?('push')
+  return push_constant(command) if command.start_with?('push constant')
+  return pop(command) if command.start_with?('pop')
   return add if command == 'add'
   return eq if command == 'eq'
   return lt if command == 'lt'
@@ -206,13 +245,16 @@ def translated_command(command)
   return []
 end
 
+
 File.open("#{ARGV[0].sub('vm', 'asm')}", "w") do |asm_file|
   File.open(ARGV[0]) do |vm_file|
     if ARGV[0].include?('PersonalTest') # setting stack pointer on my own tests
-      asm_file.puts("@256")
-      asm_file.puts("D = A")
-      asm_file.puts("@0")
-      asm_file.puts("M = D")
+      SEGMENTS.each do |name, params|
+        asm_file.puts("@#{params[0]}")
+        asm_file.puts("D = A")
+        asm_file.puts("@#{params[1]}")
+        asm_file.puts("M = D")
+      end
     end
 
     vm_file.each_line.map(&:strip).reject { |l| l.start_with?('//') || l.empty? }.each do |line|
