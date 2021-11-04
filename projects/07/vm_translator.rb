@@ -214,14 +214,14 @@ def pop(command)
     "@#{seg_position}"
   ]
 
-  (0..seg_iteration).each { |step| commands << 'M = M + 1' } if seg_iteration > 0
+  (1..seg_iteration).each { |step| commands << 'M = M + 1' } if seg_iteration > 0
 
   commands << 'A = M'
   commands << 'M = D'
 
   if seg_iteration > 0 # rolling back segment
-    commands << '@LCL'
-    (0..seg_iteration).each { |step| commands << 'M = M - 1' }
+    commands << "@#{seg_position}"
+    (1..seg_iteration).each { |step| commands << 'M = M - 1' }
   end
 
   commands << '@SP'
