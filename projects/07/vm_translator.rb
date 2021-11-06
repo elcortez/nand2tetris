@@ -210,6 +210,10 @@ def push(command)
   (1..seg_iteration).each { |step| commands << 'M = M + 1' } if seg_iteration > 0
   commands << 'A = M'
   commands << 'D = M'
+  if seg_iteration > 0
+    commands << "@#{seg_position}"
+    (1..seg_iteration).each { |step| commands << 'M = M - 1' }
+  end
   commands << '@SP'
   commands << 'A = M'
   commands << 'M = D'
@@ -259,9 +263,23 @@ def pop_temp(command)
   ]
 end
 
+def push_temp(command)
+  ram_location = command.split(' ').last.to_i + 5
+  return [
+    "@#{ram_location}",
+    'D = M',
+    '@SP',
+    'A = M',
+    'M = D',
+    '@SP',
+    'M = M + 1'
+  ]
+end
+
 def translated_command(command)
   return push_constant(command) if command.start_with?('push constant')
   return pop_temp(command) if command.start_with?('pop temp')
+  return push_temp(command) if command.start_with?('push temp')
   return pop(command) if command.start_with?('pop')
   return push(command) if command.start_with?('push')
   return add if command == 'add'

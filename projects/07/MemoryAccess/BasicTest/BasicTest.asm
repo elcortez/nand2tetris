@@ -155,6 +155,12 @@ M = M + 1
 M = M + 1
 A = M
 D = M
+@4
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
 @SP
 A = M
 M = D
@@ -172,6 +178,8 @@ M = M - 1
 M = M + 1
 A = M
 D = M
+@2
+M = M - 1
 @SP
 A = M
 M = D
@@ -194,6 +202,13 @@ M = M + 1
 M = M + 1
 A = M
 D = M
+@3
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
 @SP
 A = M
 M = D
@@ -208,6 +223,13 @@ M = M + 1
 M = M + 1
 A = M
 D = M
+@3
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
 @SP
 A = M
 M = D
@@ -229,3 +251,21 @@ D = M - D
 M = D
 @SP
 M = M - 1
+@11
+D = M
+@SP
+A = M
+M = D
+@SP
+M = M + 1
+@SP
+A = M - 1
+D = M
+A = A - 1
+D = M + D
+M = D
+@SP
+M = M - 1
+(END)
+@END
+0;JMP
