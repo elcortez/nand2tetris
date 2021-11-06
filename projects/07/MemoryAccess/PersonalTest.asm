@@ -145,6 +145,20 @@ M = M - 1
 M = M - 1
 @SP
 M = M - 1
+@510
+D = A
+@SP
+A = M
+M = D
+@SP
+M = M + 1
+@SP
+A = M - 1
+D = M
+@11
+M = D
+@SP
+M = M - 1
 (END)
 @END
 0;JMP

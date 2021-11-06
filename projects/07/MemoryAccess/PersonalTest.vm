@@ -10,3 +10,5 @@ push constant 42
 push constant 45
 pop that 5
 pop that 2
+push constant 510
+pop temp 6

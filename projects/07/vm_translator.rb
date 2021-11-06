@@ -230,8 +230,22 @@ def pop(command)
   return commands
 end
 
+def pop_temp(command)
+  ram_location = command.split(' ').last.to_i + 5
+  return [
+    '@SP',
+    'A = M - 1',
+    'D = M',
+    "@#{ram_location}",
+    'M = D',
+    '@SP',
+    'M = M - 1'
+  ]
+end
+
 def translated_command(command)
   return push_constant(command) if command.start_with?('push constant')
+  return pop_temp(command) if command.start_with?('pop temp')
   return pop(command) if command.start_with?('pop')
   return add if command == 'add'
   return eq if command == 'eq'
