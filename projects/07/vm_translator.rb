@@ -200,9 +200,25 @@ SEGMENTS = {
   'that' => [3010, 4, 'THAT']
 }
 
+def push(command)
+  segment = SEGMENTS[command.split(' ')[1]]
+  seg_position = segment[1]
+  seg_iteration = command.split(' ').last.to_i
+
+  commands = ["@#{seg_position}"]
+
+  (1..seg_iteration).each { |step| commands << 'M = M + 1' } if seg_iteration > 0
+  commands << 'A = M'
+  commands << 'D = M'
+  commands << '@SP'
+  commands << 'A = M'
+  commands << 'M = D'
+  commands << '@SP'
+  commands << 'M = M + 1'
+end
+
 def pop(command)
   segment = SEGMENTS[command.split(' ')[1]]
-  seg_base_value = segment[0]
   seg_position = segment[1]
 
   seg_iteration = command.split(' ').last.to_i
@@ -247,6 +263,7 @@ def translated_command(command)
   return push_constant(command) if command.start_with?('push constant')
   return pop_temp(command) if command.start_with?('pop temp')
   return pop(command) if command.start_with?('pop')
+  return push(command) if command.start_with?('push')
   return add if command == 'add'
   return eq if command == 'eq'
   return lt if command == 'lt'
