@@ -71,6 +71,80 @@ M = D
 M = M - 1
 @SP
 M = M - 1
+@36
+D = A
+@SP
+A = M
+M = D
+@SP
+M = M + 1
+@SP
+A = M - 1
+D = M
+@3
+M = M + 1
+M = M + 1
+M = M + 1
+M = M + 1
+M = M + 1
+M = M + 1
+A = M
+M = D
+@3
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
+@SP
+M = M - 1
+@42
+D = A
+@SP
+A = M
+M = D
+@SP
+M = M + 1
+@45
+D = A
+@SP
+A = M
+M = D
+@SP
+M = M + 1
+@SP
+A = M - 1
+D = M
+@4
+M = M + 1
+M = M + 1
+M = M + 1
+M = M + 1
+M = M + 1
+A = M
+M = D
+@4
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
+M = M - 1
+@SP
+M = M - 1
+@SP
+A = M - 1
+D = M
+@4
+M = M + 1
+M = M + 1
+A = M
+M = D
+@4
+M = M - 1
+M = M - 1
+@SP
+M = M - 1
 (END)
 @END
 0;JMP
