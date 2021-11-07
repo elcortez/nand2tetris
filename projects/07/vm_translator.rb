@@ -294,12 +294,35 @@ def pop_pointer(command)
   segment_name = command.split('').last == '0' ? 'this' : 'that'
   pointer = SEGMENTS[segment_name][1]
   return [
-    "@SP",
-    "M = M - 1",
-    "A = M",
-    "D = M",
+    '@SP',
+    'M = M - 1',
+    'A = M',
+    'D = M',
     "@#{pointer}",
-    "M = D"
+    'M = D'
+  ]
+end
+
+def pop_static(command)
+  return [
+    '@SP',
+    'M = M - 1',
+    'A = M',
+    'D = M',
+    "@#{16 + command.split('').last.to_i}",
+    'M = D'
+  ]
+end
+
+def push_static(command)
+  return [
+    "@#{16 + command.split('').last.to_i}",
+    'D = M',
+    '@SP',
+    'A = M',
+    'M = D',
+    '@SP',
+    'M = M + 1'
   ]
 end
 
@@ -309,6 +332,8 @@ def translated_command(command)
   return push_temp(command) if command.start_with?('push temp')
   return pop_pointer(command) if command.start_with?('pop pointer')
   return push_pointer(command) if command.start_with?('push pointer')
+  return pop_static(command) if command.start_with?('pop static')
+  return push_static(command) if command.start_with?('push static')
   return pop(command) if command.start_with?('pop')
   return push(command) if command.start_with?('push')
   return add if command == 'add'
