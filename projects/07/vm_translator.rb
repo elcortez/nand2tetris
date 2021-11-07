@@ -276,10 +276,39 @@ def push_temp(command)
   ]
 end
 
+def push_pointer(command)
+  segment_name = command.split('').last == '0' ? 'this' : 'that'
+  pointer = SEGMENTS[segment_name][1]
+  return [
+    "@#{pointer}",
+    'D = M',
+    '@SP',
+    'A = M',
+    'M = D',
+    '@SP',
+    'M = M + 1'
+  ]
+end
+
+def pop_pointer(command)
+  segment_name = command.split('').last == '0' ? 'this' : 'that'
+  pointer = SEGMENTS[segment_name][1]
+  return [
+    "@SP",
+    "M = M - 1",
+    "A = M",
+    "D = M",
+    "@#{pointer}",
+    "M = D"
+  ]
+end
+
 def translated_command(command)
   return push_constant(command) if command.start_with?('push constant')
   return pop_temp(command) if command.start_with?('pop temp')
   return push_temp(command) if command.start_with?('push temp')
+  return pop_pointer(command) if command.start_with?('pop pointer')
+  return push_pointer(command) if command.start_with?('push pointer')
   return pop(command) if command.start_with?('pop')
   return push(command) if command.start_with?('push')
   return add if command == 'add'
@@ -291,7 +320,6 @@ def translated_command(command)
   return and_m if command == 'and'
   return or_m if command == 'or'
   return not_m if command == 'not'
-  return []
 end
 
 
