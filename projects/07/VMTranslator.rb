@@ -345,6 +345,7 @@ def translated_command(command)
   return and_m if command == 'and'
   return or_m if command == 'or'
   return not_m if command == 'not'
+  raise "Command #{command} not handled"
 end
 
 
