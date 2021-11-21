@@ -326,6 +326,22 @@ def push_static(command)
   ]
 end
 
+def label(command)
+  return ["(#{command.split(' ').last})"]
+end
+
+def if_minus_goto(command)
+  direction = command.split(' ').last
+  return [
+    "@SP",
+    "M = M - 1",
+    "A = M",
+    "D = M",
+    "@#{direction}",
+    "D;JGT"
+  ]
+end
+
 def translated_command(command)
   return push_constant(command) if command.start_with?('push constant')
   return pop_temp(command) if command.start_with?('pop temp')
@@ -336,6 +352,8 @@ def translated_command(command)
   return push_static(command) if command.start_with?('push static')
   return pop(command) if command.start_with?('pop')
   return push(command) if command.start_with?('push')
+  return label(command) if command.start_with?('label')
+  return if_minus_goto(command) if command.start_with?('if-goto')
   return add if command == 'add'
   return eq if command == 'eq'
   return lt if command == 'lt'
@@ -348,26 +366,44 @@ def translated_command(command)
   raise "Command #{command} not handled"
 end
 
-
-File.open("#{ARGV[0].sub('vm', 'asm')}", "w") do |asm_file|
-  File.open(ARGV[0]) do |vm_file|
-    if ARGV[0].include?('PersonalTest') # setting stack pointer on my own tests
-      SEGMENTS.each do |name, params|
-        asm_file.puts("@#{params[0]}")
-        asm_file.puts("D = A")
-        asm_file.puts("@#{params[1]}")
-        asm_file.puts("M = D")
-      end
-    end
-
-    vm_file.each_line.map(&:strip).reject { |l| l.start_with?('//') || l.empty? }.each do |line|
-      translated_command(line).each do |asm_command|
-        asm_file.puts(asm_command)
-      end
-    end
-
-    asm_file.puts('(END)')
-    asm_file.puts('@END')
-    asm_file.puts('0;JMP')
+def insert_segments(asm_file)
+  SEGMENTS.each do |name, params|
+    asm_file.puts("@#{params[0]}")
+    asm_file.puts("D = A")
+    asm_file.puts("@#{params[1]}")
+    asm_file.puts("M = D")
   end
+end
+
+def insert_ending(asm_file)
+   asm_file.puts('(END)')
+   asm_file.puts('@END')
+   asm_file.puts('0;JMP')
+end
+
+def translate_vm_file_content(vm_file, asm_file)
+  vm_file.each_line.map(&:strip).reject { |l| l.start_with?('//') || l.empty? }.each do |line|
+     translated_command(line).each do |asm_command|
+       asm_file.puts(asm_command)
+     end
+  end
+end
+
+path = ARGV[0]
+filename = ARGV[0].split('/').last
+vm_files = Dir[path + '*'].select { |filename| filename.split('.').last == 'vm' }
+
+File.open("#{path}/#{filename}.asm", "w") do |asm_file|
+  insert_segments(asm_file)
+
+  if vm_files.length == 1
+    File.open(vm_files.first) { |vm_file| translate_vm_file_content(vm_file, asm_file) }
+  else
+    # raise si pas de Sys.vm
+    # commencer par le Sys.vm
+    # Traduire les fonctions en fonction du moment où elles sont appelées ?
+    raise "File length #{vm_files.length} not supported"
+  end
+
+  insert_ending(asm_file)
 end
