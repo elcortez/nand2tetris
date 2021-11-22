@@ -342,6 +342,14 @@ def if_minus_goto(command)
   ]
 end
 
+def goto(command)
+  direction = command.split(' ').last
+  return [
+    "@#{direction}",
+    "0;JMP"
+  ]
+end
+
 def translated_command(command)
   return push_constant(command) if command.start_with?('push constant')
   return pop_temp(command) if command.start_with?('pop temp')
@@ -354,6 +362,7 @@ def translated_command(command)
   return push(command) if command.start_with?('push')
   return label(command) if command.start_with?('label')
   return if_minus_goto(command) if command.start_with?('if-goto')
+  return goto(command) if command.start_with?('goto')
   return add if command == 'add'
   return eq if command == 'eq'
   return lt if command == 'lt'
@@ -381,15 +390,23 @@ def insert_ending(asm_file)
    asm_file.puts('0;JMP')
 end
 
+def sanitized_lines(vm_file)
+  return vm_file.each_line.map(&:strip)
+    .reject { |l| l.start_with?('//') || l.empty? }
+    .map { |l| l.split('//').first.strip }
+end
+
 def translate_vm_file_content(vm_file, asm_file)
-  vm_file.each_line.map(&:strip).reject { |l| l.start_with?('//') || l.empty? }.each do |line|
+  sanitized_lines(vm_file).each do |line|
+    p line
+    p translated_command(line)
      translated_command(line).each do |asm_command|
        asm_file.puts(asm_command)
      end
   end
 end
 
-path = ARGV[0]
+path = ARGV[0].split('').last == '/' ? ARGV[0] : "#{ARGV[0]}/" # path/
 filename = ARGV[0].split('/').last
 vm_files = Dir[path + '*'].select { |filename| filename.split('.').last == 'vm' }
 
