@@ -350,6 +350,84 @@ def goto(command)
   ]
 end
 
+def function_command(command)
+  splitted = command.split(' ')
+  commands = ["(#{splitted[1]})"]
+
+  (1..splitted[2].to_i).each do |it|
+    push_0_commands = translated_command('push constant 0')
+    push_0_commands.each do |push_0_command|
+      commands << push_0_command
+    end
+  end
+
+  return commands
+end
+
+def return_command
+  commands = [
+    '@LCL', # endFrame = LCL (endFrame is a temp variable)
+    'D = M',
+    '@endFrame',
+    'M = D',
+    'D = D - 1',  # retAddr = *(endFrame - 5) (puts the returnAddress in a temp var)
+    'D = D - 1',  # PROBLEM HERE : 1000 instead of 9 in the test files
+    'D = D - 1',
+    'D = D - 1',
+    'D = D - 1',
+    'A = D',
+    'D = M',
+    '@retAddr',
+    'M = D',
+    '@SP', # *ARG = pop()
+    'M = M - 1',
+    'A = M',
+    'D = M',
+    '@ARG',
+    'A = M',
+    'M = D',
+    'D = A + 1', # `SP = ARG + 1` Reposition the Stack Pointer of the Caller
+    '@SP',
+    'M = D',
+    '@endFrame', # `THAT = *(endFrame - 1)` Restoring the state
+    'D = M - 1',
+    'A = D',
+    'D = M',
+    '@THAT',
+    'M = D',
+    '@endFrame', # `THIS = *(endFrame - 2)` Restoring the state
+    'D = M',
+    'D = D - 1',
+    'D = D - 1',
+    'A = D',
+    'D = M',
+    '@THIS',
+    'M = D',
+    '@endFrame', # `ARG = *(endFrame - 3)` Restoring the state
+    'D = M',
+    'D = D - 1',
+    'D = D - 1',
+    'D = D - 1',
+    'A = D',
+    'D = M',
+    '@ARG',
+    'M = D',
+    '@endFrame', # `LCL = *(endFrame - 4)` Restoring the state
+    'D = M',
+    'D = D - 1',
+    'D = D - 1',
+    'D = D - 1',
+    'D = D - 1',
+    'A = D',
+    'D = M',
+    '@LCL',
+    'M = D',
+    '@retAddr' # `goto retAddr` (but why ?)
+  ]
+
+  return commands
+end
+
 def translated_command(command)
   return push_constant(command) if command.start_with?('push constant')
   return pop_temp(command) if command.start_with?('pop temp')
@@ -363,6 +441,8 @@ def translated_command(command)
   return label(command) if command.start_with?('label')
   return if_minus_goto(command) if command.start_with?('if-goto')
   return goto(command) if command.start_with?('goto')
+  return function_command(command) if command.start_with?('function')
+  return return_command if command == 'return'
   return add if command == 'add'
   return eq if command == 'eq'
   return lt if command == 'lt'
@@ -375,21 +455,6 @@ def translated_command(command)
   raise "Command #{command} not handled"
 end
 
-def insert_segments(asm_file)
-  SEGMENTS.each do |name, params|
-    asm_file.puts("@#{params[0]}")
-    asm_file.puts("D = A")
-    asm_file.puts("@#{params[1]}")
-    asm_file.puts("M = D")
-  end
-end
-
-def insert_ending(asm_file)
-   asm_file.puts('(END)')
-   asm_file.puts('@END')
-   asm_file.puts('0;JMP')
-end
-
 def sanitized_lines(vm_file)
   return vm_file.each_line.map(&:strip)
     .reject { |l| l.start_with?('//') || l.empty? }
@@ -398,8 +463,6 @@ end
 
 def translate_vm_file_content(vm_file, asm_file)
   sanitized_lines(vm_file).each do |line|
-    p line
-    p translated_command(line)
      translated_command(line).each do |asm_command|
        asm_file.puts(asm_command)
      end
@@ -411,8 +474,6 @@ filename = ARGV[0].split('/').last
 vm_files = Dir[path + '*'].select { |filename| filename.split('.').last == 'vm' }
 
 File.open("#{path}/#{filename}.asm", "w") do |asm_file|
-  insert_segments(asm_file)
-
   if vm_files.length == 1
     File.open(vm_files.first) { |vm_file| translate_vm_file_content(vm_file, asm_file) }
   else
@@ -422,5 +483,7 @@ File.open("#{path}/#{filename}.asm", "w") do |asm_file|
     raise "File length #{vm_files.length} not supported"
   end
 
-  insert_ending(asm_file)
+  asm_file.puts('(END)')
+  asm_file.puts('@END')
+  asm_file.puts('0;JMP')
 end
