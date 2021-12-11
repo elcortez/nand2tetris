@@ -365,10 +365,11 @@ def function_command(command)
 end
 
 def return_command
+  this_command = random_string
   commands = [
     '@LCL', # endFrame = LCL (endFrame is a temp variable)
     'D = M',
-    '@endFrame',
+    "@endFrame_#{this_command}",
     'M = D',
     'D = D - 1',  # retAddr = *(endFrame - 5) (puts the returnAddress in a temp var)
     'D = D - 1',  # PROBLEM HERE : 1000 instead of 9 in the test files
@@ -377,7 +378,7 @@ def return_command
     'D = D - 1',
     'A = D',
     'D = M',
-    '@retAddr',
+    "@retAddr_#{this_command}",
     'M = D',
     '@SP', # *ARG = pop()
     'M = M - 1',
@@ -389,13 +390,13 @@ def return_command
     'D = A + 1', # `SP = ARG + 1` Reposition the Stack Pointer of the Caller
     '@SP',
     'M = D',
-    '@endFrame', # `THAT = *(endFrame - 1)` Restoring the state
+    "@endFrame_#{this_command}", # `THAT = *(endFrame - 1)` Restoring the state
     'D = M - 1',
     'A = D',
     'D = M',
     '@THAT',
     'M = D',
-    '@endFrame', # `THIS = *(endFrame - 2)` Restoring the state
+    "@endFrame_#{this_command}", # `THIS = *(endFrame - 2)` Restoring the state
     'D = M',
     'D = D - 1',
     'D = D - 1',
@@ -403,7 +404,7 @@ def return_command
     'D = M',
     '@THIS',
     'M = D',
-    '@endFrame', # `ARG = *(endFrame - 3)` Restoring the state
+    "@endFrame_#{this_command}", # `ARG = *(endFrame - 3)` Restoring the state
     'D = M',
     'D = D - 1',
     'D = D - 1',
@@ -412,7 +413,7 @@ def return_command
     'D = M',
     '@ARG',
     'M = D',
-    '@endFrame', # `LCL = *(endFrame - 4)` Restoring the state
+    "@endFrame_#{this_command}", # `LCL = *(endFrame - 4)` Restoring the state
     'D = M',
     'D = D - 1',
     'D = D - 1',
@@ -422,8 +423,74 @@ def return_command
     'D = M',
     '@LCL',
     'M = D',
-    '@retAddr' # `goto retAddr` (but why ?)
+    "@retAddr_#{this_command}", # `goto retAddr` (but why ?)
+    '0;JMP'
   ]
+
+  return commands
+end
+
+def call_command(command)
+  this_command = random_string
+  commands = [
+    "@retAddr_#{this_command}", # push retAddr
+    'D = M',
+    '@SP',
+    'A = M',
+    'M = D',
+    '@SP',
+    'M = M + 1',
+    '@LCL', # push LCL
+    'D = M',
+    '@SP',
+    'A = M',
+    'M = D',
+    '@SP',
+    'M = M + 1',
+    '@ARG', # push ARG
+    'D = M',
+    '@SP',
+    'A = M',
+    'M = D',
+    '@SP',
+    'M = M + 1',
+    '@THIS', # push THIS
+    'D = M',
+    '@SP',
+    'A = M',
+    'M = D',
+    '@SP',
+    'M = M + 1',
+    '@THAT', # push THAT
+    'D = M',
+    '@SP',
+    'A = M',
+    'M = D',
+    '@SP',
+    'M = M + 1'
+  ]
+
+  nArgs = command.split(' ').last.to_i # ARG = SP - 5 - nArgs
+  commands << '@SP'
+  commands << 'D = M - 1'
+  commands << 'D = M - 1'
+  commands << 'D = M - 1'
+  commands << 'D = M - 1'
+  commands << 'D = M - 1'
+  (1..nArgs).each { |nb| commands << 'D = M - 1' }
+  commands << '@ARG'
+  commands << 'M = D'
+
+  commands << "@SP" # LCL = SP
+  commands << 'D = M'
+  commands << '@LCL'
+  commands << 'M = D'
+
+  functionName = command.split(' ')[1] # goto functionName
+  commands << "@#{functionName}"
+  commands << '0;JMP'
+
+  commands << "(retAddr_#{this_command})" # insert (retAddr)
 
   return commands
 end
@@ -442,6 +509,7 @@ def translated_command(command)
   return if_minus_goto(command) if command.start_with?('if-goto')
   return goto(command) if command.start_with?('goto')
   return function_command(command) if command.start_with?('function')
+  return call_command(command) if command.start_with?('call')
   return return_command if command == 'return'
   return add if command == 'add'
   return eq if command == 'eq'
