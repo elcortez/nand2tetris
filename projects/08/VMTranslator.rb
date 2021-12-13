@@ -550,9 +550,17 @@ def insert_segments(asm_file)
   end
 end
 
-path = ARGV[0].split('').last == '/' ? ARGV[0] : "#{ARGV[0]}/" # path/
-filename = ARGV[0].split('/').last
-vm_files = Dir[path + '*'].select { |filename| filename.split('.').last == 'vm' }
+folders = ARGV[0].split('/')
+
+if folders.last.end_with?('.vm')
+  path = folders[0..-2].join('/')
+  filename = folders[-2]
+  vm_files = Dir[path + '/*'].select { |filename| filename.split('.').last == 'vm' }
+else
+  path = ARGV[0].split('').last == '/' ? ARGV[0] : "#{ARGV[0]}/" # path/
+  filename = folders.last
+  vm_files = Dir[path + '*'].select { |filename| filename.split('.').last == 'vm' }
+end
 
 File.open("#{path}/#{filename}.asm", "w") do |asm_file|
   if vm_files.length == 1

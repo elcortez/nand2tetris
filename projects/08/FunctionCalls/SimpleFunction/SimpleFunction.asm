@@ -81,7 +81,7 @@ M = D
 M = M - 1
 @LCL
 D = M
-@endFrame_UAGXDHJN
+@endFrame_MZIJNSZX
 M = D
 D = D - 1
 D = D - 1
@@ -90,7 +90,7 @@ D = D - 1
 D = D - 1
 A = D
 D = M
-@retAddr_UAGXDHJN
+@retAddr_MZIJNSZX
 M = D
 @SP
 M = M - 1
@@ -102,13 +102,13 @@ M = D
 D = A + 1
 @SP
 M = D
-@endFrame_UAGXDHJN
+@endFrame_MZIJNSZX
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
-@endFrame_UAGXDHJN
+@endFrame_MZIJNSZX
 D = M
 D = D - 1
 D = D - 1
@@ -116,7 +116,7 @@ A = D
 D = M
 @THIS
 M = D
-@endFrame_UAGXDHJN
+@endFrame_MZIJNSZX
 D = M
 D = D - 1
 D = D - 1
@@ -125,7 +125,7 @@ A = D
 D = M
 @ARG
 M = D
-@endFrame_UAGXDHJN
+@endFrame_MZIJNSZX
 D = M
 D = D - 1
 D = D - 1
@@ -135,7 +135,7 @@ A = D
 D = M
 @LCL
 M = D
-@retAddr_UAGXDHJN
+@retAddr_MZIJNSZX
 A = M
 0;JMP
 (END)

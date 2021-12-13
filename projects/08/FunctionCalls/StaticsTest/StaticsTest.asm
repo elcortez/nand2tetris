@@ -18,7 +18,7 @@ M = D
 D = A
 @4
 M = D
-@retAddr_BAKROMZG
+@retAddr_QRALGWCC
 D = A
 @SP
 A = M
@@ -67,7 +67,7 @@ D = M
 M = D
 @Sys.init
 0;JMP
-(retAddr_BAKROMZG)
+(retAddr_QRALGWCC)
 (Sys.init)
 @6
 D = A
@@ -83,7 +83,7 @@ A = M
 M = D
 @SP
 M = M + 1
-@retAddr_AGXSMKHM
+@retAddr_WIJWTFPJ
 D = A
 @SP
 A = M
@@ -134,7 +134,7 @@ D = M
 M = D
 @Class1.set
 0;JMP
-(retAddr_AGXSMKHM)
+(retAddr_WIJWTFPJ)
 @SP
 A = M - 1
 D = M
@@ -156,7 +156,7 @@ A = M
 M = D
 @SP
 M = M + 1
-@retAddr_YETOTUUI
+@retAddr_JWDFVZFA
 D = A
 @SP
 A = M
@@ -207,7 +207,7 @@ D = M
 M = D
 @Class2.set
 0;JMP
-(retAddr_YETOTUUI)
+(retAddr_JWDFVZFA)
 @SP
 A = M - 1
 D = M
@@ -215,7 +215,7 @@ D = M
 M = D
 @SP
 M = M - 1
-@retAddr_EQGPJYPT
+@retAddr_FYYGTXPH
 D = A
 @SP
 A = M
@@ -264,8 +264,8 @@ D = M
 M = D
 @Class1.get
 0;JMP
-(retAddr_EQGPJYPT)
-@retAddr_DMIGTMNE
+(retAddr_FYYGTXPH)
+@retAddr_CYVBILYP
 D = A
 @SP
 A = M
@@ -314,7 +314,7 @@ D = M
 M = D
 @Class2.get
 0;JMP
-(retAddr_DMIGTMNE)
+(retAddr_CYVBILYP)
 (WHILE)
 @WHILE
 0;JMP
@@ -359,7 +359,7 @@ M = D
 M = M + 1
 @LCL
 D = M
-@endFrame_TQPKQJRI
+@endFrame_YQKUQLLI
 M = D
 D = D - 1
 D = D - 1
@@ -368,7 +368,7 @@ D = D - 1
 D = D - 1
 A = D
 D = M
-@retAddr_TQPKQJRI
+@retAddr_YQKUQLLI
 M = D
 @SP
 M = M - 1
@@ -380,13 +380,13 @@ M = D
 D = A + 1
 @SP
 M = D
-@endFrame_TQPKQJRI
+@endFrame_YQKUQLLI
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
-@endFrame_TQPKQJRI
+@endFrame_YQKUQLLI
 D = M
 D = D - 1
 D = D - 1
@@ -394,7 +394,7 @@ A = D
 D = M
 @THIS
 M = D
-@endFrame_TQPKQJRI
+@endFrame_YQKUQLLI
 D = M
 D = D - 1
 D = D - 1
@@ -403,7 +403,7 @@ A = D
 D = M
 @ARG
 M = D
-@endFrame_TQPKQJRI
+@endFrame_YQKUQLLI
 D = M
 D = D - 1
 D = D - 1
@@ -413,7 +413,7 @@ A = D
 D = M
 @LCL
 M = D
-@retAddr_TQPKQJRI
+@retAddr_YQKUQLLI
 A = M
 0;JMP
 (Class1.get)
@@ -441,7 +441,7 @@ M = D
 M = M - 1
 @LCL
 D = M
-@endFrame_GSLULQUA
+@endFrame_CVZAWHMM
 M = D
 D = D - 1
 D = D - 1
@@ -450,7 +450,7 @@ D = D - 1
 D = D - 1
 A = D
 D = M
-@retAddr_GSLULQUA
+@retAddr_CVZAWHMM
 M = D
 @SP
 M = M - 1
@@ -462,13 +462,13 @@ M = D
 D = A + 1
 @SP
 M = D
-@endFrame_GSLULQUA
+@endFrame_CVZAWHMM
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
-@endFrame_GSLULQUA
+@endFrame_CVZAWHMM
 D = M
 D = D - 1
 D = D - 1
@@ -476,7 +476,7 @@ A = D
 D = M
 @THIS
 M = D
-@endFrame_GSLULQUA
+@endFrame_CVZAWHMM
 D = M
 D = D - 1
 D = D - 1
@@ -485,7 +485,7 @@ A = D
 D = M
 @ARG
 M = D
-@endFrame_GSLULQUA
+@endFrame_CVZAWHMM
 D = M
 D = D - 1
 D = D - 1
@@ -495,7 +495,7 @@ A = D
 D = M
 @LCL
 M = D
-@retAddr_GSLULQUA
+@retAddr_CVZAWHMM
 A = M
 0;JMP
 (Class2.set)
@@ -539,7 +539,7 @@ M = D
 M = M + 1
 @LCL
 D = M
-@endFrame_XIWBREEY
+@endFrame_ACSJBUMQ
 M = D
 D = D - 1
 D = D - 1
@@ -548,7 +548,7 @@ D = D - 1
 D = D - 1
 A = D
 D = M
-@retAddr_XIWBREEY
+@retAddr_ACSJBUMQ
 M = D
 @SP
 M = M - 1
@@ -560,13 +560,13 @@ M = D
 D = A + 1
 @SP
 M = D
-@endFrame_XIWBREEY
+@endFrame_ACSJBUMQ
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
-@endFrame_XIWBREEY
+@endFrame_ACSJBUMQ
 D = M
 D = D - 1
 D = D - 1
@@ -574,7 +574,7 @@ A = D
 D = M
 @THIS
 M = D
-@endFrame_XIWBREEY
+@endFrame_ACSJBUMQ
 D = M
 D = D - 1
 D = D - 1
@@ -583,7 +583,7 @@ A = D
 D = M
 @ARG
 M = D
-@endFrame_XIWBREEY
+@endFrame_ACSJBUMQ
 D = M
 D = D - 1
 D = D - 1
@@ -593,7 +593,7 @@ A = D
 D = M
 @LCL
 M = D
-@retAddr_XIWBREEY
+@retAddr_ACSJBUMQ
 A = M
 0;JMP
 (Class2.get)
@@ -621,7 +621,7 @@ M = D
 M = M - 1
 @LCL
 D = M
-@endFrame_EXHDQTJO
+@endFrame_LEQGTUCR
 M = D
 D = D - 1
 D = D - 1
@@ -630,7 +630,7 @@ D = D - 1
 D = D - 1
 A = D
 D = M
-@retAddr_EXHDQTJO
+@retAddr_LEQGTUCR
 M = D
 @SP
 M = M - 1
@@ -642,13 +642,13 @@ M = D
 D = A + 1
 @SP
 M = D
-@endFrame_EXHDQTJO
+@endFrame_LEQGTUCR
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
-@endFrame_EXHDQTJO
+@endFrame_LEQGTUCR
 D = M
 D = D - 1
 D = D - 1
@@ -656,7 +656,7 @@ A = D
 D = M
 @THIS
 M = D
-@endFrame_EXHDQTJO
+@endFrame_LEQGTUCR
 D = M
 D = D - 1
 D = D - 1
@@ -665,7 +665,7 @@ A = D
 D = M
 @ARG
 M = D
-@endFrame_EXHDQTJO
+@endFrame_LEQGTUCR
 D = M
 D = D - 1
 D = D - 1
@@ -675,7 +675,7 @@ A = D
 D = M
 @LCL
 M = D
-@retAddr_EXHDQTJO
+@retAddr_LEQGTUCR
 A = M
 0;JMP
 (END)
