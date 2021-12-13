@@ -1,23 +1,3 @@
-@256
-D = A
-@0
-M = D
-@300
-D = A
-@1
-M = D
-@400
-D = A
-@2
-M = D
-@3000
-D = A
-@3
-M = D
-@3010
-D = A
-@4
-M = D
 @2
 M = M + 1
 A = M
@@ -108,12 +88,15 @@ A = M
 M = D
 @SP
 M = M + 1
+0;JNE
+0;JNE
+0;JNE
 @SP
 M = M - 1
 A = M
 D = M
 @COMPUTE_ELEMENT
-D;JGT
+D;JNE
 @END_PROGRAM
 0;JMP
 (COMPUTE_ELEMENT)

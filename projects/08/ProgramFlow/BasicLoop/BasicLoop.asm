@@ -85,12 +85,15 @@ A = M
 M = D
 @SP
 M = M + 1
+0;JNE
+0;JNE
+0;JNE
 @SP
 M = M - 1
 A = M
 D = M
 @LOOP_START
-D;JLT
+D;JNE
 @1
 A = M
 D = M

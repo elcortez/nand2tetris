@@ -34,7 +34,7 @@ M = D
 0;JGT
 0;JGT
 0;JGT
-@retAddr_HWOJDBYY
+@retAddr_PCKTJXUP
 D = A
 @SP
 A = M
@@ -74,8 +74,6 @@ M = D
 @SP
 M = M + 1
 0;JGT
-0;JGT
-0;JGT
 @SP
 D = M - 1
 D = D - 1
@@ -90,7 +88,10 @@ D = M
 M = D
 @Sys.main
 0;JMP
-(retAddr_HWOJDBYY)
+(retAddr_PCKTJXUP)
+0;JGT
+0;JGT
+0;JGT
 @SP
 A = M - 1
 D = M
@@ -239,7 +240,7 @@ M = M + 1
 0;JGT
 0;JGT
 0;JGT
-@retAddr_PUQTWSCR
+@retAddr_CZJDHMYW
 D = A
 @SP
 A = M
@@ -279,8 +280,6 @@ M = D
 @SP
 M = M + 1
 0;JGT
-0;JGT
-0;JGT
 @SP
 D = M - 1
 D = D - 1
@@ -296,7 +295,10 @@ D = M
 M = D
 @Sys.add12
 0;JMP
-(retAddr_PUQTWSCR)
+(retAddr_CZJDHMYW)
+0;JGT
+0;JGT
+0;JGT
 @SP
 A = M - 1
 D = M
@@ -405,7 +407,7 @@ M = M - 1
 0;JLT
 @LCL
 D = M
-@endFrame_VSOGZEHT
+@endFrame_KQDDZCSV
 M = D
 0;JLT
 D = D - 1
@@ -416,7 +418,7 @@ D = D - 1
 A = D
 D = M
 0;JLT
-@retAddr_VSOGZEHT
+@retAddr_KQDDZCSV
 M = D
 0;JLT
 @SP
@@ -431,14 +433,14 @@ D = A + 1
 @SP
 M = D
 0;JLT
-@endFrame_VSOGZEHT
+@endFrame_KQDDZCSV
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
 0;JLT
-@endFrame_VSOGZEHT
+@endFrame_KQDDZCSV
 D = M
 D = D - 1
 D = D - 1
@@ -447,7 +449,7 @@ D = M
 @THIS
 M = D
 0;JLT
-@endFrame_VSOGZEHT
+@endFrame_KQDDZCSV
 D = M
 D = D - 1
 D = D - 1
@@ -457,7 +459,7 @@ D = M
 @ARG
 M = D
 0;JLT
-@endFrame_VSOGZEHT
+@endFrame_KQDDZCSV
 D = M
 D = D - 1
 D = D - 1
@@ -468,7 +470,7 @@ D = M
 @LCL
 M = D
 0;JLT
-@retAddr_VSOGZEHT
+@retAddr_KQDDZCSV
 A = M
 0;JMP
 0;JLT
@@ -535,7 +537,7 @@ M = M - 1
 0;JLT
 @LCL
 D = M
-@endFrame_XIDRZQJE
+@endFrame_GMJPUVBG
 M = D
 0;JLT
 D = D - 1
@@ -546,7 +548,7 @@ D = D - 1
 A = D
 D = M
 0;JLT
-@retAddr_XIDRZQJE
+@retAddr_GMJPUVBG
 M = D
 0;JLT
 @SP
@@ -561,14 +563,14 @@ D = A + 1
 @SP
 M = D
 0;JLT
-@endFrame_XIDRZQJE
+@endFrame_GMJPUVBG
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
 0;JLT
-@endFrame_XIDRZQJE
+@endFrame_GMJPUVBG
 D = M
 D = D - 1
 D = D - 1
@@ -577,7 +579,7 @@ D = M
 @THIS
 M = D
 0;JLT
-@endFrame_XIDRZQJE
+@endFrame_GMJPUVBG
 D = M
 D = D - 1
 D = D - 1
@@ -587,7 +589,7 @@ D = M
 @ARG
 M = D
 0;JLT
-@endFrame_XIDRZQJE
+@endFrame_GMJPUVBG
 D = M
 D = D - 1
 D = D - 1
@@ -598,7 +600,7 @@ D = M
 @LCL
 M = D
 0;JLT
-@retAddr_XIDRZQJE
+@retAddr_GMJPUVBG
 A = M
 0;JMP
 0;JLT

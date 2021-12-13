@@ -330,15 +330,18 @@ def label(command)
   return ["(#{command.split(' ').last})"]
 end
 
-def if_minus_goto(command)
+def if_condition_goto(command)
   direction = command.split(' ').last
   return [
+    '0;JNE',
+    '0;JNE',
+    '0;JNE',
     "@SP",
     "M = M - 1",
     "A = M",
     "D = M",
     "@#{direction}",
-    "D;JLT"
+    "D;JNE"
   ]
 end
 
@@ -541,7 +544,7 @@ def translated_command(command)
   return pop(command) if command.start_with?('pop')
   return push(command) if command.start_with?('push')
   return label(command) if command.start_with?('label')
-  return if_minus_goto(command) if command.start_with?('if-goto')
+  return if_condition_goto(command) if command.start_with?('if-goto')
   return goto(command) if command.start_with?('goto')
   return function_command(command) if command.start_with?('function')
   return call_command(command) if command.start_with?('call')
