@@ -18,10 +18,56 @@ M = D
 D = A
 @4
 M = D
-@261
+@retAddr_OCXALKWD
 D = A
-@0
+@SP
+A = M
 M = D
+@SP
+M = M + 1
+@LCL
+D = M
+@SP
+A = M
+M = D
+@SP
+M = M + 1
+@ARG
+D = M
+@SP
+A = M
+M = D
+@SP
+M = M + 1
+@THIS
+D = M
+@SP
+A = M
+M = D
+@SP
+M = M + 1
+@THAT
+D = M
+@SP
+A = M
+M = D
+@SP
+M = M + 1
+@SP
+D = M - 1
+D = D - 1
+D = D - 1
+D = D - 1
+D = D - 1
+@ARG
+M = D
+@SP
+D = M
+@LCL
+M = D
+@Sys.init
+0;JMP
+(retAddr_OCXALKWD)
 (Sys.init)
 @4
 D = A
@@ -30,7 +76,7 @@ A = M
 M = D
 @SP
 M = M + 1
-@retAddr_JQBJNWJW
+@retAddr_WHATZZWO
 D = A
 @SP
 A = M
@@ -80,7 +126,7 @@ D = M
 M = D
 @Main.fibonacci
 0;JMP
-(retAddr_JQBJNWJW)
+(retAddr_WHATZZWO)
 (WHILE)
 @WHILE
 0;JMP
@@ -105,29 +151,29 @@ A = M - 1
 D = M
 A = A - 1
 D = M - D
-@LT_SWNVPPTY
+@LT_RDOCSOCT
 D;JLT
-@NOT_LT_SWNVPPTY
+@NOT_LT_RDOCSOCT
 D;JGE
-(LT_SWNVPPTY)
+(LT_RDOCSOCT)
 @SP
 A = M - 1
 A = A - 1
 M = -1
 @SP
 M = M - 1
-@END_SWNVPPTY
+@END_RDOCSOCT
 0;JMP
-(NOT_LT_SWNVPPTY)
+(NOT_LT_RDOCSOCT)
 @SP
 A = M - 1
 A = A - 1
 M = 0
 @SP
 M = M - 1
-@END_SWNVPPTY
+@END_RDOCSOCT
 0;JMP
-(END_SWNVPPTY)
+(END_RDOCSOCT)
 @SP
 M = M - 1
 A = M
@@ -147,7 +193,7 @@ M = D
 M = M + 1
 @LCL
 D = M
-@endFrame_TTDLYYDO
+@endFrame_TYGKBLYS
 M = D
 D = D - 1
 D = D - 1
@@ -156,7 +202,7 @@ D = D - 1
 D = D - 1
 A = D
 D = M
-@retAddr_TTDLYYDO
+@retAddr_TYGKBLYS
 M = D
 @SP
 M = M - 1
@@ -168,13 +214,13 @@ M = D
 D = A + 1
 @SP
 M = D
-@endFrame_TTDLYYDO
+@endFrame_TYGKBLYS
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
-@endFrame_TTDLYYDO
+@endFrame_TYGKBLYS
 D = M
 D = D - 1
 D = D - 1
@@ -182,7 +228,7 @@ A = D
 D = M
 @THIS
 M = D
-@endFrame_TTDLYYDO
+@endFrame_TYGKBLYS
 D = M
 D = D - 1
 D = D - 1
@@ -191,7 +237,7 @@ A = D
 D = M
 @ARG
 M = D
-@endFrame_TTDLYYDO
+@endFrame_TYGKBLYS
 D = M
 D = D - 1
 D = D - 1
@@ -201,7 +247,7 @@ A = D
 D = M
 @LCL
 M = D
-@retAddr_TTDLYYDO
+@retAddr_TYGKBLYS
 A = M
 0;JMP
 (IF_FALSE)
@@ -228,7 +274,7 @@ D = M - D
 M = D
 @SP
 M = M - 1
-@retAddr_HREJHIIM
+@retAddr_CVJQVFKS
 D = A
 @SP
 A = M
@@ -278,7 +324,7 @@ D = M
 M = D
 @Main.fibonacci
 0;JMP
-(retAddr_HREJHIIM)
+(retAddr_CVJQVFKS)
 @2
 A = M
 D = M
@@ -302,7 +348,7 @@ D = M - D
 M = D
 @SP
 M = M - 1
-@retAddr_RHCSFUKW
+@retAddr_NNCFZGYI
 D = A
 @SP
 A = M
@@ -352,7 +398,7 @@ D = M
 M = D
 @Main.fibonacci
 0;JMP
-(retAddr_RHCSFUKW)
+(retAddr_NNCFZGYI)
 @SP
 A = M - 1
 D = M
@@ -363,7 +409,7 @@ M = D
 M = M - 1
 @LCL
 D = M
-@endFrame_GKAMDZLO
+@endFrame_YGUBVGZO
 M = D
 D = D - 1
 D = D - 1
@@ -372,7 +418,7 @@ D = D - 1
 D = D - 1
 A = D
 D = M
-@retAddr_GKAMDZLO
+@retAddr_YGUBVGZO
 M = D
 @SP
 M = M - 1
@@ -384,13 +430,13 @@ M = D
 D = A + 1
 @SP
 M = D
-@endFrame_GKAMDZLO
+@endFrame_YGUBVGZO
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
-@endFrame_GKAMDZLO
+@endFrame_YGUBVGZO
 D = M
 D = D - 1
 D = D - 1
@@ -398,7 +444,7 @@ A = D
 D = M
 @THIS
 M = D
-@endFrame_GKAMDZLO
+@endFrame_YGUBVGZO
 D = M
 D = D - 1
 D = D - 1
@@ -407,7 +453,7 @@ A = D
 D = M
 @ARG
 M = D
-@endFrame_GKAMDZLO
+@endFrame_YGUBVGZO
 D = M
 D = D - 1
 D = D - 1
@@ -417,7 +463,7 @@ A = D
 D = M
 @LCL
 M = D
-@retAddr_GKAMDZLO
+@retAddr_YGUBVGZO
 A = M
 0;JMP
 (END)

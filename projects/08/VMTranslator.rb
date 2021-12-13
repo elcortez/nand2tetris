@@ -556,11 +556,8 @@ File.open("#{path}/#{filename}.asm", "w") do |asm_file|
   else
     insert_segments(asm_file)
 
-    if filename == 'FibonacciElement' # SERIOUSLY WTF ????!!!!!!
-      asm_file.puts("@261")
-      asm_file.puts("D = A")
-      asm_file.puts("@0")
-      asm_file.puts("M = D")
+    call_command("Call Sys.init").each do |command|
+      asm_file.puts(command)
     end
 
     sorted_files = vm_files.sort_by { |vm_file| vm_file.end_with?('Sys.vm') ? 0 : 1 }
