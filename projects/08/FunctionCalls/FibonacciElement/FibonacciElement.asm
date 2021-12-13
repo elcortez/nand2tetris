@@ -22,13 +22,7 @@ M = D
 D = A
 @0
 M = D
-0;JNE
-0;JNE
-0;JNE
 (Sys.init)
-0;JNE
-0;JNE
-0;JNE
 @4
 D = A
 @SP
@@ -36,17 +30,13 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
-0;JGT
-0;JGT
-@retAddr_LFBTPTZW
+@retAddr_JQBJNWJW
 D = A
 @SP
 A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @LCL
 D = M
 @SP
@@ -54,7 +44,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @ARG
 D = M
 @SP
@@ -62,7 +51,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @THIS
 D = M
 @SP
@@ -70,7 +58,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @THAT
 D = M
 @SP
@@ -78,7 +65,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @SP
 D = M - 1
 D = D - 1
@@ -94,20 +80,11 @@ D = M
 M = D
 @Main.fibonacci
 0;JMP
-(retAddr_LFBTPTZW)
-0;JGT
-0;JGT
-0;JGT
+(retAddr_JQBJNWJW)
 (WHILE)
 @WHILE
 0;JMP
-0;JNE
-0;JNE
-0;JNE
 (Main.fibonacci)
-0;JNE
-0;JNE
-0;JNE
 @2
 A = M
 D = M
@@ -128,32 +105,29 @@ A = M - 1
 D = M
 A = A - 1
 D = M - D
-@LT_WRWXMIBH
+@LT_SWNVPPTY
 D;JLT
-@NOT_LT_WRWXMIBH
+@NOT_LT_SWNVPPTY
 D;JGE
-(LT_WRWXMIBH)
+(LT_SWNVPPTY)
 @SP
 A = M - 1
 A = A - 1
 M = -1
 @SP
 M = M - 1
-@END_WRWXMIBH
+@END_SWNVPPTY
 0;JMP
-(NOT_LT_WRWXMIBH)
+(NOT_LT_SWNVPPTY)
 @SP
 A = M - 1
 A = A - 1
 M = 0
 @SP
 M = M - 1
-@END_WRWXMIBH
+@END_SWNVPPTY
 0;JMP
-(END_WRWXMIBH)
-0;JNE
-0;JNE
-0;JNE
+(END_SWNVPPTY)
 @SP
 M = M - 1
 A = M
@@ -171,14 +145,10 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JLT
-0;JLT
-0;JLT
 @LCL
 D = M
-@endFrame_ZUFTWQUA
+@endFrame_TTDLYYDO
 M = D
-0;JLT
 D = D - 1
 D = D - 1
 D = D - 1
@@ -186,10 +156,8 @@ D = D - 1
 D = D - 1
 A = D
 D = M
-0;JLT
-@retAddr_ZUFTWQUA
+@retAddr_TTDLYYDO
 M = D
-0;JLT
 @SP
 M = M - 1
 A = M
@@ -197,19 +165,16 @@ D = M
 @ARG
 A = M
 M = D
-0;JLT
 D = A + 1
 @SP
 M = D
-0;JLT
-@endFrame_ZUFTWQUA
+@endFrame_TTDLYYDO
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
-0;JLT
-@endFrame_ZUFTWQUA
+@endFrame_TTDLYYDO
 D = M
 D = D - 1
 D = D - 1
@@ -217,8 +182,7 @@ A = D
 D = M
 @THIS
 M = D
-0;JLT
-@endFrame_ZUFTWQUA
+@endFrame_TTDLYYDO
 D = M
 D = D - 1
 D = D - 1
@@ -227,8 +191,7 @@ A = D
 D = M
 @ARG
 M = D
-0;JLT
-@endFrame_ZUFTWQUA
+@endFrame_TTDLYYDO
 D = M
 D = D - 1
 D = D - 1
@@ -238,13 +201,9 @@ A = D
 D = M
 @LCL
 M = D
-0;JLT
-@retAddr_ZUFTWQUA
+@retAddr_TTDLYYDO
 A = M
 0;JMP
-0;JLT
-0;JLT
-0;JLT
 (IF_FALSE)
 @2
 A = M
@@ -269,17 +228,13 @@ D = M - D
 M = D
 @SP
 M = M - 1
-0;JGT
-0;JGT
-0;JGT
-@retAddr_RMCJSWSU
+@retAddr_HREJHIIM
 D = A
 @SP
 A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @LCL
 D = M
 @SP
@@ -287,7 +242,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @ARG
 D = M
 @SP
@@ -295,7 +249,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @THIS
 D = M
 @SP
@@ -303,7 +256,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @THAT
 D = M
 @SP
@@ -311,7 +263,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @SP
 D = M - 1
 D = D - 1
@@ -327,10 +278,7 @@ D = M
 M = D
 @Main.fibonacci
 0;JMP
-(retAddr_RMCJSWSU)
-0;JGT
-0;JGT
-0;JGT
+(retAddr_HREJHIIM)
 @2
 A = M
 D = M
@@ -354,17 +302,13 @@ D = M - D
 M = D
 @SP
 M = M - 1
-0;JGT
-0;JGT
-0;JGT
-@retAddr_CYCQOQTV
+@retAddr_RHCSFUKW
 D = A
 @SP
 A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @LCL
 D = M
 @SP
@@ -372,7 +316,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @ARG
 D = M
 @SP
@@ -380,7 +323,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @THIS
 D = M
 @SP
@@ -388,7 +330,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @THAT
 D = M
 @SP
@@ -396,7 +337,6 @@ A = M
 M = D
 @SP
 M = M + 1
-0;JGT
 @SP
 D = M - 1
 D = D - 1
@@ -412,10 +352,7 @@ D = M
 M = D
 @Main.fibonacci
 0;JMP
-(retAddr_CYCQOQTV)
-0;JGT
-0;JGT
-0;JGT
+(retAddr_RHCSFUKW)
 @SP
 A = M - 1
 D = M
@@ -424,14 +361,10 @@ D = M + D
 M = D
 @SP
 M = M - 1
-0;JLT
-0;JLT
-0;JLT
 @LCL
 D = M
-@endFrame_TDVKVUZB
+@endFrame_GKAMDZLO
 M = D
-0;JLT
 D = D - 1
 D = D - 1
 D = D - 1
@@ -439,10 +372,8 @@ D = D - 1
 D = D - 1
 A = D
 D = M
-0;JLT
-@retAddr_TDVKVUZB
+@retAddr_GKAMDZLO
 M = D
-0;JLT
 @SP
 M = M - 1
 A = M
@@ -450,19 +381,16 @@ D = M
 @ARG
 A = M
 M = D
-0;JLT
 D = A + 1
 @SP
 M = D
-0;JLT
-@endFrame_TDVKVUZB
+@endFrame_GKAMDZLO
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
-0;JLT
-@endFrame_TDVKVUZB
+@endFrame_GKAMDZLO
 D = M
 D = D - 1
 D = D - 1
@@ -470,8 +398,7 @@ A = D
 D = M
 @THIS
 M = D
-0;JLT
-@endFrame_TDVKVUZB
+@endFrame_GKAMDZLO
 D = M
 D = D - 1
 D = D - 1
@@ -480,8 +407,7 @@ A = D
 D = M
 @ARG
 M = D
-0;JLT
-@endFrame_TDVKVUZB
+@endFrame_GKAMDZLO
 D = M
 D = D - 1
 D = D - 1
@@ -491,13 +417,9 @@ A = D
 D = M
 @LCL
 M = D
-0;JLT
-@retAddr_TDVKVUZB
+@retAddr_GKAMDZLO
 A = M
 0;JMP
-0;JLT
-0;JLT
-0;JLT
 (END)
 @END
 0;JMP
