@@ -1,4 +1,10 @@
+0;JNE
+0;JNE
+0;JNE
 (Sys.init)
+0;JNE
+0;JNE
+0;JNE
 @4000
 D = A
 @SP
@@ -25,13 +31,17 @@ A = M
 D = M
 @4
 M = D
-@retAddr_MHSBGPGP
+0;JGT
+0;JGT
+0;JGT
+@retAddr_HWOJDBYY
 D = A
 @SP
 A = M
 M = D
 @SP
 M = M + 1
+0;JGT
 @LCL
 D = M
 @SP
@@ -39,6 +49,7 @@ A = M
 M = D
 @SP
 M = M + 1
+0;JGT
 @ARG
 D = M
 @SP
@@ -46,6 +57,7 @@ A = M
 M = D
 @SP
 M = M + 1
+0;JGT
 @THIS
 D = M
 @SP
@@ -53,6 +65,7 @@ A = M
 M = D
 @SP
 M = M + 1
+0;JGT
 @THAT
 D = M
 @SP
@@ -60,6 +73,9 @@ A = M
 M = D
 @SP
 M = M + 1
+0;JGT
+0;JGT
+0;JGT
 @SP
 D = M - 1
 D = D - 1
@@ -74,7 +90,7 @@ D = M
 M = D
 @Sys.main
 0;JMP
-(retAddr_MHSBGPGP)
+(retAddr_HWOJDBYY)
 @SP
 A = M - 1
 D = M
@@ -85,6 +101,9 @@ M = M - 1
 (LOOP)
 @LOOP
 0;JMP
+0;JNE
+0;JNE
+0;JNE
 (Sys.main)
 @0
 D = A
@@ -121,6 +140,9 @@ A = M
 M = D
 @SP
 M = M + 1
+0;JNE
+0;JNE
+0;JNE
 @4001
 D = A
 @SP
@@ -214,13 +236,17 @@ A = M
 M = D
 @SP
 M = M + 1
-@retAddr_GEVRKPLS
+0;JGT
+0;JGT
+0;JGT
+@retAddr_PUQTWSCR
 D = A
 @SP
 A = M
 M = D
 @SP
 M = M + 1
+0;JGT
 @LCL
 D = M
 @SP
@@ -228,6 +254,7 @@ A = M
 M = D
 @SP
 M = M + 1
+0;JGT
 @ARG
 D = M
 @SP
@@ -235,6 +262,7 @@ A = M
 M = D
 @SP
 M = M + 1
+0;JGT
 @THIS
 D = M
 @SP
@@ -242,6 +270,7 @@ A = M
 M = D
 @SP
 M = M + 1
+0;JGT
 @THAT
 D = M
 @SP
@@ -249,6 +278,9 @@ A = M
 M = D
 @SP
 M = M + 1
+0;JGT
+0;JGT
+0;JGT
 @SP
 D = M - 1
 D = D - 1
@@ -264,7 +296,7 @@ D = M
 M = D
 @Sys.add12
 0;JMP
-(retAddr_GEVRKPLS)
+(retAddr_PUQTWSCR)
 @SP
 A = M - 1
 D = M
@@ -368,10 +400,14 @@ D = M + D
 M = D
 @SP
 M = M - 1
+0;JLT
+0;JLT
+0;JLT
 @LCL
 D = M
-@endFrame_AULGZRBP
+@endFrame_VSOGZEHT
 M = D
+0;JLT
 D = D - 1
 D = D - 1
 D = D - 1
@@ -379,8 +415,10 @@ D = D - 1
 D = D - 1
 A = D
 D = M
-@retAddr_AULGZRBP
+0;JLT
+@retAddr_VSOGZEHT
 M = D
+0;JLT
 @SP
 M = M - 1
 A = M
@@ -388,16 +426,19 @@ D = M
 @ARG
 A = M
 M = D
+0;JLT
 D = A + 1
 @SP
 M = D
-@endFrame_AULGZRBP
+0;JLT
+@endFrame_VSOGZEHT
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
-@endFrame_AULGZRBP
+0;JLT
+@endFrame_VSOGZEHT
 D = M
 D = D - 1
 D = D - 1
@@ -405,7 +446,8 @@ A = D
 D = M
 @THIS
 M = D
-@endFrame_AULGZRBP
+0;JLT
+@endFrame_VSOGZEHT
 D = M
 D = D - 1
 D = D - 1
@@ -414,7 +456,8 @@ A = D
 D = M
 @ARG
 M = D
-@endFrame_AULGZRBP
+0;JLT
+@endFrame_VSOGZEHT
 D = M
 D = D - 1
 D = D - 1
@@ -424,10 +467,20 @@ A = D
 D = M
 @LCL
 M = D
-@retAddr_AULGZRBP
+0;JLT
+@retAddr_VSOGZEHT
 A = M
 0;JMP
+0;JLT
+0;JLT
+0;JLT
+0;JNE
+0;JNE
+0;JNE
 (Sys.add12)
+0;JNE
+0;JNE
+0;JNE
 @4002
 D = A
 @SP
@@ -477,10 +530,14 @@ D = M + D
 M = D
 @SP
 M = M - 1
+0;JLT
+0;JLT
+0;JLT
 @LCL
 D = M
-@endFrame_YIELJMDA
+@endFrame_XIDRZQJE
 M = D
+0;JLT
 D = D - 1
 D = D - 1
 D = D - 1
@@ -488,8 +545,10 @@ D = D - 1
 D = D - 1
 A = D
 D = M
-@retAddr_YIELJMDA
+0;JLT
+@retAddr_XIDRZQJE
 M = D
+0;JLT
 @SP
 M = M - 1
 A = M
@@ -497,16 +556,19 @@ D = M
 @ARG
 A = M
 M = D
+0;JLT
 D = A + 1
 @SP
 M = D
-@endFrame_YIELJMDA
+0;JLT
+@endFrame_XIDRZQJE
 D = M - 1
 A = D
 D = M
 @THAT
 M = D
-@endFrame_YIELJMDA
+0;JLT
+@endFrame_XIDRZQJE
 D = M
 D = D - 1
 D = D - 1
@@ -514,7 +576,8 @@ A = D
 D = M
 @THIS
 M = D
-@endFrame_YIELJMDA
+0;JLT
+@endFrame_XIDRZQJE
 D = M
 D = D - 1
 D = D - 1
@@ -523,7 +586,8 @@ A = D
 D = M
 @ARG
 M = D
-@endFrame_YIELJMDA
+0;JLT
+@endFrame_XIDRZQJE
 D = M
 D = D - 1
 D = D - 1
@@ -533,9 +597,13 @@ A = D
 D = M
 @LCL
 M = D
-@retAddr_YIELJMDA
+0;JLT
+@retAddr_XIDRZQJE
 A = M
 0;JMP
+0;JLT
+0;JLT
+0;JLT
 (END)
 @END
 0;JMP

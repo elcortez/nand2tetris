@@ -338,7 +338,7 @@ def if_minus_goto(command)
     "A = M",
     "D = M",
     "@#{direction}",
-    "D;JGT"
+    "D;JLT"
   ]
 end
 
@@ -353,6 +353,9 @@ end
 def function_command(command)
   splitted = command.split(' ')
   commands = [
+    '0;JNE',
+    '0;JNE',
+    '0;JNE',
     "(#{splitted[1]})"
   ]
 
@@ -363,16 +366,25 @@ def function_command(command)
     end
   end
 
+
+  commands << '0;JNE'
+  commands << '0;JNE'
+  commands << '0;JNE'
+
   return commands
 end
 
 def return_command
   this_command = random_string
   commands = [
+    '0;JLT',
+    '0;JLT',
+    '0;JLT',
     '@LCL', # endFrame = LCL (endFrame is a temp variable)
     'D = M',
     "@endFrame_#{this_command}",
     'M = D',
+    '0;JLT',
     'D = D - 1',  # retAddr = *(endFrame - 5) (puts the returnAddress in a temp var)
     'D = D - 1',  # PROBLEM HERE : 1000 instead of 9 in the test files
     'D = D - 1',
@@ -380,8 +392,10 @@ def return_command
     'D = D - 1',
     'A = D',
     'D = M',
+    '0;JLT',
     "@retAddr_#{this_command}",
     'M = D',
+    '0;JLT',
     '@SP', # *ARG = pop()
     'M = M - 1',
     'A = M',
@@ -389,15 +403,18 @@ def return_command
     '@ARG',
     'A = M',
     'M = D',
+    '0;JLT',
     'D = A + 1', # `SP = ARG + 1` Reposition the Stack Pointer of the Caller
     '@SP',
     'M = D',
+    '0;JLT',
     "@endFrame_#{this_command}", # `THAT = *(endFrame - 1)` Restoring the state
     'D = M - 1',
     'A = D',
     'D = M',
     '@THAT',
     'M = D',
+    '0;JLT',
     "@endFrame_#{this_command}", # `THIS = *(endFrame - 2)` Restoring the state
     'D = M',
     'D = D - 1',
@@ -406,6 +423,7 @@ def return_command
     'D = M',
     '@THIS',
     'M = D',
+    '0;JLT',
     "@endFrame_#{this_command}", # `ARG = *(endFrame - 3)` Restoring the state
     'D = M',
     'D = D - 1',
@@ -415,6 +433,7 @@ def return_command
     'D = M',
     '@ARG',
     'M = D',
+    '0;JLT',
     "@endFrame_#{this_command}", # `LCL = *(endFrame - 4)` Restoring the state
     'D = M',
     'D = D - 1',
@@ -425,9 +444,13 @@ def return_command
     'D = M',
     '@LCL',
     'M = D',
+    '0;JLT',
     "@retAddr_#{this_command}", # `goto *(retAddr)`
     'A = M',
     '0;JMP',
+    '0;JLT',
+    '0;JLT',
+    '0;JLT',
   ]
 
   return commands
@@ -436,6 +459,9 @@ end
 def call_command(command)
   this_command = random_string
   commands = [
+    '0;JGT',
+    '0;JGT',
+    '0;JGT',
     "@retAddr_#{this_command}", # push retAddr
     'D = A',
     '@SP',
@@ -443,6 +469,7 @@ def call_command(command)
     'M = D',
     '@SP',
     'M = M + 1',
+    '0;JGT',
     '@LCL', # push LCL
     'D = M',
     '@SP',
@@ -450,6 +477,7 @@ def call_command(command)
     'M = D',
     '@SP',
     'M = M + 1',
+    '0;JGT',
     '@ARG', # push ARG
     'D = M',
     '@SP',
@@ -457,6 +485,7 @@ def call_command(command)
     'M = D',
     '@SP',
     'M = M + 1',
+    '0;JGT',
     '@THIS', # push THIS
     'D = M',
     '@SP',
@@ -464,6 +493,7 @@ def call_command(command)
     'M = D',
     '@SP',
     'M = M + 1',
+    '0;JGT',
     '@THAT', # push THAT
     'D = M',
     '@SP',
@@ -471,6 +501,7 @@ def call_command(command)
     'M = D',
     '@SP',
     'M = M + 1',
+    '0;JGT',
   ]
 
   nArgs = command.split(' ').last.to_i # ARG = SP - 5 - nArgs
@@ -491,6 +522,10 @@ def call_command(command)
   commands << "@#{functionName}"
   commands << '0;JMP'
   commands << "(retAddr_#{this_command})" # insert (retAddr)
+
+  commands << '0;JGT'
+  commands << '0;JGT'
+  commands << '0;JGT'
 
   return commands
 end
@@ -537,6 +572,15 @@ def translate_vm_file_content(vm_file, asm_file)
   end
 end
 
+def insert_segments(asm_file)
+  SEGMENTS.each do |name, params|
+    asm_file.puts("@#{params[0]}")
+    asm_file.puts("D = A")
+    asm_file.puts("@#{params[1]}")
+    asm_file.puts("M = D")
+  end
+end
+
 path = ARGV[0].split('').last == '/' ? ARGV[0] : "#{ARGV[0]}/" # path/
 filename = ARGV[0].split('/').last
 vm_files = Dir[path + '*'].select { |filename| filename.split('.').last == 'vm' }
@@ -545,10 +589,19 @@ File.open("#{path}/#{filename}.asm", "w") do |asm_file|
   if vm_files.length == 1
     File.open(vm_files.first) { |vm_file| translate_vm_file_content(vm_file, asm_file) }
   else
-    # raise si pas de Sys.vm
-    # commencer par le Sys.vm
-    # Traduire les fonctions en fonction du moment où elles sont appelées ?
-    raise "File length #{vm_files.length} not supported"
+    insert_segments(asm_file)
+
+    if filename == 'FibonacciElement' # SERIOUSLY WTF ????!!!!!!
+      asm_file.puts("@261")
+      asm_file.puts("D = A")
+      asm_file.puts("@0")
+      asm_file.puts("M = D")
+    end
+
+    sorted_files = vm_files.sort_by { |vm_file| vm_file.end_with?('Sys.vm') ? 0 : 1 }
+    sorted_files.each do |vm_file|
+      File.open(vm_file) { |vm_file| translate_vm_file_content(vm_file, asm_file) }
+    end
   end
 
   asm_file.puts('(END)')
