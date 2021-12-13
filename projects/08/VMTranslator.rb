@@ -303,20 +303,24 @@ def pop_pointer(command)
   ]
 end
 
-def pop_static(command)
+def pop_static(command, vm_file)
+  classname = File.basename(vm_file, '.*')
+  var_number = command.split('').last.to_i
   return [
     '@SP',
     'M = M - 1',
     'A = M',
     'D = M',
-    "@#{16 + command.split('').last.to_i}",
+    "@#{classname}.#{var_number}",
     'M = D'
   ]
 end
 
-def push_static(command)
+def push_static(command, vm_file)
+  classname = File.basename(vm_file, '.*')
+  var_number = command.split('').last.to_i
   return [
-    "@#{16 + command.split('').last.to_i}",
+    "@#{classname}.#{var_number}",
     'D = M',
     '@SP',
     'A = M',
@@ -495,14 +499,14 @@ def call_command(command)
   return commands
 end
 
-def translated_command(command)
+def translated_command(command, vm_file = nil)
   return push_constant(command) if command.start_with?('push constant')
   return pop_temp(command) if command.start_with?('pop temp')
   return push_temp(command) if command.start_with?('push temp')
   return pop_pointer(command) if command.start_with?('pop pointer')
   return push_pointer(command) if command.start_with?('push pointer')
-  return pop_static(command) if command.start_with?('pop static')
-  return push_static(command) if command.start_with?('push static')
+  return pop_static(command, vm_file) if command.start_with?('pop static')
+  return push_static(command, vm_file) if command.start_with?('push static')
   return pop(command) if command.start_with?('pop')
   return push(command) if command.start_with?('push')
   return label(command) if command.start_with?('label')
@@ -531,7 +535,7 @@ end
 
 def translate_vm_file_content(vm_file, asm_file)
   sanitized_lines(vm_file).each do |line|
-     translated_command(line).each do |asm_command|
+     translated_command(line, vm_file).each do |asm_command|
        asm_file.puts(asm_command)
      end
   end
