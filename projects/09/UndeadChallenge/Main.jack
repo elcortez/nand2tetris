@@ -1,0 +1,9 @@
+class Main {
+  function void main() {
+    var UndeadChallenge game;
+    let game = UndeadChallenge.new();
+    do game.run();
+    do game.dispose();
+    return;
+  }
+}

@@ -1,0 +1,19 @@
+class Hero {
+   field int life; // remaining life points of the hero
+
+   constructor Hero new() {
+      do draw();
+      return this;
+   }
+
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   method void draw() {
+      do Screen.setColor(true);
+      do Screen.drawRectangle(50, 50, 30, 30);
+      return;
+   }
+}
