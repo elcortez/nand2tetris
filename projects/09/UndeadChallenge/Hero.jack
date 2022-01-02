@@ -2,7 +2,7 @@ class Hero {
    field int life; // remaining life points of the hero
 
    constructor Hero new() {
-      do draw();
+      do drawRight(4080);
       return this;
    }
 
@@ -11,9 +11,47 @@ class Hero {
       return;
    }
 
-   method void draw() {
-      do Screen.setColor(true);
-      do Screen.drawRectangle(50, 50, 30, 30);
-      return;
+   method void drawRight(int location) {
+    var int memAddress;
+   	let memAddress = 16384+location;
+   	do Memory.poke(memAddress+0, 0);
+   	do Memory.poke(memAddress+32, 0);
+   	do Memory.poke(memAddress+64, 0);
+   	do Memory.poke(memAddress+96, 0);
+   	do Memory.poke(memAddress+128, 0);
+   	do Memory.poke(memAddress+160, 0);
+   	do Memory.poke(memAddress+192, 448);
+   	do Memory.poke(memAddress+224, 7616);
+   	do Memory.poke(memAddress+256, 15504);
+   	do Memory.poke(memAddress+288, 4080);
+   	do Memory.poke(memAddress+320, 448);
+   	do Memory.poke(memAddress+352, 448);
+   	do Memory.poke(memAddress+384, 448);
+   	do Memory.poke(memAddress+416, 864);
+   	do Memory.poke(memAddress+448, 864);
+   	do Memory.poke(memAddress+480, 1904);
+   	return;
    }
+
+   method void drawLeft(int location) {
+    var int memAddress;
+    let memAddress = 16384+location;
+    do Memory.poke(memAddress+0, 0);
+    do Memory.poke(memAddress+32, 0);
+    do Memory.poke(memAddress+64, 0);
+    do Memory.poke(memAddress+96, 0);
+    do Memory.poke(memAddress+128, 0);
+    do Memory.poke(memAddress+160, 0);
+    do Memory.poke(memAddress+192, 896);
+    do Memory.poke(memAddress+224, 952);
+    do Memory.poke(memAddress+256, 2364);
+    do Memory.poke(memAddress+288, 4080);
+    do Memory.poke(memAddress+320, 896);
+    do Memory.poke(memAddress+352, 896);
+    do Memory.poke(memAddress+384, 896);
+    do Memory.poke(memAddress+416, 1728);
+    do Memory.poke(memAddress+448, 1728);
+    do Memory.poke(memAddress+480, 3808);
+    return;
+  }
 }
