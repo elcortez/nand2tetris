@@ -20,18 +20,7 @@ function Hero.moveUp 0
 push argument 0
 pop pointer 0
 push pointer 0
-push constant 4080
-call Hero.drawRunningRight 2
-pop temp 0
-push constant 50
-call Sys.wait 1
-pop temp 0
-push pointer 0
-push constant 4080
-call Hero.drawRight 2
-pop temp 0
-push constant 50
-call Sys.wait 1
+call Hero.moveLegsRight 1
 pop temp 0
 push constant 0
 return
@@ -39,6 +28,30 @@ function Hero.moveRight 0
 push argument 0
 pop pointer 0
 push pointer 0
+call Hero.moveLegsRight 1
+pop temp 0
+push constant 0
+return
+function Hero.moveDown 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Hero.moveLegsLeft 1
+pop temp 0
+push constant 0
+return
+function Hero.moveLeft 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Hero.moveLegsLeft 1
+pop temp 0
+push constant 0
+return
+function Hero.moveLegsRight 0
+push argument 0
+pop pointer 0
+push pointer 0
 push constant 4080
 call Hero.drawRunningRight 2
 pop temp 0
@@ -54,26 +67,7 @@ call Sys.wait 1
 pop temp 0
 push constant 0
 return
-function Hero.moveDown 0
-push argument 0
-pop pointer 0
-push pointer 0
-push constant 4080
-call Hero.drawRunningLeft 2
-pop temp 0
-push constant 50
-call Sys.wait 1
-pop temp 0
-push pointer 0
-push constant 4080
-call Hero.drawLeft 2
-pop temp 0
-push constant 50
-call Sys.wait 1
-pop temp 0
-push constant 0
-return
-function Hero.moveLeft 0
+function Hero.moveLegsLeft 0
 push argument 0
 pop pointer 0
 push pointer 0

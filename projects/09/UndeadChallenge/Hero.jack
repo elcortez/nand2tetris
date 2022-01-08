@@ -13,14 +13,26 @@ class Hero {
    }
 
    method void moveUp() {
-      do drawRunningRight(4080);
-      do Sys.wait(50);
-      do drawRight(4080);
-      do Sys.wait(50);
+      do moveLegsRight();
       return;
    }
 
    method void moveRight() {
+      do moveLegsRight();
+      return;
+   }
+
+   method void moveDown() {
+      do moveLegsLeft();
+      return;
+   }
+
+   method void moveLeft() {
+      do moveLegsLeft();
+      return;
+   }
+
+   method void moveLegsRight() {
       do drawRunningRight(4080);
       do Sys.wait(50);
       do drawRight(4080);
@@ -28,15 +40,7 @@ class Hero {
       return;
    }
 
-   method void moveDown() {
-      do drawRunningLeft(4080);
-      do Sys.wait(50);
-      do drawLeft(4080);
-      do Sys.wait(50);
-      return;
-   }
-
-   method void moveLeft() {
+   method void moveLegsLeft() {
       do drawRunningLeft(4080);
       do Sys.wait(50);
       do drawLeft(4080);
