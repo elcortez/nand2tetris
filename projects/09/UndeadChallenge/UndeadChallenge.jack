@@ -22,7 +22,22 @@ class UndeadChallenge {
          while (key = 0) {
             let key = Keyboard.keyPressed();
          }
-         if (key = 81)  { let exit = true; }     // q key
+         while (key = 131) { 
+            do hero.moveUp(); 
+            let key = Keyboard.keyPressed();
+         }
+         while (key = 133) { 
+            do hero.moveLeft(); 
+            let key = Keyboard.keyPressed();
+         }
+         while (key = 130) { 
+            do hero.moveLeft(); 
+            let key = Keyboard.keyPressed();
+         }
+         while (key = 132) { 
+            do hero.moveRight(); 
+            let key = Keyboard.keyPressed();
+         }
 
          // waits for the key to be released
          while (~(key = 0)) {

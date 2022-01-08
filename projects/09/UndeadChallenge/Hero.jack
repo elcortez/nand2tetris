@@ -1,5 +1,6 @@
 class Hero {
    field int life; // remaining life points of the hero
+   field int location;
 
    constructor Hero new() {
       do drawRight(4080);
@@ -11,8 +12,84 @@ class Hero {
       return;
    }
 
+   method void moveUp() {
+      do drawRunningRight(4080);
+      do Sys.wait(50);
+      do drawRight(4080);
+      do Sys.wait(50);
+      return;
+   }
+
+   method void moveRight() {
+      do drawRunningRight(4080);
+      do Sys.wait(50);
+      do drawRight(4080);
+      do Sys.wait(50);
+      return;
+   }
+
+   method void moveDown() {
+      do drawRunningLeft(4080);
+      do Sys.wait(50);
+      do drawLeft(4080);
+      do Sys.wait(50);
+      return;
+   }
+
+   method void moveLeft() {
+      do drawRunningLeft(4080);
+      do Sys.wait(50);
+      do drawLeft(4080);
+      do Sys.wait(50);
+      return;
+   }
+
+   method void drawRunningRight(int location) {
+      var int memAddress;
+      let memAddress = 16384+location;
+      do Memory.poke(memAddress+0, 0);
+      do Memory.poke(memAddress+32, 0);
+      do Memory.poke(memAddress+64, 0);
+      do Memory.poke(memAddress+96, 0);
+      do Memory.poke(memAddress+128, 480);
+      do Memory.poke(memAddress+160, 7648);
+      do Memory.poke(memAddress+192, 15552);
+      do Memory.poke(memAddress+224, 8188);
+      do Memory.poke(memAddress+256, 192);
+      do Memory.poke(memAddress+288, 192);
+      do Memory.poke(memAddress+320, 192);
+      do Memory.poke(memAddress+352, 192);
+      do Memory.poke(memAddress+384, 508);
+      do Memory.poke(memAddress+416, 796);
+      do Memory.poke(memAddress+448, 1804);
+      do Memory.poke(memAddress+480, 1792);
+      return;
+   }
+
+
+   method void drawRunningLeft(int location) {
+      var int memAddress;
+      let memAddress = 16384+location;
+      do Memory.poke(memAddress+0, 0);
+      do Memory.poke(memAddress+32, 0);
+      do Memory.poke(memAddress+64, 0);
+      do Memory.poke(memAddress+96, 0);
+      do Memory.poke(memAddress+128, 1920);
+      do Memory.poke(memAddress+160, 1976);
+      do Memory.poke(memAddress+192, 828);
+      do Memory.poke(memAddress+224, 16376);
+      do Memory.poke(memAddress+256, 768);
+      do Memory.poke(memAddress+288, 768);
+      do Memory.poke(memAddress+320, 768);
+      do Memory.poke(memAddress+352, 768);
+      do Memory.poke(memAddress+384, 16256);
+      do Memory.poke(memAddress+416, 14528);
+      do Memory.poke(memAddress+448, 12512);
+      do Memory.poke(memAddress+480, 224);
+      return;
+   }
    method void drawRight(int location) {
-    var int memAddress;
+      var int memAddress;
    	let memAddress = 16384+location;
    	do Memory.poke(memAddress+0, 0);
    	do Memory.poke(memAddress+32, 0);

@@ -37,27 +37,69 @@ call Keyboard.keyPressed 0
 pop local 0
 goto WHILE_EXP1
 label WHILE_END1
-push local 0
-push constant 81
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 0
-not
-pop local 1
-label IF_FALSE0
 label WHILE_EXP2
 push local 0
-push constant 0
+push constant 131
 eq
 not
-not
 if-goto WHILE_END2
+push this 0
+call Hero.moveUp 1
+pop temp 0
 call Keyboard.keyPressed 0
 pop local 0
 goto WHILE_EXP2
 label WHILE_END2
+label WHILE_EXP3
+push local 0
+push constant 133
+eq
+not
+if-goto WHILE_END3
+push this 0
+call Hero.moveLeft 1
+pop temp 0
+call Keyboard.keyPressed 0
+pop local 0
+goto WHILE_EXP3
+label WHILE_END3
+label WHILE_EXP4
+push local 0
+push constant 130
+eq
+not
+if-goto WHILE_END4
+push this 0
+call Hero.moveLeft 1
+pop temp 0
+call Keyboard.keyPressed 0
+pop local 0
+goto WHILE_EXP4
+label WHILE_END4
+label WHILE_EXP5
+push local 0
+push constant 132
+eq
+not
+if-goto WHILE_END5
+push this 0
+call Hero.moveRight 1
+pop temp 0
+call Keyboard.keyPressed 0
+pop local 0
+goto WHILE_EXP5
+label WHILE_END5
+label WHILE_EXP6
+push local 0
+push constant 0
+eq
+not
+not
+if-goto WHILE_END6
+call Keyboard.keyPressed 0
+pop local 0
+goto WHILE_EXP6
+label WHILE_END6
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0
