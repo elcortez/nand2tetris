@@ -2,8 +2,10 @@ function Hero.new 0
 push constant 2
 call Memory.alloc 1
 pop pointer 0
-push pointer 0
 push constant 4080
+pop this 1
+push pointer 0
+push this 1
 call Hero.drawRight 2
 pop temp 0
 push pointer 0
@@ -20,13 +22,13 @@ function Hero.moveUp 0
 push argument 0
 pop pointer 0
 push pointer 0
-call Hero.moveLegsRight 1
+push this 1
+call Hero.eraseHero 2
 pop temp 0
-push constant 0
-return
-function Hero.moveRight 0
-push argument 0
-pop pointer 0
+push this 1
+push constant 64
+sub
+pop this 1
 push pointer 0
 call Hero.moveLegsRight 1
 pop temp 0
@@ -36,6 +38,14 @@ function Hero.moveDown 0
 push argument 0
 pop pointer 0
 push pointer 0
+push this 1
+call Hero.eraseHero 2
+pop temp 0
+push this 1
+push constant 64
+add
+pop this 1
+push pointer 0
 call Hero.moveLegsLeft 1
 pop temp 0
 push constant 0
@@ -44,7 +54,31 @@ function Hero.moveLeft 0
 push argument 0
 pop pointer 0
 push pointer 0
+push this 1
+call Hero.eraseHero 2
+pop temp 0
+push this 1
+push constant 1
+sub
+pop this 1
+push pointer 0
 call Hero.moveLegsLeft 1
+pop temp 0
+push constant 0
+return
+function Hero.moveRight 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 1
+call Hero.eraseHero 2
+pop temp 0
+push this 1
+push constant 1
+add
+pop this 1
+push pointer 0
+call Hero.moveLegsRight 1
 pop temp 0
 push constant 0
 return
@@ -52,14 +86,14 @@ function Hero.moveLegsRight 0
 push argument 0
 pop pointer 0
 push pointer 0
-push constant 4080
+push this 1
 call Hero.drawRunningRight 2
 pop temp 0
 push constant 50
 call Sys.wait 1
 pop temp 0
 push pointer 0
-push constant 4080
+push this 1
 call Hero.drawRight 2
 pop temp 0
 push constant 50
@@ -71,18 +105,123 @@ function Hero.moveLegsLeft 0
 push argument 0
 pop pointer 0
 push pointer 0
-push constant 4080
+push this 1
 call Hero.drawRunningLeft 2
 pop temp 0
 push constant 50
 call Sys.wait 1
 pop temp 0
 push pointer 0
-push constant 4080
+push this 1
 call Hero.drawLeft 2
 pop temp 0
 push constant 50
 call Sys.wait 1
+pop temp 0
+push constant 0
+return
+function Hero.eraseHero 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 0
+call Memory.poke 2
 pop temp 0
 push constant 0
 return

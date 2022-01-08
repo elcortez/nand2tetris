@@ -57,7 +57,7 @@ eq
 not
 if-goto WHILE_END3
 push this 0
-call Hero.moveLeft 1
+call Hero.moveDown 1
 pop temp 0
 call Keyboard.keyPressed 0
 pop local 0

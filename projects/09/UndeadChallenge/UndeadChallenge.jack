@@ -27,7 +27,7 @@ class UndeadChallenge {
             let key = Keyboard.keyPressed();
          }
          while (key = 133) { 
-            do hero.moveLeft(); 
+            do hero.moveDown(); 
             let key = Keyboard.keyPressed();
          }
          while (key = 130) { 
