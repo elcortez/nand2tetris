@@ -30,7 +30,7 @@ push constant 64
 sub
 pop this 1
 push pointer 0
-call Hero.moveLegsRight 1
+call Hero.moveLegsUp 1
 pop temp 0
 push constant 0
 return
@@ -46,7 +46,7 @@ push constant 64
 add
 pop this 1
 push pointer 0
-call Hero.moveLegsLeft 1
+call Hero.moveLegsDown 1
 pop temp 0
 push constant 0
 return
@@ -101,6 +101,25 @@ call Sys.wait 1
 pop temp 0
 push constant 0
 return
+function Hero.moveLegsUp 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 1
+call Hero.drawRunningUp 2
+pop temp 0
+push constant 50
+call Sys.wait 1
+pop temp 0
+push pointer 0
+push this 1
+call Hero.drawUp 2
+pop temp 0
+push constant 50
+call Sys.wait 1
+pop temp 0
+push constant 0
+return
 function Hero.moveLegsLeft 0
 push argument 0
 pop pointer 0
@@ -114,6 +133,25 @@ pop temp 0
 push pointer 0
 push this 1
 call Hero.drawLeft 2
+pop temp 0
+push constant 50
+call Sys.wait 1
+pop temp 0
+push constant 0
+return
+function Hero.moveLegsDown 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 1
+call Hero.drawRunningDown 2
+pop temp 0
+push constant 50
+call Sys.wait 1
+pop temp 0
+push pointer 0
+push this 1
+call Hero.drawDown 2
 pop temp 0
 push constant 50
 call Sys.wait 1
@@ -641,6 +679,426 @@ push local 0
 push constant 480
 add
 push constant 3808
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Hero.drawUp 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 32
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 48
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 48
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 464
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 464
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 144
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 1008
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 736
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 736
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 224
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 432
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 952
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Hero.drawRunningUp 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 32
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 48
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 48
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 464
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 464
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 144
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 4080
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 224
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 224
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 736
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 1008
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 944
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 56
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Hero.drawDown 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 2496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 2496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 2176
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 4088
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 460
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 460
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 460
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 460
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 1000
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 864
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 864
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 864
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 1904
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Hero.drawRunningDown 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 2496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 2496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 2176
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 4088
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 460
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 460
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 460
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 2508
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 4072
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 3936
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 96
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 224
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 128
 call Memory.poke 2
 pop temp 0
 push constant 0

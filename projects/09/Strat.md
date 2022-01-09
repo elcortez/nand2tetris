@@ -1,11 +1,14 @@
 # Strategy for building Undead Challenge
-## 1. Build a hero
-## 2. Make the hero move legs when pressing keyboard key : up, down, left, right
-## 3. Make the hero move on screen when pressing keyboard key : up, down, left, right
-## 4. Build a zombie
-## 5. Make the zombie move legs
-## 6. Make the zombie move always towards the hero
-## 7. Make the zombie attack the hero when in physical contact : instant death
-## 8. Make the hero shoot with his gun : make a bullet go out in the correct direction
-## 9. Make the bullet kill the zombie if it touches it
-## 10. Make lots of zombies
+## (OK) Build a hero
+## (OK) Make the hero move on screen : up, down
+## (OK) Make the hero move on screen : left, right
+## (OK) Make the hero move legs : left, right
+## (OK) Make the hero move legs : up, down
+## Limit moves of the hero based on the screen
+## Build a zombie
+## Make the zombie move legs
+## Make the zombie move always towards the hero
+## Make the zombie attack the hero when in physical contact : instant death
+## Make the hero shoot with his gun : make a bullet go out in the correct direction
+## Make the bullet kill the zombie if it touches it
+## Make lots of zombies
