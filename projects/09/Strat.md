@@ -4,7 +4,7 @@
 ## (OK) Make the hero move on screen : left, right
 ## (OK) Make the hero move legs : left, right
 ## (OK) Make the hero move legs : up, down
-## Limit moves of the hero based on the screen
+## (OK) Limit moves of the hero based on the screen
 ## Build a zombie
 ## Make the zombie move legs
 ## Make the zombie move always towards the hero
