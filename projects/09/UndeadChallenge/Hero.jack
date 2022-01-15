@@ -3,9 +3,7 @@ class Hero {
    field int location;
 
    constructor Hero new() {
-      let location = 4080; // starting point
-      // 16384 -> 32767
-      // 4064 -> 32508
+      let location = 32; // starting point 4080
       do drawRight(location);
       return this;
    }
@@ -16,24 +14,42 @@ class Hero {
    }
 
    method void moveUp() {
-      do eraseHero(location);
-      let location = location - 64;
+     if (location > 32) {
+       do eraseHero(location);
+       let location = location - 64;
+     }
+
       do moveLegsUp();
       return;
    }
 
    method void moveDown() {
-      do eraseHero(location);
-      let location = location + 64;
+     if (location < 7585) {
+        do eraseHero(location);
+        let location = location + 64;
+      }
       do moveLegsDown();
       return;
    }
 
    method void moveLeft() {
+    var int checkLocationModulo;
+    let checkLocationModulo = location;
+
+    while(checkLocationModulo > 32) {
+      let checkLocationModulo = checkLocationModulo - 32;
+    }
+    do Output.printString("--");
+    do Output.printInt(location);
+    do Output.printString(".");
+    do Output.printInt(checkLocationModulo);
+
+    if (checkLocationModulo > 0) {
       do eraseHero(location);
       let location = location - 1;
-      do moveLegsLeft();
-      return;
+    }
+    do moveLegsLeft();
+    return;
    }
 
    method void moveRight() {
