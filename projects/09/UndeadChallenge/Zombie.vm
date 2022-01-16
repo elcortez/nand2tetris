@@ -1,16 +1,16 @@
-function Hero.new 0
+function Zombie.new 0
 push constant 1
 call Memory.alloc 1
 pop pointer 0
-push constant 4112
+push constant 0
 pop this 0
 push pointer 0
 push this 0
-call Hero.drawRight 2
+call Zombie.drawRight 2
 pop temp 0
 push pointer 0
 return
-function Hero.dispose 0
+function Zombie.dispose 0
 push argument 0
 pop pointer 0
 push pointer 0
@@ -18,7 +18,7 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
-function Hero.moveUp 0
+function Zombie.moveUp 0
 push argument 0
 pop pointer 0
 push this 0
@@ -29,7 +29,7 @@ goto IF_FALSE0
 label IF_TRUE0
 push pointer 0
 push this 0
-call Hero.eraseHero 2
+call Zombie.eraseZombie 2
 pop temp 0
 push this 0
 push constant 64
@@ -37,11 +37,11 @@ sub
 pop this 0
 label IF_FALSE0
 push pointer 0
-call Hero.moveLegsUp 1
+call Zombie.moveLegsUp 1
 pop temp 0
 push constant 0
 return
-function Hero.moveDown 0
+function Zombie.moveDown 0
 push argument 0
 pop pointer 0
 push this 0
@@ -52,7 +52,7 @@ goto IF_FALSE0
 label IF_TRUE0
 push pointer 0
 push this 0
-call Hero.eraseHero 2
+call Zombie.eraseZombie 2
 pop temp 0
 push this 0
 push constant 64
@@ -60,11 +60,11 @@ add
 pop this 0
 label IF_FALSE0
 push pointer 0
-call Hero.moveLegsDown 1
+call Zombie.moveLegsDown 1
 pop temp 0
 push constant 0
 return
-function Hero.moveLeft 1
+function Zombie.moveLeft 1
 push argument 0
 pop pointer 0
 push this 0
@@ -91,7 +91,7 @@ goto IF_FALSE0
 label IF_TRUE0
 push pointer 0
 push this 0
-call Hero.eraseHero 2
+call Zombie.eraseZombie 2
 pop temp 0
 push this 0
 push constant 1
@@ -99,11 +99,11 @@ sub
 pop this 0
 label IF_FALSE0
 push pointer 0
-call Hero.moveLegsLeft 1
+call Zombie.moveLegsLeft 1
 pop temp 0
 push constant 0
 return
-function Hero.moveRight 1
+function Zombie.moveRight 1
 push argument 0
 pop pointer 0
 push this 0
@@ -130,7 +130,7 @@ goto IF_FALSE0
 label IF_TRUE0
 push pointer 0
 push this 0
-call Hero.eraseHero 2
+call Zombie.eraseZombie 2
 pop temp 0
 push this 0
 push constant 1
@@ -138,87 +138,87 @@ add
 pop this 0
 label IF_FALSE0
 push pointer 0
-call Hero.moveLegsRight 1
+call Zombie.moveLegsRight 1
 pop temp 0
 push constant 0
 return
-function Hero.moveLegsRight 0
+function Zombie.moveLegsRight 0
 push argument 0
 pop pointer 0
 push pointer 0
 push this 0
-call Hero.drawRunningRight 2
+call Zombie.drawRunningRight 2
 pop temp 0
-push constant 50
+push constant 200
 call Sys.wait 1
 pop temp 0
 push pointer 0
 push this 0
-call Hero.drawRight 2
+call Zombie.drawRight 2
 pop temp 0
-push constant 50
+push constant 200
 call Sys.wait 1
 pop temp 0
 push constant 0
 return
-function Hero.moveLegsUp 0
+function Zombie.moveLegsUp 0
 push argument 0
 pop pointer 0
 push pointer 0
 push this 0
-call Hero.drawRunningUp 2
+call Zombie.drawRunningUp 2
 pop temp 0
-push constant 50
+push constant 200
 call Sys.wait 1
 pop temp 0
 push pointer 0
 push this 0
-call Hero.drawUp 2
+call Zombie.drawUp 2
 pop temp 0
-push constant 50
+push constant 200
 call Sys.wait 1
 pop temp 0
 push constant 0
 return
-function Hero.moveLegsLeft 0
+function Zombie.moveLegsLeft 0
 push argument 0
 pop pointer 0
 push pointer 0
 push this 0
-call Hero.drawRunningLeft 2
+call Zombie.drawRunningLeft 2
 pop temp 0
-push constant 50
+push constant 200
 call Sys.wait 1
 pop temp 0
 push pointer 0
 push this 0
-call Hero.drawLeft 2
+call Zombie.drawLeft 2
 pop temp 0
-push constant 50
+push constant 200
 call Sys.wait 1
 pop temp 0
 push constant 0
 return
-function Hero.moveLegsDown 0
+function Zombie.moveLegsDown 0
 push argument 0
 pop pointer 0
 push pointer 0
 push this 0
-call Hero.drawRunningDown 2
+call Zombie.drawRunningDown 2
 pop temp 0
-push constant 50
+push constant 200
 call Sys.wait 1
 pop temp 0
 push pointer 0
 push this 0
-call Hero.drawDown 2
+call Zombie.drawDown 2
 pop temp 0
-push constant 50
+push constant 200
 call Sys.wait 1
 pop temp 0
 push constant 0
 return
-function Hero.eraseHero 1
+function Zombie.eraseZombie 1
 push argument 0
 pop pointer 0
 push constant 16384
@@ -323,7 +323,7 @@ call Memory.poke 2
 pop temp 0
 push constant 0
 return
-function Hero.drawRunningRight 1
+function Zombie.drawRunningRight 1
 push argument 0
 pop pointer 0
 push constant 16384
@@ -351,73 +351,178 @@ pop temp 0
 push local 0
 push constant 96
 add
-push constant 0
+push constant 224
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 128
 add
-push constant 480
+push constant 224
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 160
 add
-push constant 7648
+push constant 64
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 192
 add
-push constant 15552
+push constant 16352
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 224
 add
-push constant 8188
+push constant 496
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 256
 add
-push constant 192
+push constant 8176
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 288
 add
-push constant 192
+push constant 496
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 320
 add
-push constant 192
+push constant 496
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 352
 add
-push constant 192
+push constant 496
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 384
 add
-push constant 508
+push constant 434
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 416
 add
-push constant 796
+push constant 414
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 448
 add
-push constant 1804
+push constant 206
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 224
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Zombie.drawRunningLeft 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 1792
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 1792
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 512
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 2044
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 3968
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 4088
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 3968
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 3968
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 3968
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 19840
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 31104
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 29440
 call Memory.poke 2
 pop temp 0
 push local 0
@@ -428,7 +533,7 @@ call Memory.poke 2
 pop temp 0
 push constant 0
 return
-function Hero.drawRunningLeft 1
+function Zombie.drawRight 1
 push argument 0
 pop pointer 0
 push constant 16384
@@ -456,382 +561,67 @@ pop temp 0
 push local 0
 push constant 96
 add
-push constant 0
+push constant 224
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 128
 add
-push constant 1920
+push constant 224
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 160
 add
-push constant 1976
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 192
-add
-push constant 828
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 224
-add
-push constant 16376
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 256
-add
-push constant 768
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 288
-add
-push constant 768
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 320
-add
-push constant 768
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 352
-add
-push constant 768
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 384
-add
-push constant 16256
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 416
-add
-push constant 14528
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 448
-add
-push constant 12512
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 480
-add
-push constant 224
-call Memory.poke 2
-pop temp 0
-push constant 0
-return
-function Hero.drawRight 1
-push argument 0
-pop pointer 0
-push constant 16384
-push argument 1
-add
-pop local 0
-push local 0
-push constant 0
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 32
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
 push constant 64
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 96
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 128
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 160
-add
-push constant 0
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 192
 add
-push constant 448
+push constant 16368
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 224
-add
-push constant 7616
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 256
-add
-push constant 15504
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 288
-add
-push constant 4080
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 320
-add
-push constant 448
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 352
-add
-push constant 448
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 384
-add
-push constant 448
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 416
-add
-push constant 864
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 448
-add
-push constant 864
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 480
-add
-push constant 1904
-call Memory.poke 2
-pop temp 0
-push constant 0
-return
-function Hero.drawLeft 1
-push argument 0
-pop pointer 0
-push constant 16384
-push argument 1
-add
-pop local 0
-push local 0
-push constant 0
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 32
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 64
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 96
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 128
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 160
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 192
-add
-push constant 896
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 224
-add
-push constant 952
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 256
-add
-push constant 2364
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 288
-add
-push constant 4080
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 320
-add
-push constant 896
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 352
-add
-push constant 896
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 384
-add
-push constant 896
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 416
-add
-push constant 1728
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 448
-add
-push constant 1728
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 480
-add
-push constant 3808
-call Memory.poke 2
-pop temp 0
-push constant 0
-return
-function Hero.drawUp 1
-push argument 0
-pop pointer 0
-push constant 16384
-push argument 1
-add
-pop local 0
-push local 0
-push constant 0
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 32
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 64
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 96
-add
-push constant 32
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 128
-add
-push constant 48
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 160
-add
-push constant 48
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 192
-add
-push constant 464
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 224
-add
-push constant 464
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 256
-add
-push constant 144
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 288
-add
-push constant 1008
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 320
-add
-push constant 736
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 352
-add
-push constant 736
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 384
-add
-push constant 224
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 416
 add
 push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 8176
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 432
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 432
 call Memory.poke 2
 pop temp 0
 push local 0
@@ -848,7 +638,7 @@ call Memory.poke 2
 pop temp 0
 push constant 0
 return
-function Hero.drawRunningUp 1
+function Zombie.drawLeft 1
 push argument 0
 pop pointer 0
 push constant 16384
@@ -876,189 +666,294 @@ pop temp 0
 push local 0
 push constant 96
 add
-push constant 32
+push constant 1792
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 128
 add
-push constant 48
+push constant 1792
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 160
 add
-push constant 48
+push constant 512
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 192
 add
-push constant 464
+push constant 4092
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 224
 add
-push constant 464
+push constant 3968
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 256
-add
-push constant 144
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 288
-add
-push constant 4080
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 320
-add
-push constant 224
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 352
-add
-push constant 224
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 384
-add
-push constant 736
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 416
-add
-push constant 1008
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 448
-add
-push constant 944
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 480
-add
-push constant 56
-call Memory.poke 2
-pop temp 0
-push constant 0
-return
-function Hero.drawDown 1
-push argument 0
-pop pointer 0
-push constant 16384
-push argument 1
-add
-pop local 0
-push local 0
-push constant 0
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 32
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 64
-add
-push constant 0
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 96
-add
-push constant 2496
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 128
-add
-push constant 2496
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 160
-add
-push constant 2176
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 192
 add
 push constant 4088
 call Memory.poke 2
 pop temp 0
 push local 0
-push constant 224
-add
-push constant 460
-call Memory.poke 2
-pop temp 0
-push local 0
-push constant 256
-add
-push constant 460
-call Memory.poke 2
-pop temp 0
-push local 0
 push constant 288
 add
-push constant 460
+push constant 3968
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 320
 add
-push constant 460
+push constant 3968
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 352
 add
-push constant 1000
+push constant 3968
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 384
 add
-push constant 864
+push constant 3456
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 416
 add
-push constant 864
+push constant 3456
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 448
 add
-push constant 864
+push constant 3456
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 480
 add
-push constant 1904
+push constant 7616
 call Memory.poke 2
 pop temp 0
 push constant 0
 return
-function Hero.drawRunningDown 1
+function Zombie.drawUp 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 1028
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 1028
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 1252
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 1252
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 1092
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 1524
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 2044
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 432
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 432
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 432
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 952
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Zombie.drawRunningUp 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 1028
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 1028
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 1252
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 1252
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 1092
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 1524
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 2044
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 432
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 432
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 952
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Zombie.drawDown 1
 push argument 0
 pop pointer 0
 push constant 16384
@@ -1086,79 +981,184 @@ pop temp 0
 push local 0
 push constant 96
 add
-push constant 2496
+push constant 224
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 128
 add
-push constant 2496
+push constant 224
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 160
 add
-push constant 2176
+push constant 64
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 192
 add
-push constant 4088
+push constant 496
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 224
 add
-push constant 460
+push constant 4094
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 256
 add
-push constant 460
+push constant 2546
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 288
 add
-push constant 460
+push constant 2546
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 320
 add
-push constant 2508
+push constant 2546
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 352
 add
-push constant 4072
+push constant 2546
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 384
 add
-push constant 3936
+push constant 2482
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 416
 add
-push constant 96
+push constant 432
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 448
 add
-push constant 224
+push constant 432
 call Memory.poke 2
 pop temp 0
 push local 0
 push constant 480
 add
+push constant 952
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Zombie.drawRunningDown 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 224
+call Memory.poke 2
+pop temp 0
+push local 0
 push constant 128
+add
+push constant 224
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 64
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 496
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 4094
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 2546
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 2546
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 2546
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 2546
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 2482
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 432
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 952
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 0
 call Memory.poke 2
 pop temp 0
 push constant 0

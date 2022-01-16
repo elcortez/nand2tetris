@@ -1,13 +1,16 @@
 class UndeadChallenge {
    field Hero hero;
+   field Zombie zombie;
 
    constructor UndeadChallenge new() {
       let hero = Hero.new();
+      let zombie = Zombie.new();
       return this;
    }
 
    method void dispose() {
       do hero.dispose();
+      do zombie.dispose();
       do Memory.deAlloc(this);
       return;
    }
@@ -24,18 +27,22 @@ class UndeadChallenge {
          }
          while (key = 131) { 
             do hero.moveUp(); 
+            do zombie.moveUp(); 
             let key = Keyboard.keyPressed();
          }
          while (key = 133) { 
             do hero.moveDown(); 
+            do zombie.moveDown(); 
             let key = Keyboard.keyPressed();
          }
          while (key = 130) { 
             do hero.moveLeft(); 
+            do zombie.moveLeft(); 
             let key = Keyboard.keyPressed();
          }
          while (key = 132) { 
             do hero.moveRight(); 
+            do zombie.moveRight(); 
             let key = Keyboard.keyPressed();
          }
 

@@ -1,5 +1,4 @@
 class Hero {
-   field int life; // remaining life points of the hero
    field int location;
 
    constructor Hero new() {

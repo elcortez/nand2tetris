@@ -1,9 +1,11 @@
 function UndeadChallenge.new 0
-push constant 1
+push constant 2
 call Memory.alloc 1
 pop pointer 0
 call Hero.new 0
 pop this 0
+call Zombie.new 0
+pop this 1
 push pointer 0
 return
 function UndeadChallenge.dispose 0
@@ -11,6 +13,9 @@ push argument 0
 pop pointer 0
 push this 0
 call Hero.dispose 1
+pop temp 0
+push this 1
+call Zombie.dispose 1
 pop temp 0
 push pointer 0
 call Memory.deAlloc 1
@@ -46,6 +51,9 @@ if-goto WHILE_END2
 push this 0
 call Hero.moveUp 1
 pop temp 0
+push this 1
+call Zombie.moveUp 1
+pop temp 0
 call Keyboard.keyPressed 0
 pop local 0
 goto WHILE_EXP2
@@ -58,6 +66,9 @@ not
 if-goto WHILE_END3
 push this 0
 call Hero.moveDown 1
+pop temp 0
+push this 1
+call Zombie.moveDown 1
 pop temp 0
 call Keyboard.keyPressed 0
 pop local 0
@@ -72,6 +83,9 @@ if-goto WHILE_END4
 push this 0
 call Hero.moveLeft 1
 pop temp 0
+push this 1
+call Zombie.moveLeft 1
+pop temp 0
 call Keyboard.keyPressed 0
 pop local 0
 goto WHILE_EXP4
@@ -84,6 +98,9 @@ not
 if-goto WHILE_END5
 push this 0
 call Hero.moveRight 1
+pop temp 0
+push this 1
+call Zombie.moveRight 1
 pop temp 0
 call Keyboard.keyPressed 0
 pop local 0

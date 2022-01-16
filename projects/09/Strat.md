@@ -5,8 +5,8 @@
 ## (OK) Make the hero move legs : left, right
 ## (OK) Make the hero move legs : up, down
 ## (OK) Limit moves of the hero based on the screen
-## Build a zombie
-## Make the zombie move legs
+## (OK) Build a zombie
+## (OK) Make the zombie move
 ## Make the zombie move always towards the hero
 ## Make the zombie attack the hero when in physical contact : instant death
 ## Make the hero shoot with his gun : make a bullet go out in the correct direction
