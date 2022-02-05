@@ -16,6 +16,14 @@ class Zombie {
       return;
    }
 
+   method int getXAxis() {
+     return xAxis;
+   }
+
+   method int getYAxis() {
+     return yAxis;
+   }
+
    method void moveUp() {
      if (yAxis > 0) {
        do eraseZombie(location);

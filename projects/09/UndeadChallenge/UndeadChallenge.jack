@@ -15,6 +15,22 @@ class UndeadChallenge {
       return;
    }
 
+   method void itFollows() {
+     if (hero.getXAxis() > zombie.getXAxis()) {
+       do zombie.moveRight();
+     }
+     if (hero.getXAxis() < zombie.getXAxis()) {
+       do zombie.moveLeft();
+     }
+     if (hero.getYAxis() > zombie.getYAxis()) {
+       do zombie.moveDown();
+     }
+     if (hero.getYAxis() < zombie.getYAxis()) {
+       do zombie.moveUp();
+     }
+     return;
+   }
+
    method void run() {
       var char key;
       var boolean exit;
@@ -23,20 +39,25 @@ class UndeadChallenge {
       while (~exit) {
          while (key = 0) { // 0 by default at the beginning of the program
             let key = Keyboard.keyPressed();
+            // do itFollows();
          }
          while (key = 131) {
+           // do itFollows();
             do hero.moveUp();
             let key = Keyboard.keyPressed();
          }
          while (key = 133) {
+           // do itFollows();
             do hero.moveDown();
             let key = Keyboard.keyPressed();
          }
          while (key = 130) {
-           do hero.moveLeft();
-           let key = Keyboard.keyPressed();
+           // do itFollows();
+            do hero.moveLeft();
+            let key = Keyboard.keyPressed();
          }
          while (key = 132) {
+           // do itFollows();
             do hero.moveRight();
             let key = Keyboard.keyPressed();
          }

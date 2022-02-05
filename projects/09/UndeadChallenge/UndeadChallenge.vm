@@ -22,6 +22,59 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
+function UndeadChallenge.itFollows 0
+push argument 0
+pop pointer 0
+push this 0
+call Hero.getXAxis 1
+push this 1
+call Zombie.getXAxis 1
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 1
+call Zombie.moveRight 1
+pop temp 0
+label IF_FALSE0
+push this 0
+call Hero.getXAxis 1
+push this 1
+call Zombie.getXAxis 1
+lt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 1
+call Zombie.moveLeft 1
+pop temp 0
+label IF_FALSE1
+push this 0
+call Hero.getYAxis 1
+push this 1
+call Zombie.getYAxis 1
+gt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 1
+call Zombie.moveDown 1
+pop temp 0
+label IF_FALSE2
+push this 0
+call Hero.getYAxis 1
+push this 1
+call Zombie.getYAxis 1
+lt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 1
+call Zombie.moveUp 1
+pop temp 0
+label IF_FALSE3
+push constant 0
+return
 function UndeadChallenge.run 2
 push argument 0
 pop pointer 0
@@ -32,9 +85,6 @@ push local 1
 not
 not
 if-goto WHILE_END0
-push local 0
-call Output.printInt 1
-pop temp 0
 label WHILE_EXP1
 push local 0
 push constant 0
@@ -43,6 +93,9 @@ not
 if-goto WHILE_END1
 call Keyboard.keyPressed 0
 pop local 0
+push pointer 0
+call UndeadChallenge.itFollows 1
+pop temp 0
 goto WHILE_EXP1
 label WHILE_END1
 label WHILE_EXP2
