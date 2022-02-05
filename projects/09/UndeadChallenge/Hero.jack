@@ -1,10 +1,12 @@
 class Hero {
    field int location;
    field int xAxis;
+   field int yAxis;
 
    constructor Hero new() {
       let location = 4112; // 4112 = middle of the screen = (128 (lines) * 32 (blocs of 16 pixels)) + 16 (pixels per line / 2)
-      let xAxis = 16; // 1 line * 32 pixels per line : 4112 === 16 in xAxis !
+      let xAxis = 16; // 1 line * 32 pixels per line : 4112 is the middle of the screen
+      let yAxis = 128; // Screen has 256 lines : 4112 is the middle of the screen
       do drawRight(location);
       return this;
    }
@@ -15,9 +17,10 @@ class Hero {
    }
 
    method void moveUp() {
-     if (location > 64) {
+     if (yAxis > 0) {
        do eraseHero(location);
        let location = location - 64; // 2 (lines) * 32 (blocs of 16 pixels per line)
+       let yAxis = yAxis - 2; // same as line above : 2 lines
      }
 
       do moveLegsUp();
@@ -25,9 +28,10 @@ class Hero {
    }
 
    method void moveDown() {
-     if (location < 7648) { // 256 (screen lines) - 17 (bitmap editor lines - 1) * 32 (blocs of 16 pixels per line)
+     if (yAxis < 240) { // 256 - 16 (bitmap editor height)
         do eraseHero(location);
         let location = location + 64; // 2 (lines) * 32 (blocs of 16 pixels per line)
+        let yAxis = yAxis + 2; // same as line above : 2 lines
       }
       do moveLegsDown();
       return;
