@@ -21,9 +21,7 @@ class UndeadChallenge {
       let exit = false;
 
       while (~exit) {
-
-
-         while (key = 0) {
+         while (key = 0) { // 0 by default at the beginning of the program
             let key = Keyboard.keyPressed();
          }
          while (key = 131) {
@@ -40,11 +38,6 @@ class UndeadChallenge {
          }
          while (key = 132) {
             do hero.moveRight();
-            let key = Keyboard.keyPressed();
-         }
-
-         // waits for the key to be released
-         while (~(key = 0)) {
             let key = Keyboard.keyPressed();
          }
      } // while

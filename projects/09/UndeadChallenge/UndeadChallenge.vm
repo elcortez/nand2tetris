@@ -32,6 +32,9 @@ push local 1
 not
 not
 if-goto WHILE_END0
+push local 0
+call Output.printInt 1
+pop temp 0
 label WHILE_EXP1
 push local 0
 push constant 0
@@ -94,17 +97,6 @@ call Keyboard.keyPressed 0
 pop local 0
 goto WHILE_EXP5
 label WHILE_END5
-label WHILE_EXP6
-push local 0
-push constant 0
-eq
-not
-not
-if-goto WHILE_END6
-call Keyboard.keyPressed 0
-pop local 0
-goto WHILE_EXP6
-label WHILE_END6
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0

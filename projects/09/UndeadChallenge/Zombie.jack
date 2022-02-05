@@ -1,9 +1,12 @@
 class Zombie {
    field int location;
    field int xAxis;
+   field int yAxis;
 
    constructor Zombie new() {
       let location = 0;
+      let xAxis = 0; // 1 line * 32 pixels per line
+      let yAxis = 0; // Screen has 256 lines
       do drawRight(location);
       return this;
    }
@@ -14,9 +17,10 @@ class Zombie {
    }
 
    method void moveUp() {
-     if (location > 64) {
+     if (yAxis > 0) {
        do eraseZombie(location);
        let location = location - 64; // 2 (lines) * 32 (pixels per line)
+       let yAxis = yAxis - 2; // same as line above : 2 lines
      }
 
       do moveLegsUp();
@@ -24,43 +28,34 @@ class Zombie {
    }
 
    method void moveDown() {
-     if (location < 7648) { // 256 (screen lines) - 17 (bitmap editor lines - 1) * 32 (pixels per line)
+     if (yAxis < 240) { // 256 - 16 (bitmap editor height)
         do eraseZombie(location);
         let location = location + 64; // 2 (lines) * 32 (pixels per line)
+        let yAxis = yAxis + 2; // same as line above : 2 lines
       }
       do moveLegsDown();
       return;
    }
 
    method void moveLeft() {
-    var int xAxis;
-    let xAxis = location + 1;
-    while(xAxis > 32) {
-      let xAxis = xAxis - 32; // 1 line * 32 pixels per line
-    }
+     if (xAxis > 0) {
+       do eraseZombie(location);
+       let location = location - 1;
+       let xAxis = xAxis - 1;
+     }
 
-    if (xAxis > 1) {
-      do eraseZombie(location);
-      let location = location - 1;
-    }
-
-    do moveLegsLeft();
-    return;
+     do moveLegsLeft();
+     return;
    }
 
    method void moveRight() {
-      var int xAxis;
-      let xAxis = location + 1;
-      while(xAxis > 32) {
-         let xAxis = xAxis - 32; // 1 line * 32 pixels per line
-      }
-
-      if (xAxis < 32) {
-         do eraseZombie(location);
-         let location = location + 1;
-      }
-      do moveLegsRight();
-      return;
+     if (xAxis < 31) {
+       do eraseZombie(location);
+       let location = location + 1;
+       let xAxis = xAxis + 1;
+     }
+     do moveLegsRight();
+     return;
    }
 
    method void moveLegsRight() {
