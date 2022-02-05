@@ -1,8 +1,10 @@
 class Hero {
    field int location;
+   field int xAxis;
 
    constructor Hero new() {
       let location = 4112; // 4112 = middle of the screen = (128 (lines) * 32 (blocs of 16 pixels)) + 16 (pixels per line / 2)
+      let xAxis = 16; // 1 line * 32 pixels per line : 4112 === 16 in xAxis !
       do drawRight(location);
       return this;
    }
@@ -32,15 +34,10 @@ class Hero {
    }
 
    method void moveLeft() {
-    var int xAxis;
-    let xAxis = location + 1;
-    while(xAxis > 32) {
-      let xAxis = xAxis - 32; // 1 line * 32 pixels per line
-    }
-
-    if (xAxis > 1) {
+    if (xAxis > 0) {
       do eraseHero(location);
       let location = location - 1;
+      let xAxis = xAxis - 1;
     }
 
     do moveLegsLeft();
@@ -48,15 +45,10 @@ class Hero {
    }
 
    method void moveRight() {
-      var int xAxis;
-      let xAxis = location + 1;
-      while(xAxis > 32) {
-         let xAxis = xAxis - 32; // 1 line * 32 pixels per line
-      }
-   
-      if (xAxis < 32) {
+      if (xAxis < 31) {
          do eraseHero(location);
          let location = location + 1;
+         let xAxis = xAxis + 1;
       }
       do moveLegsRight();
       return;

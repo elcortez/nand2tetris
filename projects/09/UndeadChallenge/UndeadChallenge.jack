@@ -21,28 +21,25 @@ class UndeadChallenge {
       let exit = false;
 
       while (~exit) {
-         // waits for a key to be pressed
+
+
          while (key = 0) {
             let key = Keyboard.keyPressed();
          }
-         while (key = 131) { 
-            do hero.moveUp(); 
-            do zombie.moveUp(); 
+         while (key = 131) {
+            do hero.moveUp();
             let key = Keyboard.keyPressed();
          }
-         while (key = 133) { 
-            do hero.moveDown(); 
-            do zombie.moveDown(); 
+         while (key = 133) {
+            do hero.moveDown();
             let key = Keyboard.keyPressed();
          }
-         while (key = 130) { 
-            do hero.moveLeft(); 
-            do zombie.moveLeft(); 
-            let key = Keyboard.keyPressed();
+         while (key = 130) {
+           do hero.moveLeft();
+           let key = Keyboard.keyPressed();
          }
-         while (key = 132) { 
-            do hero.moveRight(); 
-            do zombie.moveRight(); 
+         while (key = 132) {
+            do hero.moveRight();
             let key = Keyboard.keyPressed();
          }
 

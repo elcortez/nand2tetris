@@ -1,5 +1,6 @@
 class Zombie {
    field int location;
+   field int xAxis;
 
    constructor Zombie new() {
       let location = 0;
@@ -53,7 +54,7 @@ class Zombie {
       while(xAxis > 32) {
          let xAxis = xAxis - 32; // 1 line * 32 pixels per line
       }
-   
+
       if (xAxis < 32) {
          do eraseZombie(location);
          let location = location + 1;

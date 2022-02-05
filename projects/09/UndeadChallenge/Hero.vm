@@ -1,9 +1,11 @@
 function Hero.new 0
-push constant 1
+push constant 2
 call Memory.alloc 1
 pop pointer 0
 push constant 4112
 pop this 0
+push constant 16
+pop this 1
 push pointer 0
 push this 0
 call Hero.drawRight 2
@@ -64,27 +66,11 @@ call Hero.moveLegsDown 1
 pop temp 0
 push constant 0
 return
-function Hero.moveLeft 1
+function Hero.moveLeft 0
 push argument 0
 pop pointer 0
-push this 0
-push constant 1
-add
-pop local 0
-label WHILE_EXP0
-push local 0
-push constant 32
-gt
-not
-if-goto WHILE_END0
-push local 0
-push constant 32
-sub
-pop local 0
-goto WHILE_EXP0
-label WHILE_END0
-push local 0
-push constant 1
+push this 1
+push constant 0
 gt
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -97,33 +83,21 @@ push this 0
 push constant 1
 sub
 pop this 0
+push this 1
+push constant 1
+sub
+pop this 1
 label IF_FALSE0
 push pointer 0
 call Hero.moveLegsLeft 1
 pop temp 0
 push constant 0
 return
-function Hero.moveRight 1
+function Hero.moveRight 0
 push argument 0
 pop pointer 0
-push this 0
-push constant 1
-add
-pop local 0
-label WHILE_EXP0
-push local 0
-push constant 32
-gt
-not
-if-goto WHILE_END0
-push local 0
-push constant 32
-sub
-pop local 0
-goto WHILE_EXP0
-label WHILE_END0
-push local 0
-push constant 32
+push this 1
+push constant 31
 lt
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -136,6 +110,10 @@ push this 0
 push constant 1
 add
 pop this 0
+push this 1
+push constant 1
+add
+pop this 1
 label IF_FALSE0
 push pointer 0
 call Hero.moveLegsRight 1
