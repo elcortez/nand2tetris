@@ -1,7 +1,9 @@
 class UndeadChallenge {
    field Hero hero;
    field Zombie zombie;
-   field int heroDirection;
+   field int direction;
+   field int enemyFloatInterval;
+   field int heroFloatInterval;
 
    constructor UndeadChallenge new() {
       let hero = Hero.new();
@@ -25,13 +27,13 @@ class UndeadChallenge {
    }
 
    method void moveHero() {
-     if (heroDirection = 0) { return; }
+     if (direction = 0) { return; }
 
-     if (heroDirection = 1) { do hero.moveUp(); }
-     if (heroDirection = 2) { do hero.moveDown(); }
-     if (heroDirection = 3) { do hero.moveRight(); }
-     if (heroDirection = 4) { do hero.moveLeft(); }
-     let heroDirection = 0;
+     if (direction = 1) { do hero.moveUp(); }
+     if (direction = 2) { do hero.moveDown(); }
+     if (direction = 3) { do hero.moveRight(); }
+     if (direction = 4) { do hero.moveLeft(); }
+     if (direction > 0) { let direction = 0; }
 
      return;
    }
@@ -46,28 +48,40 @@ class UndeadChallenge {
         let key = Keyboard.keyPressed();
 
          if (key = 0) { // 0 by default at the beginning of the program
-           let heroDirection = 0;
+           let direction = 0;
            let key = Keyboard.keyPressed();
          }
          if (key = 131) {
-           let heroDirection = 1;
+           let direction = 1;
            let key = Keyboard.keyPressed();
          }
          if (key = 133) {
-           let heroDirection = 2;
+           let direction = 2;
            let key = Keyboard.keyPressed();
          }
          if (key = 132) {
-           let heroDirection = 3;
+           let direction = 3;
            let key = Keyboard.keyPressed();
          }
          if (key = 130) {
-           let heroDirection = 4;
+           let direction = 4;
            let key = Keyboard.keyPressed();
          }
 
-         do moveHero();
-         // do itFollows();
+
+         if (enemyFloatInterval > 10000) {
+             let enemyFloatInterval = 0;
+         } else {
+             if (enemyFloatInterval = 0) { do itFollows(); }
+             let enemyFloatInterval = enemyFloatInterval + 1;
+         }
+
+         if (heroFloatInterval > 10000) {
+             let heroFloatInterval = 0;
+         } else {
+             if (heroFloatInterval = 0) { do moveHero(); }
+             let heroFloatInterval = enemyFloatInterval + 1;
+         }
      } // while
      return;
    }

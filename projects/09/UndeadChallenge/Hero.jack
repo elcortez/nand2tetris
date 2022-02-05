@@ -68,33 +68,25 @@ class Hero {
 
    method void moveLegsRight() {
       do drawRunningRight(location);
-      do Sys.wait(50);
       do drawRight(location);
-      do Sys.wait(50);
       return;
    }
 
    method void moveLegsUp() {
       do drawRunningUp(location);
-      do Sys.wait(50);
       do drawUp(location);
-      do Sys.wait(50);
       return;
    }
 
    method void moveLegsLeft() {
       do drawRunningLeft(location);
-      do Sys.wait(50);
       do drawLeft(location);
-      do Sys.wait(50);
       return;
    }
 
    method void moveLegsDown() {
       do drawRunningDown(location);
-      do Sys.wait(50);
       do drawDown(location);
-      do Sys.wait(50);
       return;
    }
 
