@@ -1,16 +1,13 @@
 function Hero.new 0
-push constant 3
+push constant 2
 call Memory.alloc 1
 pop pointer 0
-push constant 4112
+push constant 255
 pop this 0
-push constant 16
-pop this 1
 push constant 128
-pop this 2
+pop this 1
 push pointer 0
-push this 0
-call Hero.drawRight 2
+call Hero.drawRight 1
 pop temp 0
 push pointer 0
 return
@@ -25,34 +22,29 @@ return
 function Hero.getXAxis 0
 push argument 0
 pop pointer 0
-push this 1
+push this 0
 return
 function Hero.getYAxis 0
 push argument 0
 pop pointer 0
-push this 2
+push this 1
 return
 function Hero.moveUp 0
 push argument 0
 pop pointer 0
-push this 2
+push this 1
 push constant 0
 gt
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push pointer 0
-push this 0
-call Hero.eraseHero 2
+call Hero.eraseHero 1
 pop temp 0
-push this 0
-push constant 64
+push this 1
+push constant 1
 sub
-pop this 0
-push this 2
-push constant 2
-sub
-pop this 2
+pop this 1
 label IF_FALSE0
 push pointer 0
 call Hero.moveLegsUp 1
@@ -62,24 +54,19 @@ return
 function Hero.moveDown 0
 push argument 0
 pop pointer 0
-push this 2
+push this 1
 push constant 240
 lt
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push pointer 0
-push this 0
-call Hero.eraseHero 2
+call Hero.eraseHero 1
 pop temp 0
-push this 0
-push constant 64
+push this 1
+push constant 1
 add
-pop this 0
-push this 2
-push constant 2
-add
-pop this 2
+pop this 1
 label IF_FALSE0
 push pointer 0
 call Hero.moveLegsDown 1
@@ -89,24 +76,19 @@ return
 function Hero.moveLeft 0
 push argument 0
 pop pointer 0
-push this 1
+push this 0
 push constant 0
 gt
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push pointer 0
-push this 0
-call Hero.eraseHero 2
+call Hero.eraseHero 1
 pop temp 0
 push this 0
 push constant 1
 sub
 pop this 0
-push this 1
-push constant 1
-sub
-pop this 1
 label IF_FALSE0
 push pointer 0
 call Hero.moveLegsLeft 1
@@ -116,24 +98,19 @@ return
 function Hero.moveRight 0
 push argument 0
 pop pointer 0
-push this 1
-push constant 31
+push this 0
+push constant 510
 lt
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push pointer 0
-push this 0
-call Hero.eraseHero 2
+call Hero.eraseHero 1
 pop temp 0
 push this 0
 push constant 1
 add
 pop this 0
-push this 1
-push constant 1
-add
-pop this 1
 label IF_FALSE0
 push pointer 0
 call Hero.moveLegsRight 1
@@ -144,12 +121,10 @@ function Hero.moveLegsRight 0
 push argument 0
 pop pointer 0
 push pointer 0
-push this 0
-call Hero.drawRunningRight 2
+call Hero.drawRunningRight 1
 pop temp 0
 push pointer 0
-push this 0
-call Hero.drawRight 2
+call Hero.drawRight 1
 pop temp 0
 push constant 0
 return
@@ -157,12 +132,10 @@ function Hero.moveLegsUp 0
 push argument 0
 pop pointer 0
 push pointer 0
-push this 0
-call Hero.drawRunningUp 2
+call Hero.drawRunningUp 1
 pop temp 0
 push pointer 0
-push this 0
-call Hero.drawUp 2
+call Hero.drawUp 1
 pop temp 0
 push constant 0
 return
@@ -170,12 +143,10 @@ function Hero.moveLegsLeft 0
 push argument 0
 pop pointer 0
 push pointer 0
-push this 0
-call Hero.drawRunningLeft 2
+call Hero.drawRunningLeft 1
 pop temp 0
 push pointer 0
-push this 0
-call Hero.drawLeft 2
+call Hero.drawLeft 1
 pop temp 0
 push constant 0
 return
@@ -183,12 +154,10 @@ function Hero.moveLegsDown 0
 push argument 0
 pop pointer 0
 push pointer 0
-push this 0
-call Hero.drawRunningDown 2
+call Hero.drawRunningDown 1
 pop temp 0
 push pointer 0
-push this 0
-call Hero.drawDown 2
+call Hero.drawDown 1
 pop temp 0
 push constant 0
 return
@@ -196,7 +165,13 @@ function Hero.eraseHero 1
 push argument 0
 pop pointer 0
 push constant 16384
-push argument 1
+push this 0
+push constant 16
+call Math.divide 2
+add
+push this 1
+push constant 32
+call Math.multiply 2
 add
 pop local 0
 push local 0
@@ -301,7 +276,13 @@ function Hero.drawRunningRight 1
 push argument 0
 pop pointer 0
 push constant 16384
-push argument 1
+push this 0
+push constant 16
+call Math.divide 2
+add
+push this 1
+push constant 32
+call Math.multiply 2
 add
 pop local 0
 push local 0
@@ -406,7 +387,13 @@ function Hero.drawRunningLeft 1
 push argument 0
 pop pointer 0
 push constant 16384
-push argument 1
+push this 0
+push constant 16
+call Math.divide 2
+add
+push this 1
+push constant 32
+call Math.multiply 2
 add
 pop local 0
 push local 0
@@ -511,7 +498,13 @@ function Hero.drawRight 1
 push argument 0
 pop pointer 0
 push constant 16384
-push argument 1
+push this 0
+push constant 16
+call Math.divide 2
+add
+push this 1
+push constant 32
+call Math.multiply 2
 add
 pop local 0
 push local 0
@@ -616,7 +609,13 @@ function Hero.drawLeft 1
 push argument 0
 pop pointer 0
 push constant 16384
-push argument 1
+push this 0
+push constant 16
+call Math.divide 2
+add
+push this 1
+push constant 32
+call Math.multiply 2
 add
 pop local 0
 push local 0
@@ -721,7 +720,13 @@ function Hero.drawUp 1
 push argument 0
 pop pointer 0
 push constant 16384
-push argument 1
+push this 0
+push constant 16
+call Math.divide 2
+add
+push this 1
+push constant 32
+call Math.multiply 2
 add
 pop local 0
 push local 0
@@ -826,7 +831,13 @@ function Hero.drawRunningUp 1
 push argument 0
 pop pointer 0
 push constant 16384
-push argument 1
+push this 0
+push constant 16
+call Math.divide 2
+add
+push this 1
+push constant 32
+call Math.multiply 2
 add
 pop local 0
 push local 0
@@ -931,7 +942,13 @@ function Hero.drawDown 1
 push argument 0
 pop pointer 0
 push constant 16384
-push argument 1
+push this 0
+push constant 16
+call Math.divide 2
+add
+push this 1
+push constant 32
+call Math.multiply 2
 add
 pop local 0
 push local 0
@@ -1036,7 +1053,13 @@ function Hero.drawRunningDown 1
 push argument 0
 pop pointer 0
 push constant 16384
-push argument 1
+push this 0
+push constant 16
+call Math.divide 2
+add
+push this 1
+push constant 32
+call Math.multiply 2
 add
 pop local 0
 push local 0

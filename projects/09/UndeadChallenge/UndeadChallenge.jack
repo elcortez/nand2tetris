@@ -44,7 +44,6 @@ class UndeadChallenge {
       let exit = false;
 
       while (~exit) {
-        // https://github.com/kmerenkov/galaxy/blob/master/source/GalaxyGame.jack
         let key = Keyboard.keyPressed();
 
          if (key = 0) { // 0 by default at the beginning of the program
@@ -69,18 +68,21 @@ class UndeadChallenge {
          }
 
 
-         if (enemyFloatInterval > 10000) {
+         if (enemyFloatInterval > 1000) {
              let enemyFloatInterval = 0;
          } else {
              if (enemyFloatInterval = 0) { do itFollows(); }
              let enemyFloatInterval = enemyFloatInterval + 1;
          }
+         // do moveHero();
 
-         if (heroFloatInterval > 10000) {
+         if (heroFloatInterval > 50) {
              let heroFloatInterval = 0;
          } else {
-             if (heroFloatInterval = 0) { do moveHero(); }
-             let heroFloatInterval = enemyFloatInterval + 1;
+             if (heroFloatInterval = 0) {
+               do moveHero();
+             }
+             let heroFloatInterval = heroFloatInterval + 1;
          }
      } // while
      return;

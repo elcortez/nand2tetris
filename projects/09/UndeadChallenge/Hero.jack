@@ -1,13 +1,11 @@
 class Hero {
-   field int location;
-   field int xAxis;
-   field int yAxis;
+   field int x;
+   field int y;
 
    constructor Hero new() {
-      let location = 4112; // 4112 = middle of the screen = (128 (lines) * 32 (blocs of 16 pixels)) + 16 (pixels per line / 2)
-      let xAxis = 16; // 1 line * 32 pixels per line : 4112 is the middle of the screen
-      let yAxis = 128; // Screen has 256 lines : 4112 is the middle of the screen
-      do drawRight(location);
+      let x = 255;
+      let y = 128;
+      do drawRight();
       return this;
    }
 
@@ -17,83 +15,83 @@ class Hero {
    }
 
    method int getXAxis() {
-     return xAxis;
+     return x;
    }
 
    method int getYAxis() {
-     return yAxis;
+     return y;
    }
 
    method void moveUp() {
-     if (yAxis > 0) {
-       do eraseHero(location);
-       let location = location - 64; // 2 (lines) * 32 (blocs of 16 pixels per line)
-       let yAxis = yAxis - 2; // same as line above : 2 lines
+     if (y > 0) {
+       do eraseHero();
+       let y = y - 1;
      }
 
+     // do drawRunningUp();
       do moveLegsUp();
       return;
    }
 
    method void moveDown() {
-     if (yAxis < 240) { // 256 - 16 (bitmap editor height)
-        do eraseHero(location);
-        let location = location + 64; // 2 (lines) * 32 (blocs of 16 pixels per line)
-        let yAxis = yAxis + 2; // same as line above : 2 lines
+     if (y < 240) { // 256 - 16 (bitmap editor height)
+        do eraseHero();
+        let y = y + 1;
       }
+      // do drawRunningDown();
       do moveLegsDown();
       return;
    }
 
    method void moveLeft() {
-    if (xAxis > 0) {
-      do eraseHero(location);
-      let location = location - 1;
-      let xAxis = xAxis - 1;
+    if (x > 0) {
+      do eraseHero();
+      let x = x - 1;
     }
 
+    // do drawRunningLeft();
     do moveLegsLeft();
     return;
    }
 
    method void moveRight() {
-      if (xAxis < 31) {
-         do eraseHero(location);
-         let location = location + 1;
-         let xAxis = xAxis + 1;
+      if (x < 510) {
+         do eraseHero();
+         let x = x + 1;
       }
+      // do drawRunningRight();
       do moveLegsRight();
       return;
    }
 
    method void moveLegsRight() {
-      do drawRunningRight(location);
-      do drawRight(location);
+      do drawRunningRight();
+      do drawRight();
       return;
    }
 
    method void moveLegsUp() {
-      do drawRunningUp(location);
-      do drawUp(location);
+      do drawRunningUp();
+      do drawUp();
       return;
    }
 
    method void moveLegsLeft() {
-      do drawRunningLeft(location);
-      do drawLeft(location);
+      do drawRunningLeft();
+      do drawLeft();
       return;
    }
 
    method void moveLegsDown() {
-      do drawRunningDown(location);
-      do drawDown(location);
+      do drawRunningDown();
+      do drawDown();
       return;
    }
 
 
-   method void eraseHero(int location) {
+   method void eraseHero() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
@@ -113,9 +111,9 @@ class Hero {
       return;
    }
 
-   method void drawRunningRight(int location) {
+   method void drawRunningRight() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
@@ -136,9 +134,9 @@ class Hero {
    }
 
 
-   method void drawRunningLeft(int location) {
+   method void drawRunningLeft() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
@@ -157,9 +155,9 @@ class Hero {
       do Memory.poke(memAddress+480, 224);
       return;
    }
-   method void drawRight(int location) {
+   method void drawRight() {
       var int memAddress;
-   	let memAddress = 16384+location;
+    let memAddress = 16384 + (x/16) + (y*32);
    	do Memory.poke(memAddress+0, 0);
    	do Memory.poke(memAddress+32, 0);
    	do Memory.poke(memAddress+64, 0);
@@ -179,9 +177,9 @@ class Hero {
    	return;
    }
 
-   method void drawLeft(int location) {
+   method void drawLeft() {
     var int memAddress;
-    let memAddress = 16384+location;
+    let memAddress = 16384 + (x/16) + (y*32);
     do Memory.poke(memAddress+0, 0);
     do Memory.poke(memAddress+32, 0);
     do Memory.poke(memAddress+64, 0);
@@ -201,9 +199,9 @@ class Hero {
     return;
   }
 
-   method void drawUp(int location) {
+   method void drawUp() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
@@ -223,9 +221,9 @@ class Hero {
       return;
    }
 
-   method void drawRunningUp(int location) {
+   method void drawRunningUp() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
@@ -245,9 +243,9 @@ class Hero {
       return;
    }
 
-   method void drawDown(int location) {
+   method void drawDown() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
@@ -268,9 +266,9 @@ class Hero {
    }
 
 
-   method void drawRunningDown(int location) {
+   method void drawRunningDown() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);

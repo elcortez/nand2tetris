@@ -1,13 +1,11 @@
 class Zombie {
-   field int location;
-   field int xAxis;
-   field int yAxis;
+   field int x;
+   field int y;
 
    constructor Zombie new() {
-      let location = 0;
-      let xAxis = 0; // 1 line * 32 pixels per line
-      let yAxis = 0; // Screen has 256 lines
-      do drawRight(location);
+      let x = 0;
+      let y = 0;
+      do drawRight();
       return this;
    }
 
@@ -17,83 +15,83 @@ class Zombie {
    }
 
    method int getXAxis() {
-     return xAxis;
+     return x;
    }
 
    method int getYAxis() {
-     return yAxis;
+     return y;
    }
 
    method void moveUp() {
-     if (yAxis > 0) {
-       do eraseZombie(location);
-       let location = location - 64; // 2 (lines) * 32 (pixels per line)
-       let yAxis = yAxis - 2; // same as line above : 2 lines
+     if (y > 0) {
+       do eraseZombie();
+       let y = y - 1;
      }
 
-      do moveLegsUp();
+     do drawRunningUp();
+      // do moveLegsUp();
       return;
    }
 
    method void moveDown() {
-     if (yAxis < 240) { // 256 - 16 (bitmap editor height)
-        do eraseZombie(location);
-        let location = location + 64; // 2 (lines) * 32 (pixels per line)
-        let yAxis = yAxis + 2; // same as line above : 2 lines
+     if (y < 240) { // 256 - 16 (bitmap editor height)
+        do eraseZombie();
+        let y = y + 1;
       }
-      do moveLegsDown();
+      do drawRunningDown();
+      // do moveLegsDown();
       return;
    }
 
    method void moveLeft() {
-     if (xAxis > 0) {
-       do eraseZombie(location);
-       let location = location - 1;
-       let xAxis = xAxis - 1;
+     if (x > 0) {
+       do eraseZombie();
+       let x = x - 1;
      }
 
-     do moveLegsLeft();
+     do drawRunningLeft();
+     // do moveLegsLeft();
      return;
    }
 
    method void moveRight() {
-     if (xAxis < 31) {
-       do eraseZombie(location);
-       let location = location + 1;
-       let xAxis = xAxis + 1;
+     if (x < 510) {
+       do eraseZombie();
+       let x = x + 1;
      }
-     do moveLegsRight();
+     do drawRunningRight();
+     // do moveLegsRight();
      return;
    }
 
-   method void moveLegsRight() {
-      do drawRunningRight(location);
-      do drawRight(location);
-      return;
-   }
+   // method void moveLegsRight() {
+   //    do drawRunningRight();
+   //    do drawRight();
+   //    return;
+   // }
+   //
+   // method void moveLegsUp() {
+   //    do drawRunningUp();
+   //    do drawUp();
+   //    return;
+   // }
+   //
+   // method void moveLegsLeft() {
+   //    do drawRunningLeft();
+   //    do drawLeft();
+   //    return;
+   // }
+   //
+   // method void moveLegsDown() {
+   //    do drawRunningDown();
+   //    do drawDown();
+   //    return;
+   // }
 
-   method void moveLegsUp() {
-      do drawRunningUp(location);
-      do drawUp(location);
-      return;
-   }
 
-   method void moveLegsLeft() {
-      do drawRunningLeft(location);
-      do drawLeft(location);
-      return;
-   }
-
-   method void moveLegsDown() {
-      do drawRunningDown(location);
-      do drawDown(location);
-      return;
-   }
-
-
-   method void eraseZombie(int location) {
+   method void eraseZombie() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
@@ -113,9 +111,9 @@ class Zombie {
       return;
    }
 
-   method void drawRunningRight(int location) {
+   method void drawRunningRight() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
@@ -136,9 +134,9 @@ class Zombie {
    }
 
 
-   method void drawRunningLeft(int location) {
+   method void drawRunningLeft() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
@@ -157,9 +155,9 @@ class Zombie {
       do Memory.poke(memAddress+480, 1792);
       return;
    }
-   method void drawRight(int location) {
+   method void drawRight() {
       var int memAddress;
-     	let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
@@ -179,9 +177,9 @@ class Zombie {
       return;
    }
 
-   method void drawLeft(int location) {
+   method void drawLeft() {
     var int memAddress;
-    let memAddress = 16384+location;
+    let memAddress = 16384 + (x/16) + (y*32);
     do Memory.poke(memAddress+0, 0);
     do Memory.poke(memAddress+32, 0);
     do Memory.poke(memAddress+64, 0);
@@ -201,9 +199,9 @@ class Zombie {
     return;
   }
 
-   method void drawUp(int location) {
+   method void drawUp() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 1028);
       do Memory.poke(memAddress+64, 1028);
@@ -223,9 +221,9 @@ class Zombie {
       return;
    }
 
-   method void drawRunningUp(int location) {
+   method void drawRunningUp() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 1028);
       do Memory.poke(memAddress+64, 1028);
@@ -245,9 +243,9 @@ class Zombie {
       return;
    }
 
-   method void drawDown(int location) {
+   method void drawDown() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
@@ -268,9 +266,9 @@ class Zombie {
    }
 
 
-   method void drawRunningDown(int location) {
+   method void drawRunningDown() {
       var int memAddress;
-      let memAddress = 16384+location;
+      let memAddress = 16384 + (x/16) + (y*32);
       do Memory.poke(memAddress+0, 0);
       do Memory.poke(memAddress+32, 0);
       do Memory.poke(memAddress+64, 0);
