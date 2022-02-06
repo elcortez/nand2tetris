@@ -9,8 +9,8 @@
 ## (OK) Make the zombie move
 ## (OK) Get xAxis & yAxis of hero, & adapt moves to it
 ## (OK) Use same coordinates for the zombie moves
-## Make the zombie move by itself always towards the hero
-## Make the zombie attack the hero when in physical contact : instant death
+## (OK) Make the zombie move by itself always towards the hero
+## (OK) Make the zombie attack the hero when in physical contact : instant death
 ## Make the hero shoot with his gun : make a bullet go out in the correct direction
 ## Make the bullet kill the zombie if it touches it
-## Make lots of zombies
+## Loop to double the number of zombies every time you kill all zombies

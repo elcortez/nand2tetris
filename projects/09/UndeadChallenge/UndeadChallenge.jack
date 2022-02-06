@@ -84,7 +84,16 @@ class UndeadChallenge {
              }
              let heroFloatInterval = heroFloatInterval + 1;
          }
+
+         if(zombie.getYAxis() = hero.getYAxis()) {
+           if(zombie.getXAxis() = hero.getXAxis()) {
+             let exit = true;
+           }
+         }
      } // while
+
+     do Screen.clearScreen();
+     do Output.printString("GAME OVER SUCKER !");
      return;
    }
 }
