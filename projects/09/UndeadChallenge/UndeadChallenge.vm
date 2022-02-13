@@ -206,7 +206,7 @@ call Keyboard.keyPressed 0
 pop local 0
 label IF_FALSE4
 push this 3
-push constant 1000
+push constant 250
 gt
 if-goto IF_TRUE5
 goto IF_FALSE5
