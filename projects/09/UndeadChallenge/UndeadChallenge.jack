@@ -1,9 +1,12 @@
 class UndeadChallenge {
    field Hero hero;
    field Zombie zombie;
-   field int direction;
+   field Bullet bullet;
+   field int heroDirection;
+   field int heroLatestDirection; // useful to determine where the bullet will go;
    field int enemyFloatInterval;
    field int heroFloatInterval;
+   field int shootInterval;
 
    constructor UndeadChallenge new() {
       let hero = Hero.new();
@@ -27,13 +30,24 @@ class UndeadChallenge {
    }
 
    method void moveHero() {
-     if (direction = 0) { return; }
+     if (heroDirection = 0) { return; }
 
-     if (direction = 1) { do hero.moveUp(); }
-     if (direction = 2) { do hero.moveDown(); }
-     if (direction = 3) { do hero.moveRight(); }
-     if (direction = 4) { do hero.moveLeft(); }
-     if (direction > 0) { let direction = 0; }
+     if (heroDirection = 1) {
+       let heroLatestDirection = heroDirection;
+       do hero.moveUp();
+     }
+     if (heroDirection = 2) {
+       let heroLatestDirection = heroDirection;
+       do hero.moveDown();
+     }
+     if (heroDirection = 3) {
+       let heroLatestDirection = heroDirection;
+       do hero.moveRight();
+     }
+     if (heroDirection = 4) {
+       let heroLatestDirection = heroDirection;
+       do hero.moveLeft();
+     }
 
      return;
    }
@@ -47,26 +61,42 @@ class UndeadChallenge {
         let key = Keyboard.keyPressed();
 
          if (key = 0) { // 0 by default at the beginning of the program
-           let direction = 0;
+           let heroDirection = 0;
            let key = Keyboard.keyPressed();
          }
          if (key = 131) {
-           let direction = 1;
+           let heroDirection = 1;
            let key = Keyboard.keyPressed();
          }
          if (key = 133) {
-           let direction = 2;
+           let heroDirection = 2;
            let key = Keyboard.keyPressed();
          }
          if (key = 132) {
-           let direction = 3;
+           let heroDirection = 3;
            let key = Keyboard.keyPressed();
          }
          if (key = 130) {
-           let direction = 4;
+           let heroDirection = 4;
            let key = Keyboard.keyPressed();
          }
+         if (key = 32) {
+           if (shootInterval > 3000) {
+               let shootInterval = 0;
+           } else {
+               if (shootInterval = 0) {
 
+                 do Output.printString("> hero ");
+                 do Output.printInt(hero.getXAxis());
+                 do Output.printString("/");
+                 do Output.printInt(hero.getYAxis());
+                 do Output.printString(" hero <");
+
+                 let bullet = Bullet.new(hero.getXAxis(), hero.getYAxis(), heroLatestDirection);
+               }
+               let shootInterval = shootInterval + 1;
+           }
+         }
 
          if (enemyFloatInterval > 1000) {
              let enemyFloatInterval = 0;
@@ -74,7 +104,6 @@ class UndeadChallenge {
              if (enemyFloatInterval = 0) { do itFollows(); }
              let enemyFloatInterval = enemyFloatInterval + 1;
          }
-         // do moveHero();
 
          if (heroFloatInterval > 50) {
              let heroFloatInterval = 0;
