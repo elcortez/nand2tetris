@@ -291,7 +291,7 @@ pop this 7
 label IF_END6
 label IF_FALSE5
 push this 5
-push constant 1000
+push constant 250
 gt
 if-goto IF_TRUE8
 goto IF_FALSE8

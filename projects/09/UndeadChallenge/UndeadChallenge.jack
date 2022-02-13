@@ -98,7 +98,7 @@ class UndeadChallenge {
            }
          }
 
-         if (enemyFloatInterval > 1000) {
+         if (enemyFloatInterval > 250) {
              let enemyFloatInterval = 0;
          } else {
              if (enemyFloatInterval = 0) { do itFollows(); }
