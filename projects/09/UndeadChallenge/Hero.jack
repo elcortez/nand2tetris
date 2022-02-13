@@ -155,8 +155,9 @@ class Hero {
       do Memory.poke(memAddress+480, 224);
       return;
    }
+
    method void drawRight() {
-      var int memAddress;
+    var int memAddress;
     let memAddress = 16384 + (x/16) + (y*32);
    	do Memory.poke(memAddress+0, 0);
    	do Memory.poke(memAddress+32, 0);
