@@ -16,6 +16,11 @@ class Bullet {
      return this;
    }
 
+   method void dispose() {
+     do Memory.deAlloc(this);
+     return;
+   }
+
    method void move() {
      if (direction = 1) { do moveUp(); }
      if (direction = 2) { do moveDown(); }
@@ -28,9 +33,14 @@ class Bullet {
      if (y > 0) {
        do eraseBullet();
        let y = y - 1;
+       do drawUpOrDown();
      }
 
-      do drawUpOrDown();
+     if (y = 0) {
+       do eraseBullet();
+       do dispose();
+     }
+
       return;
    }
 
@@ -38,9 +48,14 @@ class Bullet {
      if (y < 240) { // 256 - 16 (bitmap editor height)
        do eraseBullet();
        let y = y + 1;
+       do drawUpOrDown();
      }
 
-      do drawUpOrDown();
+     if (y = 240) {
+       do eraseBullet();
+       do dispose();
+     }
+
       return;
    }
 
@@ -48,9 +63,14 @@ class Bullet {
      if (x < 510) {
         do eraseBullet();
         let x = x + 1;
+        do drawLeftOrRight();
      }
 
-     do drawLeftOrRight();
+     if (x = 510) {
+       do eraseBullet();
+       do dispose();
+     }
+
      return;
    }
 
@@ -58,14 +78,14 @@ class Bullet {
      if (x > 0) {
        do eraseBullet();
        let x = x - 1;
+       do drawLeftOrRight();
      }
 
-     do drawLeftOrRight();
-     return;
-   }
+     if (x = 0) {
+       do eraseBullet();
+       do dispose();
+     }
 
-   method void dispose() {
-     do Memory.deAlloc(this);
      return;
    }
 

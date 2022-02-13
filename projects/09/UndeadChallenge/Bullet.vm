@@ -50,6 +50,14 @@ pop temp 0
 label IF_FALSE3
 push pointer 0
 return
+function Bullet.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
 function Bullet.move 0
 push argument 0
 pop pointer 0
@@ -111,10 +119,23 @@ push this 1
 push constant 1
 sub
 pop this 1
-label IF_FALSE0
 push pointer 0
 call Bullet.drawUpOrDown 1
 pop temp 0
+label IF_FALSE0
+push this 1
+push constant 0
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+call Bullet.eraseBullet 1
+pop temp 0
+push pointer 0
+call Bullet.dispose 1
+pop temp 0
+label IF_FALSE1
 push constant 0
 return
 function Bullet.moveDown 0
@@ -133,10 +154,23 @@ push this 1
 push constant 1
 add
 pop this 1
-label IF_FALSE0
 push pointer 0
 call Bullet.drawUpOrDown 1
 pop temp 0
+label IF_FALSE0
+push this 1
+push constant 240
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+call Bullet.eraseBullet 1
+pop temp 0
+push pointer 0
+call Bullet.dispose 1
+pop temp 0
+label IF_FALSE1
 push constant 0
 return
 function Bullet.moveRight 0
@@ -155,10 +189,23 @@ push this 0
 push constant 1
 add
 pop this 0
-label IF_FALSE0
 push pointer 0
 call Bullet.drawLeftOrRight 1
 pop temp 0
+label IF_FALSE0
+push this 0
+push constant 510
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+call Bullet.eraseBullet 1
+pop temp 0
+push pointer 0
+call Bullet.dispose 1
+pop temp 0
+label IF_FALSE1
 push constant 0
 return
 function Bullet.moveLeft 0
@@ -177,18 +224,23 @@ push this 0
 push constant 1
 sub
 pop this 0
-label IF_FALSE0
 push pointer 0
 call Bullet.drawLeftOrRight 1
 pop temp 0
+label IF_FALSE0
+push this 0
 push constant 0
-return
-function Bullet.dispose 0
-push argument 0
-pop pointer 0
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push pointer 0
-call Memory.deAlloc 1
+call Bullet.eraseBullet 1
 pop temp 0
+push pointer 0
+call Bullet.dispose 1
+pop temp 0
+label IF_FALSE1
 push constant 0
 return
 function Bullet.shootUp 0
