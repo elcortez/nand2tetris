@@ -1,5 +1,5 @@
 function UndeadChallenge.new 0
-push constant 8
+push constant 9
 call Memory.alloc 1
 pop pointer 0
 call Hero.new 0
@@ -73,6 +73,23 @@ push this 1
 call Zombie.moveUp 1
 pop temp 0
 label IF_FALSE3
+push constant 0
+return
+function UndeadChallenge.pewPew 0
+push argument 0
+pop pointer 0
+push this 2
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push this 2
+call Bullet.move 1
+pop temp 0
 push constant 0
 return
 function UndeadChallenge.moveHero 0
@@ -210,72 +227,22 @@ eq
 if-goto IF_TRUE5
 goto IF_FALSE5
 label IF_TRUE5
-push this 7
+push this 8
 push constant 250
 gt
 if-goto IF_TRUE6
 goto IF_FALSE6
 label IF_TRUE6
 push constant 0
-pop this 7
+pop this 8
 goto IF_END6
 label IF_FALSE6
-push this 7
+push this 8
 push constant 0
 eq
 if-goto IF_TRUE7
 goto IF_FALSE7
 label IF_TRUE7
-push constant 7
-call String.new 1
-push constant 62
-call String.appendChar 2
-push constant 32
-call String.appendChar 2
-push constant 104
-call String.appendChar 2
-push constant 101
-call String.appendChar 2
-push constant 114
-call String.appendChar 2
-push constant 111
-call String.appendChar 2
-push constant 32
-call String.appendChar 2
-call Output.printString 1
-pop temp 0
-push this 0
-call Hero.getXAxis 1
-call Output.printInt 1
-pop temp 0
-push constant 1
-call String.new 1
-push constant 47
-call String.appendChar 2
-call Output.printString 1
-pop temp 0
-push this 0
-call Hero.getYAxis 1
-call Output.printInt 1
-pop temp 0
-push constant 7
-call String.new 1
-push constant 32
-call String.appendChar 2
-push constant 104
-call String.appendChar 2
-push constant 101
-call String.appendChar 2
-push constant 114
-call String.appendChar 2
-push constant 111
-call String.appendChar 2
-push constant 32
-call String.appendChar 2
-push constant 60
-call String.appendChar 2
-call Output.printString 1
-pop temp 0
 push this 0
 call Hero.getXAxis 1
 push this 0
@@ -284,10 +251,10 @@ push this 4
 call Bullet.new 3
 pop this 2
 label IF_FALSE7
-push this 7
+push this 8
 push constant 1
 add
-pop this 7
+pop this 8
 label IF_END6
 label IF_FALSE5
 push this 5
@@ -340,27 +307,52 @@ push constant 1
 add
 pop this 6
 label IF_END10
+push this 7
+push constant 10
+gt
+if-goto IF_TRUE12
+goto IF_FALSE12
+label IF_TRUE12
+push constant 0
+pop this 7
+goto IF_END12
+label IF_FALSE12
+push this 7
+push constant 0
+eq
+if-goto IF_TRUE13
+goto IF_FALSE13
+label IF_TRUE13
+push pointer 0
+call UndeadChallenge.pewPew 1
+pop temp 0
+label IF_FALSE13
+push this 7
+push constant 1
+add
+pop this 7
+label IF_END12
 push this 1
 call Zombie.getYAxis 1
 push this 0
 call Hero.getYAxis 1
 eq
-if-goto IF_TRUE12
-goto IF_FALSE12
-label IF_TRUE12
+if-goto IF_TRUE14
+goto IF_FALSE14
+label IF_TRUE14
 push this 1
 call Zombie.getXAxis 1
 push this 0
 call Hero.getXAxis 1
 eq
-if-goto IF_TRUE13
-goto IF_FALSE13
-label IF_TRUE13
+if-goto IF_TRUE15
+goto IF_FALSE15
+label IF_TRUE15
 push constant 0
 not
 pop local 1
-label IF_FALSE13
-label IF_FALSE12
+label IF_FALSE15
+label IF_FALSE14
 goto WHILE_EXP0
 label WHILE_END0
 call Screen.clearScreen 0

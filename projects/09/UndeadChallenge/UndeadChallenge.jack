@@ -6,6 +6,7 @@ class UndeadChallenge {
    field int heroLatestDirection; // useful to determine where the bullet will go;
    field int enemyFloatInterval;
    field int heroFloatInterval;
+   field int bulletFloatInterval;
    field int shootInterval;
 
    constructor UndeadChallenge new() {
@@ -26,6 +27,13 @@ class UndeadChallenge {
      if (hero.getXAxis() < zombie.getXAxis()) { do zombie.moveLeft(); }
      if (hero.getYAxis() > zombie.getYAxis()) { do zombie.moveDown(); }
      if (hero.getYAxis() < zombie.getYAxis()) { do zombie.moveUp(); }
+     return;
+   }
+
+
+   method void pewPew() {
+     if(bullet = 0) { return; }
+     do bullet.move();
      return;
    }
 
@@ -85,13 +93,6 @@ class UndeadChallenge {
                let shootInterval = 0;
            } else {
                if (shootInterval = 0) {
-
-                 do Output.printString("> hero ");
-                 do Output.printInt(hero.getXAxis());
-                 do Output.printString("/");
-                 do Output.printInt(hero.getYAxis());
-                 do Output.printString(" hero <");
-
                  let bullet = Bullet.new(hero.getXAxis(), hero.getYAxis(), heroLatestDirection);
                }
                let shootInterval = shootInterval + 1;
@@ -113,6 +114,19 @@ class UndeadChallenge {
              }
              let heroFloatInterval = heroFloatInterval + 1;
          }
+
+         if (bulletFloatInterval > 10) {
+             let bulletFloatInterval = 0;
+         } else {
+             if (bulletFloatInterval = 0) {
+               do pewPew();
+             }
+             let bulletFloatInterval = bulletFloatInterval + 1;
+         }
+
+
+
+
 
          if(zombie.getYAxis() = hero.getYAxis()) {
            if(zombie.getXAxis() = hero.getXAxis()) {

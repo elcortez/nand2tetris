@@ -3,15 +3,10 @@ class Bullet {
    field int y;
    field int direction;
 
-   constructor Bullet new(int xStart, int yStart, int direction) {
+   constructor Bullet new(int xStart, int yStart, int directionStart) {
      let x = xStart;
      let y = yStart;
-
-     do Output.printString("> bullet ");
-     do Output.printInt(x);
-     do Output.printString("/");
-     do Output.printInt(y);
-     do Output.printString(" bullet <");
+     let direction = directionStart;
 
      if (direction = 1) { do shootUp(); }
      if (direction = 2) { do shootDown(); }
@@ -19,6 +14,54 @@ class Bullet {
      if (direction = 4) { do shootLeft(); }
 
      return this;
+   }
+
+   method void move() {
+     if (direction = 1) { do moveUp(); }
+     if (direction = 2) { do moveDown(); }
+     if (direction = 3) { do moveRight(); }
+     if (direction = 4) { do moveLeft(); }
+     return;
+   }
+
+   method void moveUp() {
+     if (y > 0) {
+       do eraseBullet();
+       let y = y - 1;
+     }
+
+      do drawUpOrDown();
+      return;
+   }
+
+   method void moveDown() {
+     if (y < 240) { // 256 - 16 (bitmap editor height)
+       do eraseBullet();
+       let y = y + 1;
+     }
+
+      do drawUpOrDown();
+      return;
+   }
+
+   method void moveRight() {
+     if (x < 510) {
+        do eraseBullet();
+        let x = x + 1;
+     }
+
+     do drawLeftOrRight();
+     return;
+   }
+
+   method void moveLeft() {
+     if (x > 0) {
+       do eraseBullet();
+       let x = x - 1;
+     }
+
+     do drawLeftOrRight();
+     return;
    }
 
    method void dispose() {
@@ -70,6 +113,28 @@ class Bullet {
   	do Memory.poke(memAddress+448, 0);
   	do Memory.poke(memAddress+480, 0);
     return;
+  }
+
+  method void eraseBullet() {
+     var int memAddress;
+     let memAddress = 16384 + (x/16) + (y*32);
+     do Memory.poke(memAddress+0, 0);
+     do Memory.poke(memAddress+32, 0);
+     do Memory.poke(memAddress+64, 0);
+     do Memory.poke(memAddress+96, 0);
+     do Memory.poke(memAddress+128, 0);
+     do Memory.poke(memAddress+160, 0);
+     do Memory.poke(memAddress+192, 0);
+     do Memory.poke(memAddress+224, 0);
+     do Memory.poke(memAddress+256, 0);
+     do Memory.poke(memAddress+288, 0);
+     do Memory.poke(memAddress+320, 0);
+     do Memory.poke(memAddress+352, 0);
+     do Memory.poke(memAddress+384, 0);
+     do Memory.poke(memAddress+416, 0);
+     do Memory.poke(memAddress+448, 0);
+     do Memory.poke(memAddress+480, 0);
+     return;
   }
 
   method void drawUpOrDown() {
