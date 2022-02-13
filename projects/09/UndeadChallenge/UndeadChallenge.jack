@@ -30,9 +30,17 @@ class UndeadChallenge {
      return;
    }
 
-
    method void pewPew() {
      if(bullet = 0) { return; }
+     if (bullet.getXAxis() = zombie.getXAxis()) {
+       if (bullet.getYAxis() = zombie.getYAxis()) {
+         do bullet.dispose();
+         do zombie.dispose();
+         let bullet = 0;
+         let zombie = 0;
+         return;
+       }
+     }
      do bullet.move();
      return;
    }

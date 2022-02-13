@@ -88,6 +88,36 @@ push constant 0
 return
 label IF_FALSE0
 push this 2
+call Bullet.getXAxis 1
+push this 1
+call Zombie.getXAxis 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 2
+call Bullet.getYAxis 1
+push this 1
+call Zombie.getYAxis 1
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 2
+call Bullet.dispose 1
+pop temp 0
+push this 1
+call Zombie.dispose 1
+pop temp 0
+push constant 0
+pop this 2
+push constant 0
+pop this 1
+push constant 0
+return
+label IF_FALSE2
+label IF_FALSE1
+push this 2
 call Bullet.move 1
 pop temp 0
 push constant 0

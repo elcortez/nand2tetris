@@ -17,8 +17,17 @@ class Bullet {
    }
 
    method void dispose() {
+     do eraseBullet();
      do Memory.deAlloc(this);
      return;
+   }
+
+   method int getXAxis() {
+     return x;
+   }
+
+   method int getYAxis() {
+     return y;
    }
 
    method void move() {
