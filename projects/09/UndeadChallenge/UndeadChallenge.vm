@@ -211,7 +211,7 @@ if-goto IF_TRUE5
 goto IF_FALSE5
 label IF_TRUE5
 push this 7
-push constant 3000
+push constant 250
 gt
 if-goto IF_TRUE6
 goto IF_FALSE6

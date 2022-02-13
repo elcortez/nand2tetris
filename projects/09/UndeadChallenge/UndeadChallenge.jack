@@ -81,7 +81,7 @@ class UndeadChallenge {
            let key = Keyboard.keyPressed();
          }
          if (key = 32) {
-           if (shootInterval > 3000) {
+           if (shootInterval > 250) {
                let shootInterval = 0;
            } else {
                if (shootInterval = 0) {
