@@ -9,8 +9,10 @@ class UndeadChallenge {
    field int bulletFloatInterval;
    field int shootInterval;
    field int totalZombiesCount;
+   field int totalZombiesSlayed;
 
    constructor UndeadChallenge new() {
+     let totalZombiesSlayed = 0;
      let totalZombiesCount = 1;
      let hero = Hero.new();
      do buildZombies();
@@ -19,6 +21,7 @@ class UndeadChallenge {
 
    method void buildZombies() {
      var Zombie zombie;
+
      let zombie = Zombie.new(0, 0);
      let zombies = Array.new(totalZombiesCount);
      let zombies[0] = zombie;
@@ -87,6 +90,12 @@ class UndeadChallenge {
              do thisZombie.dispose();
              let bullet = 0;
              let zombies[zombiesNumber] = 0;
+             let totalZombiesSlayed = totalZombiesSlayed + 1;
+
+             if (totalZombiesSlayed = totalZombiesCount) {
+               let totalZombiesCount = totalZombiesCount + 1;
+               do buildZombies();
+             }
              return;
            }
          }
