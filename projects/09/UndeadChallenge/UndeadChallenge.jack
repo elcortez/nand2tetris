@@ -20,11 +20,89 @@ class UndeadChallenge {
    }
 
    method void buildZombies() {
-     var Zombie zombie;
+     var Zombie zombie0;
+     var Zombie zombie1;
+     var Zombie zombie2;
+     var Zombie zombie3;
+     var Zombie zombie4;
+     var Zombie zombie5;
+     var Zombie zombie6;
+     var Zombie zombie7;
+     var Zombie zombie8;
+     var Zombie zombie9;
+     var Zombie zombie10;
+     var Zombie zombie11;
+     var Zombie zombie12;
+     var Zombie zombie13;
+     var Zombie zombie14;
 
-     let zombie = Zombie.new(0, 0);
      let zombies = Array.new(totalZombiesCount);
-     let zombies[0] = zombie;
+
+     if (totalZombiesCount > 0) {
+       let zombie0 = Zombie.new(0, 0);
+       let zombies[0] = zombie0;
+       }
+     if (totalZombiesCount > 1) {
+       let zombie1 = Zombie.new(50, 0);
+       let zombies[1] = zombie1;
+    }
+     if (totalZombiesCount > 2) {
+       let zombie2 = Zombie.new(100, 0);
+       let zombies[2] = zombie2;
+     }
+     if (totalZombiesCount > 2) {
+       let zombie2 = Zombie.new(150, 0);
+       let zombies[2] = zombie2;
+     }
+     if (totalZombiesCount > 3) {
+       let zombie3 = Zombie.new(200, 0);
+       let zombies[3] = zombie3;
+     }
+     if (totalZombiesCount > 4) {
+       let zombie4 = Zombie.new(250, 0);
+       let zombies[4] = zombie4;
+     }
+     if (totalZombiesCount > 5) {
+       let zombie5 = Zombie.new(300, 0);
+       let zombies[5] = zombie5;
+     }
+     if (totalZombiesCount > 6) {
+       let zombie6 = Zombie.new(350, 0);
+       let zombies[6] = zombie6;
+     }
+     if (totalZombiesCount > 7) {
+       let zombie7 = Zombie.new(400, 0);
+       let zombies[7] = zombie7;
+     }
+     if (totalZombiesCount > 8) {
+       let zombie8 = Zombie.new(450, 0);
+       let zombies[8] = zombie8;
+     }
+     if (totalZombiesCount > 9) {
+       let zombie9 = Zombie.new(500, 0);
+       let zombies[9] = zombie9;
+     }
+     if (totalZombiesCount > 10) {
+       let zombie10 = Zombie.new(0, 50);
+       let zombies[10] = zombie10;
+     }
+     if (totalZombiesCount > 11) {
+       let zombie11 = Zombie.new(0, 100);
+       let zombies[11] = zombie11;
+     }
+     if (totalZombiesCount > 12) {
+       let zombie12 = Zombie.new(0, 150);
+       let zombies[12] = zombie12;
+     }
+     if (totalZombiesCount > 13) {
+       let zombie13 = Zombie.new(0, 200);
+       let zombies[13] = zombie13;
+     }
+     if (totalZombiesCount > 14) {
+       let zombie14 = Zombie.new(0, 230);
+       let zombies[14] = zombie14;
+     }
+
      return;
    }
 
@@ -55,22 +133,13 @@ class UndeadChallenge {
      return;
    }
 
-   method boolean checkZombieAttack() {
-     var Zombie thisZombie;
-     var int zombiesNumber;
-     let zombiesNumber = 0;
-
-     while (zombiesNumber < totalZombiesCount) {
-       if (zombies[zombiesNumber] > 0) {
-         let thisZombie = zombies[zombiesNumber];
-         if(thisZombie.getYAxis() = hero.getYAxis()) {
-           if(thisZombie.getXAxis() = hero.getXAxis()) {
-             return true;
-           }
-         }
+   method boolean checkZombieAttack(Zombie thisZombie) {
+     if(thisZombie.getYAxis() = hero.getYAxis()) {
+       if(thisZombie.getXAxis() = hero.getXAxis()) {
+         return true;
        }
-       let zombiesNumber = zombiesNumber + 1;
      }
+
      return false;
    }
 
@@ -94,6 +163,7 @@ class UndeadChallenge {
 
              if (totalZombiesSlayed = totalZombiesCount) {
                let totalZombiesCount = totalZombiesCount + 1;
+               let totalZombiesSlayed = 0;
                do buildZombies();
              }
              return;
@@ -134,9 +204,19 @@ class UndeadChallenge {
    method void run() {
       var char key;
       var boolean exit;
+      var int zombiesNumber;
       let exit = false;
 
       while (~exit) {
+        let zombiesNumber = 0;
+
+        while (zombiesNumber < totalZombiesCount) {
+          if (zombies[zombiesNumber] > 0) {
+            let exit = checkZombieAttack(zombies[zombiesNumber]);
+          }
+          let zombiesNumber = zombiesNumber + 1;
+        }
+
         let key = Keyboard.keyPressed();
 
          if (key = 0) { // 0 by default at the beginning of the program
@@ -196,8 +276,6 @@ class UndeadChallenge {
              }
              let bulletFloatInterval = bulletFloatInterval + 1;
          }
-
-         let exit = checkZombieAttack();
      }
 
      do Screen.clearScreen();
