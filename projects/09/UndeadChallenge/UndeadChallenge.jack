@@ -27,18 +27,18 @@ class UndeadChallenge {
    }
 
    method void itFollows() {
-     var Zombie thisZombie;
+     var Zombie thisEnemy;
      var int enemiesNumber;
      let enemiesNumber = 0;
 
      while (enemiesNumber < 20) {
        if (enemies[enemiesNumber] > 0) {
-         let thisZombie = enemies[enemiesNumber];
+         let thisEnemy = enemies[enemiesNumber];
 
-         if (hero.getXAxis() > thisZombie.getXAxis()) { do thisZombie.moveRight(); }
-         if (hero.getXAxis() < thisZombie.getXAxis()) { do thisZombie.moveLeft(); }
-         if (hero.getYAxis() > thisZombie.getYAxis()) { do thisZombie.moveDown(); }
-         if (hero.getYAxis() < thisZombie.getYAxis()) { do thisZombie.moveUp(); }
+         if (hero.getXAxis() > thisEnemy.getXAxis()) { do thisEnemy.moveRight(); }
+         if (hero.getXAxis() < thisEnemy.getXAxis()) { do thisEnemy.moveLeft(); }
+         if (hero.getYAxis() > thisEnemy.getYAxis()) { do thisEnemy.moveDown(); }
+         if (hero.getYAxis() < thisEnemy.getYAxis()) { do thisEnemy.moveUp(); }
        }
        let enemiesNumber = enemiesNumber + 1;
      }
@@ -47,16 +47,29 @@ class UndeadChallenge {
    }
 
    method void pewPew() {
+     var Zombie thisEnemy;
+     var int enemiesNumber;
+     let enemiesNumber = 0;
+
      if(bullet = 0) { return; }
-     if (bullet.getXAxis() = zombie.getXAxis()) {
-       if (bullet.getYAxis() = zombie.getYAxis()) {
-         do bullet.dispose();
-         do zombie.dispose();
-         let bullet = 0;
-         let zombie = 0;
-         return;
+
+     while (enemiesNumber < 20) {
+       if (enemies[enemiesNumber] > 0) {
+         let thisEnemy = enemies[enemiesNumber];
+         if (bullet.getXAxis() = thisEnemy.getXAxis()) {
+           if (bullet.getYAxis() = thisEnemy.getYAxis()) {
+             do bullet.dispose();
+             do zombie.dispose();
+             let bullet = 0;
+             let zombie = 0;
+             return;
+           }
+         }
        }
+
+       let enemiesNumber = enemiesNumber + 1;
      }
+
      do bullet.move();
      return;
    }
