@@ -8,14 +8,21 @@ class UndeadChallenge {
    field int heroFloatInterval;
    field int bulletFloatInterval;
    field int shootInterval;
+   field int totalZombiesCount;
 
    constructor UndeadChallenge new() {
-     var Zombie zombie;
+     let totalZombiesCount = 1;
      let hero = Hero.new();
-     let zombie = Zombie.new(0, 0);
-     let zombies = Array.new(20);
-     let zombies[0] = zombie;
+     do buildZombies();
      return this;
+   }
+
+   method void buildZombies() {
+     var Zombie zombie;
+     let zombie = Zombie.new(0, 0);
+     let zombies = Array.new(totalZombiesCount);
+     let zombies[0] = zombie;
+     return;
    }
 
    method void dispose() {
@@ -30,7 +37,7 @@ class UndeadChallenge {
      var int zombiesNumber;
      let zombiesNumber = 0;
 
-     while (zombiesNumber < 20) {
+     while (zombiesNumber < totalZombiesCount) {
        if (zombies[zombiesNumber] > 0) {
          let thisZombie = zombies[zombiesNumber];
 
@@ -50,7 +57,7 @@ class UndeadChallenge {
      var int zombiesNumber;
      let zombiesNumber = 0;
 
-     while (zombiesNumber < 20) {
+     while (zombiesNumber < totalZombiesCount) {
        if (zombies[zombiesNumber] > 0) {
          let thisZombie = zombies[zombiesNumber];
          if(thisZombie.getYAxis() = hero.getYAxis()) {
@@ -71,7 +78,7 @@ class UndeadChallenge {
 
      if(bullet = 0) { return; }
 
-     while (zombiesNumber < 20) {
+     while (zombiesNumber < totalZombiesCount) {
        if (zombies[zombiesNumber] > 0) {
          let thisZombie = zombies[zombiesNumber];
          if (bullet.getXAxis() = thisZombie.getXAxis()) {
