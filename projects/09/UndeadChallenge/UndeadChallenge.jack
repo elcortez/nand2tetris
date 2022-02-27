@@ -1,6 +1,5 @@
 class UndeadChallenge {
    field Hero hero;
-   field Zombie zombie;
    field Array enemies;
    field Bullet bullet;
    field int heroDirection;
