@@ -27,10 +27,22 @@ class UndeadChallenge {
    }
 
    method void itFollows() {
-     if (hero.getXAxis() > zombie.getXAxis()) { do zombie.moveRight(); }
-     if (hero.getXAxis() < zombie.getXAxis()) { do zombie.moveLeft(); }
-     if (hero.getYAxis() > zombie.getYAxis()) { do zombie.moveDown(); }
-     if (hero.getYAxis() < zombie.getYAxis()) { do zombie.moveUp(); }
+     var Zombie thisZombie;
+     var int enemiesNumber;
+     let enemiesNumber = 0;
+
+     while (enemiesNumber < 20) {
+       if (enemies[enemiesNumber] > 0) {
+         let thisZombie = enemies[enemiesNumber];
+
+         if (hero.getXAxis() > thisZombie.getXAxis()) { do thisZombie.moveRight(); }
+         if (hero.getXAxis() < thisZombie.getXAxis()) { do thisZombie.moveLeft(); }
+         if (hero.getYAxis() > thisZombie.getYAxis()) { do thisZombie.moveDown(); }
+         if (hero.getYAxis() < thisZombie.getYAxis()) { do thisZombie.moveUp(); }
+       }
+       let enemiesNumber = enemiesNumber + 1;
+     }
+
      return;
    }
 
