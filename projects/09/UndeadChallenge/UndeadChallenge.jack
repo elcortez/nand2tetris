@@ -1,10 +1,10 @@
 class UndeadChallenge {
    field Hero hero;
-   field Array enemies;
+   field Array zombies;
    field Bullet bullet;
    field int heroDirection;
    field int heroLatestDirection; // useful to determine where the bullet will go;
-   field int enemyFloatInterval;
+   field int zombieFloatInterval;
    field int heroFloatInterval;
    field int bulletFloatInterval;
    field int shootInterval;
@@ -13,79 +13,79 @@ class UndeadChallenge {
      var Zombie zombie;
      let hero = Hero.new();
      let zombie = Zombie.new(0, 0);
-     let enemies = Array.new(20);
-     let enemies[0] = zombie;
+     let zombies = Array.new(20);
+     let zombies[0] = zombie;
      return this;
    }
 
    method void dispose() {
       do hero.dispose();
-      do enemies.dispose();
+      do zombies.dispose();
       do Memory.deAlloc(this);
       return;
    }
 
    method void itFollows() {
-     var Zombie thisEnemy;
-     var int enemiesNumber;
-     let enemiesNumber = 0;
+     var Zombie thisZombie;
+     var int zombiesNumber;
+     let zombiesNumber = 0;
 
-     while (enemiesNumber < 20) {
-       if (enemies[enemiesNumber] > 0) {
-         let thisEnemy = enemies[enemiesNumber];
+     while (zombiesNumber < 20) {
+       if (zombies[zombiesNumber] > 0) {
+         let thisZombie = zombies[zombiesNumber];
 
-         if (hero.getXAxis() > thisEnemy.getXAxis()) { do thisEnemy.moveRight(); }
-         if (hero.getXAxis() < thisEnemy.getXAxis()) { do thisEnemy.moveLeft(); }
-         if (hero.getYAxis() > thisEnemy.getYAxis()) { do thisEnemy.moveDown(); }
-         if (hero.getYAxis() < thisEnemy.getYAxis()) { do thisEnemy.moveUp(); }
+         if (hero.getXAxis() > thisZombie.getXAxis()) { do thisZombie.moveRight(); }
+         if (hero.getXAxis() < thisZombie.getXAxis()) { do thisZombie.moveLeft(); }
+         if (hero.getYAxis() > thisZombie.getYAxis()) { do thisZombie.moveDown(); }
+         if (hero.getYAxis() < thisZombie.getYAxis()) { do thisZombie.moveUp(); }
        }
-       let enemiesNumber = enemiesNumber + 1;
+       let zombiesNumber = zombiesNumber + 1;
      }
 
      return;
    }
 
    method boolean checkZombieAttack() {
-     var Zombie thisEnemy;
-     var int enemiesNumber;
-     let enemiesNumber = 0;
+     var Zombie thisZombie;
+     var int zombiesNumber;
+     let zombiesNumber = 0;
 
-     while (enemiesNumber < 20) {
-       if (enemies[enemiesNumber] > 0) {
-         let thisEnemy = enemies[enemiesNumber];
-         if(thisEnemy.getYAxis() = hero.getYAxis()) {
-           if(thisEnemy.getXAxis() = hero.getXAxis()) {
+     while (zombiesNumber < 20) {
+       if (zombies[zombiesNumber] > 0) {
+         let thisZombie = zombies[zombiesNumber];
+         if(thisZombie.getYAxis() = hero.getYAxis()) {
+           if(thisZombie.getXAxis() = hero.getXAxis()) {
              return true;
            }
          }
        }
-       let enemiesNumber = enemiesNumber + 1;
+       let zombiesNumber = zombiesNumber + 1;
      }
      return false;
    }
 
    method void pewPew() {
-     var Zombie thisEnemy;
-     var int enemiesNumber;
-     let enemiesNumber = 0;
+     var Zombie thisZombie;
+     var int zombiesNumber;
+     let zombiesNumber = 0;
 
      if(bullet = 0) { return; }
 
-     while (enemiesNumber < 20) {
-       if (enemies[enemiesNumber] > 0) {
-         let thisEnemy = enemies[enemiesNumber];
-         if (bullet.getXAxis() = thisEnemy.getXAxis()) {
-           if (bullet.getYAxis() = thisEnemy.getYAxis()) {
+     while (zombiesNumber < 20) {
+       if (zombies[zombiesNumber] > 0) {
+         let thisZombie = zombies[zombiesNumber];
+         if (bullet.getXAxis() = thisZombie.getXAxis()) {
+           if (bullet.getYAxis() = thisZombie.getYAxis()) {
              do bullet.dispose();
-             do thisEnemy.dispose();
+             do thisZombie.dispose();
              let bullet = 0;
-             let enemies[enemiesNumber] = 0;
+             let zombies[zombiesNumber] = 0;
              return;
            }
          }
        }
 
-       let enemiesNumber = enemiesNumber + 1;
+       let zombiesNumber = zombiesNumber + 1;
      }
 
      do bullet.move();
@@ -154,13 +154,13 @@ class UndeadChallenge {
            }
          }
 
-         if (enemyFloatInterval > 500) {
-             let enemyFloatInterval = 0;
+         if (zombieFloatInterval > 500) {
+             let zombieFloatInterval = 0;
          } else {
-             if (enemyFloatInterval = 0) {
+             if (zombieFloatInterval = 0) {
                do itFollows();
              }
-             let enemyFloatInterval = enemyFloatInterval + 1;
+             let zombieFloatInterval = zombieFloatInterval + 1;
          }
 
          if (heroFloatInterval > 200) {
