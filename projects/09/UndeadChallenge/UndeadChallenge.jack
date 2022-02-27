@@ -11,16 +11,16 @@ class UndeadChallenge {
    field int shootInterval;
 
    constructor UndeadChallenge new() {
-      let hero = Hero.new();
-      let zombie = Zombie.new(0, 0);
-      let enemies = Array.new(20);
-      let enemies[0] = zombie;
-      return this;
+     var Zombie zombie;
+     let hero = Hero.new();
+     let zombie = Zombie.new(0, 0);
+     let enemies = Array.new(20);
+     let enemies[0] = zombie;
+     return this;
    }
 
    method void dispose() {
       do hero.dispose();
-      do zombie.dispose();
       do enemies.dispose();
       do Memory.deAlloc(this);
       return;
@@ -78,9 +78,9 @@ class UndeadChallenge {
          if (bullet.getXAxis() = thisEnemy.getXAxis()) {
            if (bullet.getYAxis() = thisEnemy.getYAxis()) {
              do bullet.dispose();
-             do zombie.dispose();
+             do thisEnemy.dispose();
              let bullet = 0;
-             let zombie = 0;
+             let enemies[enemiesNumber] = 0;
              return;
            }
          }

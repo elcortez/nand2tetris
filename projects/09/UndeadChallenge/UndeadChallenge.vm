@@ -1,4 +1,4 @@
-function UndeadChallenge.new 0
+function UndeadChallenge.new 1
 push constant 10
 call Memory.alloc 1
 pop pointer 0
@@ -7,14 +7,14 @@ pop this 0
 push constant 0
 push constant 0
 call Zombie.new 2
-pop this 1
+pop local 0
 push constant 20
 call Array.new 1
 pop this 2
 push constant 0
 push this 2
 add
-push this 1
+push local 0
 pop temp 0
 pop pointer 1
 push temp 0
@@ -26,9 +26,6 @@ push argument 0
 pop pointer 0
 push this 0
 call Hero.dispose 1
-pop temp 0
-push this 1
-call Zombie.dispose 1
 pop temp 0
 push this 2
 call Array.dispose 1
@@ -234,13 +231,19 @@ label IF_TRUE3
 push this 3
 call Bullet.dispose 1
 pop temp 0
-push this 1
+push local 0
 call Zombie.dispose 1
 pop temp 0
 push constant 0
 pop this 3
+push local 1
+push this 2
+add
 push constant 0
-pop this 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
 push constant 0
 return
 label IF_FALSE3
