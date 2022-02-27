@@ -2,9 +2,9 @@ class Zombie {
    field int x;
    field int y;
 
-   constructor Zombie new() {
-      let x = 0;
-      let y = 0;
+   constructor Zombie new(int xStart, int yStart) {
+      let x = xStart;
+      let y = yStart;
       do drawRight();
       return this;
    }

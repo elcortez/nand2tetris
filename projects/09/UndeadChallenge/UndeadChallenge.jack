@@ -1,6 +1,7 @@
 class UndeadChallenge {
    field Hero hero;
    field Zombie zombie;
+   field Array enemies;
    field Bullet bullet;
    field int heroDirection;
    field int heroLatestDirection; // useful to determine where the bullet will go;
@@ -11,13 +12,16 @@ class UndeadChallenge {
 
    constructor UndeadChallenge new() {
       let hero = Hero.new();
-      let zombie = Zombie.new();
+      let zombie = Zombie.new(0, 0);
+      let enemies = Array.new(20);
+      let enemies[0] = zombie;
       return this;
    }
 
    method void dispose() {
       do hero.dispose();
       do zombie.dispose();
+      do enemies.dispose();
       do Memory.deAlloc(this);
       return;
    }
@@ -107,14 +111,16 @@ class UndeadChallenge {
            }
          }
 
-         if (enemyFloatInterval > 250) {
+         if (enemyFloatInterval > 500) {
              let enemyFloatInterval = 0;
          } else {
-             if (enemyFloatInterval = 0) { do itFollows(); }
+             if (enemyFloatInterval = 0) {
+               do itFollows();
+             }
              let enemyFloatInterval = enemyFloatInterval + 1;
          }
 
-         if (heroFloatInterval > 50) {
+         if (heroFloatInterval > 200) {
              let heroFloatInterval = 0;
          } else {
              if (heroFloatInterval = 0) {
@@ -131,10 +137,6 @@ class UndeadChallenge {
              }
              let bulletFloatInterval = bulletFloatInterval + 1;
          }
-
-
-
-
 
          if(zombie.getYAxis() = hero.getYAxis()) {
            if(zombie.getXAxis() = hero.getXAxis()) {
