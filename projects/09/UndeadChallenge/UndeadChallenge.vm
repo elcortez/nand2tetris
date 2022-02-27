@@ -122,6 +122,63 @@ goto WHILE_EXP0
 label WHILE_END0
 push constant 0
 return
+function UndeadChallenge.checkZombieAttack 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push constant 20
+lt
+not
+if-goto WHILE_END0
+push local 1
+push this 2
+add
+pop pointer 1
+push that 0
+push constant 0
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 1
+push this 2
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Zombie.getYAxis 1
+push this 0
+call Hero.getYAxis 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+call Zombie.getXAxis 1
+push this 0
+call Hero.getXAxis 1
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+not
+return
+label IF_FALSE2
+label IF_FALSE1
+label IF_FALSE0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
 function UndeadChallenge.pewPew 2
 push argument 0
 pop pointer 0
@@ -440,27 +497,9 @@ push constant 1
 add
 pop this 8
 label IF_END12
-push this 1
-call Zombie.getYAxis 1
-push this 0
-call Hero.getYAxis 1
-eq
-if-goto IF_TRUE14
-goto IF_FALSE14
-label IF_TRUE14
-push this 1
-call Zombie.getXAxis 1
-push this 0
-call Hero.getXAxis 1
-eq
-if-goto IF_TRUE15
-goto IF_FALSE15
-label IF_TRUE15
-push constant 0
-not
+push pointer 0
+call UndeadChallenge.checkZombieAttack 1
 pop local 1
-label IF_FALSE15
-label IF_FALSE14
 goto WHILE_EXP0
 label WHILE_END0
 call Screen.clearScreen 0

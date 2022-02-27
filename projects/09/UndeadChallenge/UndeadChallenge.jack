@@ -46,6 +46,25 @@ class UndeadChallenge {
      return;
    }
 
+   method boolean checkZombieAttack() {
+     var Zombie thisEnemy;
+     var int enemiesNumber;
+     let enemiesNumber = 0;
+
+     while (enemiesNumber < 20) {
+       if (enemies[enemiesNumber] > 0) {
+         let thisEnemy = enemies[enemiesNumber];
+         if(thisEnemy.getYAxis() = hero.getYAxis()) {
+           if(thisEnemy.getXAxis() = hero.getXAxis()) {
+             return true;
+           }
+         }
+       }
+       let enemiesNumber = enemiesNumber + 1;
+     }
+     return false;
+   }
+
    method void pewPew() {
      var Zombie thisEnemy;
      var int enemiesNumber;
@@ -163,12 +182,8 @@ class UndeadChallenge {
              let bulletFloatInterval = bulletFloatInterval + 1;
          }
 
-         if(zombie.getYAxis() = hero.getYAxis()) {
-           if(zombie.getXAxis() = hero.getXAxis()) {
-             let exit = true;
-           }
-         }
-     } // while
+         let exit = checkZombieAttack();
+     }
 
      do Screen.clearScreen();
      do Output.printString("GAME OVER SUCKER !");
