@@ -63,42 +63,38 @@ end
 
 def translate_jack_file_content(jack_file, xml_file)
   sanitized_lines(jack_file).each do |line|
-     translated_line(line).each do |xml_command|
-       xml_file.puts(xml_command)
-     end
-  end
-end
-
-folders = ARGV[0].split('/')
-
-if folders.last.end_with?('.jack')
-  path = folders[0..-2].join('/')
-  filename = folders[-2]
-  jack_files = Dir[path + '/*'].select { |filename| filename.split('.').last == 'jack' }
-else
-  path = ARGV[0].split('').last == '/' ? ARGV[0] : "#{ARGV[0]}/" # path/
-  filename = folders.last
-  jack_files = Dir[path + '*'].select { |filename| filename.split('.').last == 'jack' }
-end
-
-File.open("#{path}/#{filename}.xml", "w") do |xml_file|
-  xml_file.puts('<tokens>')
-  if jack_files.length == 1
-    File.open(jack_files.first) { |jack_file| translate_jack_file_content(jack_file, xml_file) }
-  else
-    jack_files.each do |jack_file|
-      File.open(jack_file) { |jack_file| translate_jack_file_content(jack_file, xml_file) }
+    translated_line(line).each do |xml_command|
+      xml_file.puts(xml_command)
     end
   end
-  xml_file.puts('</tokens>')
 end
 
+folder_path = ARGV[0].split('/')
+directory = folder_path.last.end_with?('.jack') ? folder_path[0..-2] : folder_path
+jack_files = Dir[directory.join('/') + '/*'].select { |filename| filename.split('.').last == 'jack' }
+testing = ENV['USER'] == 'pierrehersant' # Testing only happens on my computer
+testing_tokenizer_only = true
 
-test_file = File.open(ARGV[0]).each_line.to_a.map(&:strip)
+jack_files.each do |jack_file|
+  extension = testing ? '2.xml' : '.xml' # Keeping test files intact while testing
+  xml_file_name = jack_file.gsub(/.jack/, extension)
 
-File.open(ARGV[0]).each_line.to_a.map(&:strip).each_with_index do |line, index|
-  next if line == test_file[index]
-  p "Discrepancy found on line #{index}"
+  File.open(xml_file_name, 'w') do |xml_file|
+    xml_file.puts('<tokens>') if testing_tokenizer_only
+    File.open(jack_file) { |jack_file| translate_jack_file_content(jack_file, xml_file) }
+    xml_file.puts('</tokens>') if testing_tokenizer_only
+  end
+
+  return unless testing
+
+  extension = testing_tokenizer_only ? 'T.xml' : '.xml'
+  test_file_name = jack_file.gsub(/.jack/, extension)
+  p "Testing now file #{test_file_name} vs #{xml_file_name}"
+  test_file_lines = File.open(test_file_name).each_line.to_a.map(&:strip)
+  xml_file_lines = File.open(xml_file_name).each_line.to_a.map(&:strip)
+
+  xml_file_lines.each_with_index do |line, index|
+    next if line == test_file_lines[index]
+    p "Discrepancy found on line #{index} : #{line} vs #{test_file_lines[index]}"
+  end
 end
-
-p 'Test successful !'
