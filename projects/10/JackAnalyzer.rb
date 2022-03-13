@@ -27,7 +27,8 @@ def translated_line(line)
   splitted = line.split(/\s(?!\")/)
     .map { |string|string.split(/(\.)|(\{)|(\})|(\[)|(\])|(\()|(\))|(\,)|(\;)|(\+)|(\-)|(\*)|(\/)|(\&)|(\|)|(\>)|(\<)|(\=)|(\~)/) }
     .flatten
-    .reject { |s|s == '' }
+    .reject { |s| s == '' }
+    .map(&:strip)
 
   splitted.each do |word|
     if word.start_with?('"') # ORDER IS IMPORTANT
@@ -56,9 +57,15 @@ def translated_line(line)
 end
 
 def sanitized_lines(jack_file)
-  return jack_file.each_line.map(&:strip)
-    .reject { |l| l.start_with?('//') ||  l.start_with?('/*') || l.empty? }
-    .map { |l| l.split('//').first.strip }
+  multiline_comment_started = false
+
+  return jack_file.each_line.map(&:strip).reject do |l|
+    multiline_comment_started = true if l.start_with?('/*')
+    multiline_comment_started = false if l.end_with?('*/')
+
+    (l.start_with?('*') && multiline_comment_started == true) || l.start_with?('/*') || l.end_with?('*/') || l.start_with?('//') || l.empty?
+
+  end.map { |l| l.split('//').first.strip }
 end
 
 def translate_jack_file_content(jack_file, xml_file)
@@ -76,6 +83,8 @@ testing = ENV['USER'] == 'pierrehersant' # Testing only happens on my computer
 testing_tokenizer_only = true
 
 jack_files.each do |jack_file|
+  p '..........................................................................'
+  p "compiling jack_file #{jack_file}"
   extension = testing ? '2.xml' : '.xml' # Keeping test files intact while testing
   xml_file_name = jack_file.gsub(/.jack/, extension)
 
