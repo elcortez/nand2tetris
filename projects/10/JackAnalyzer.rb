@@ -32,7 +32,7 @@ def sanitized_lines(jack_file)
   end.map { |l| l.split('//').first.strip }
 end
 
-def translated_line(line)
+def translated_lines(line, file_offset)
   lines = []
   string_started = false
   temp_string = []
@@ -49,28 +49,67 @@ def translated_line(line)
     elsif word.end_with?('"') # ORDER IS IMPORTANT
       string_started = false
       temp_string << word.split('"').join('')
-      lines << "<stringConstant> #{temp_string.join(' ')} </stringConstant>"
+      lines << "#{'  '* file_offset}<stringConstant> #{temp_string.join(' ')} </stringConstant>"
       temp_string = []
     elsif string_started # ORDER IS IMPORTANT
       temp_string << word.split('"').join('')
     elsif is_integer(word)
-      lines << "<integerConstant> #{word} </integerConstant>"
+      lines << "#{'  '* file_offset}<integerConstant> #{word} </integerConstant>"
     elsif XML_IDENTIFIERS.keys.include?(word)
-      lines << "<symbol> #{XML_IDENTIFIERS[word]} </symbol>"
+      lines << "#{'  '* file_offset}<symbol> #{XML_IDENTIFIERS[word]} </symbol>"
     elsif SYMBOLS.include?(word)
-      lines << "<symbol> #{word} </symbol>"
+      lines << "#{'  '* file_offset}<symbol> #{word} </symbol>"
     elsif KEYWORDS.include?(word)
-      lines << "<keyword> #{word} </keyword>"
+      lines << "#{'  '* file_offset}<keyword> #{word} </keyword>"
     else # ORDER IS IMPORTANT
-      lines << "<identifier> #{word} </identifier>"
+      lines << "#{'  '* file_offset}<identifier> #{word} </identifier>"
     end
   end
-  return [lines]
+
+  lines = apply_line_offset(lines, file_offset)
+
+  return lines
+end
+
+def apply_line_offset(lines, file_offset)
+  p '...............'
+  p lines
+
+  if lines.any? { |line| line.include?('function') }
+    open_index = lines.index { |line| line.include?('<symbol> ( </symbol>') }
+    lines.insert(open_index + 1, "#{'  '* file_offset}<parameterList>")
+
+    close_index = lines.index { |line| line.include?('<symbol> ) </symbol>') }
+    lines.insert(close_index, "#{'  '* file_offset}</parameterList>")
+
+    open_index = lines.index { |line| line.include?('<parameterList>') }
+    close_index = lines.index { |line| line.include?('</parameterList>') }
+
+    lines.each_with_index do |line, index|
+      next if index < open_index + 1 || index > close_index - 1
+      lines[index] = "  #{lines[index]}"
+    end
+  end
+
+  return lines
 end
 
 def translate_jack_file_content(jack_file, xml_file)
+  file_offset = 0
+
   sanitized_lines(jack_file).each do |line|
-    translated_line(line).each do |xml_command|
+
+    if line.start_with?('class')
+      xml_file.puts('<class>')
+      file_offset += 1
+    elsif line.start_with?('function')
+      xml_file.puts("#{'  ' * file_offset}<subroutineDec>")
+      file_offset += 1
+    end
+
+    lines = translated_lines(line, file_offset)
+
+    lines.each do |xml_command|
       xml_file.puts(xml_command)
     end
   end
@@ -84,7 +123,7 @@ testing_tokenizer_only = false
 
 jack_files.each do |jack_file|
   p '..........................................................................'
-  p "compiling jack_file #{jack_file}"
+  p "Compiling #{jack_file}"
   extension = testing ? '2.xml' : '.xml' # Keeping test files intact while testing
   xml_file_name = jack_file.gsub(/.jack/, extension)
 
@@ -98,7 +137,7 @@ jack_files.each do |jack_file|
 
   extension = testing_tokenizer_only ? 'T.xml' : '.xml'
   test_file_name = jack_file.gsub(/.jack/, extension)
-  p "Testing now file #{test_file_name} vs #{xml_file_name}"
+  p "Testing file #{test_file_name} vs #{xml_file_name}"
   test_file_lines = File.open(test_file_name).each_line.to_a.map(&:strip)
   xml_file_lines = File.open(xml_file_name).each_line.to_a.map(&:strip)
 
