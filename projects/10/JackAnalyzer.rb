@@ -20,6 +20,18 @@ def is_integer(word)
   Integer(word) rescue false
 end
 
+def sanitized_lines(jack_file)
+  multiline_comment_started = false
+
+  return jack_file.each_line.map(&:strip).reject do |l|
+    multiline_comment_started = true if l.start_with?('/*')
+    multiline_comment_started = false if l.end_with?('*/')
+
+    (l.start_with?('*') && multiline_comment_started == true) || l.start_with?('/*') || l.end_with?('*/') || l.start_with?('//') || l.empty?
+
+  end.map { |l| l.split('//').first.strip }
+end
+
 def translated_line(line)
   lines = []
   string_started = false
@@ -56,18 +68,6 @@ def translated_line(line)
   return [lines]
 end
 
-def sanitized_lines(jack_file)
-  multiline_comment_started = false
-
-  return jack_file.each_line.map(&:strip).reject do |l|
-    multiline_comment_started = true if l.start_with?('/*')
-    multiline_comment_started = false if l.end_with?('*/')
-
-    (l.start_with?('*') && multiline_comment_started == true) || l.start_with?('/*') || l.end_with?('*/') || l.start_with?('//') || l.empty?
-
-  end.map { |l| l.split('//').first.strip }
-end
-
 def translate_jack_file_content(jack_file, xml_file)
   sanitized_lines(jack_file).each do |line|
     translated_line(line).each do |xml_command|
@@ -80,7 +80,7 @@ folder_path = ARGV[0].split('/')
 directory = folder_path.last.end_with?('.jack') ? folder_path[0..-2] : folder_path
 jack_files = Dir[directory.join('/') + '/*'].select { |filename| filename.split('.').last == 'jack' }
 testing = ENV['USER'] == 'pierrehersant' # Testing only happens on my computer
-testing_tokenizer_only = true
+testing_tokenizer_only = false
 
 jack_files.each do |jack_file|
   p '..........................................................................'

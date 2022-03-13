@@ -1,4 +1,4 @@
-<tokens>
+<class>
 <keyword> class </keyword>
 <identifier> Main </identifier>
 <symbol> { </symbol>
@@ -139,4 +139,4 @@
 <symbol> ; </symbol>
 <symbol> } </symbol>
 <symbol> } </symbol>
-</tokens>
+</class>
