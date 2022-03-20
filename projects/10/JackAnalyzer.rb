@@ -92,17 +92,57 @@ def apply_single_line_offsets(tokenized_lines)
 end
 
 def apply_multi_lines_offsets(tokenized_lines)
-  # file_offset = 0
-  # if line.start_with?('class')
-  #   xml_file.puts('<class>')
-  #   file_offset += 1
-  # elsif line.start_with?('function')
-  #   xml_file.puts("#{'  ' * file_offset}<subroutineDec>")
-  #   file_offset += 1
-  # end
+  tokenized_lines = tokenized_lines.flatten
 
-  # class
-  # subroutine decl
+  non_terminal_elements = [ # ORDER IS IMPORTANT FOR THE OFFSETS TO BE APPLIED CORRECTLY
+    {
+      keyword: '<keyword> class </keyword>',
+      opener: '<symbol> { </symbol>',
+      closer: '<symbol> } </symbol>',
+      opening_non_terminal_element: '<class>',
+      closing_non_terminal_element: '</class>'
+    },
+    {
+      keyword: '<keyword> function </keyword>',
+      opener: '<symbol> { </symbol>',
+      closer: '<symbol> } </symbol>',
+      opening_non_terminal_element: '<subroutineDec>',
+      closing_non_terminal_element: '</subroutineDec>'
+    },
+  ]
+
+  non_terminal_elements.each do |non_terminal_element|
+    begin_index = tokenized_lines.index { |line| line.include?(non_terminal_element[:keyword]) }
+    next unless begin_index
+
+    end_index = nil
+    open_close_count = 0
+
+    tokenized_lines[begin_index..-1].each_with_index do |line, index|
+      if line.include?(non_terminal_element[:opener])
+        open_close_count += 1
+      elsif line.include?(non_terminal_element[:closer])
+        open_close_count -= 1
+        if open_close_count == 0
+          end_index = index + begin_index
+          break
+        end
+      end
+    end
+
+    tokenized_lines[begin_index..end_index].each_with_index do |line, index|
+      correct_index = index + begin_index
+      raise "incorrect line offset application for line #{line}" if line != tokenized_lines[correct_index]
+      tokenized_lines[correct_index] = "  #{line}"
+    end
+
+    p '...........'
+    line_after = tokenized_lines[end_index + 1]
+    offset = line_after ? line_after.split('<').first : ''
+
+    tokenized_lines.insert(end_index + 1, "#{offset}#{non_terminal_element[:closing_non_terminal_element]}")
+    tokenized_lines.insert(begin_index, "#{offset}#{non_terminal_element[:opening_non_terminal_element]}")
+  end
   # subroutine body
   # var decl
   # statements
@@ -125,10 +165,8 @@ def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
     tokenized_lines = apply_multi_lines_offsets(tokenized_lines)
   end
 
-  tokenized_lines.each do |xml_commands|
-    xml_commands.each do |xml_command|
-      xml_file.puts(xml_command)
-    end
+  tokenized_lines.flatten.each do |xml_command|
+    xml_file.puts(xml_command)
   end
 end
 
@@ -160,6 +198,6 @@ jack_files.each do |jack_file|
 
   xml_file_lines.each_with_index do |line, index|
     next if line == test_file_lines[index]
-    p "Discrepancy found on line #{index} : #{line} vs #{test_file_lines[index]}"
+    p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
   end
 end
