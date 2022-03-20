@@ -94,7 +94,7 @@ end
 def apply_multi_lines_offsets(tokenized_lines)
   tokenized_lines = tokenized_lines.flatten
 
-  non_terminal_elements = [ # ORDER IS IMPORTANT FOR THE OFFSETS TO BE APPLIED CORRECTLY
+  non_terminal_elements = [
     {
       keyword: '<keyword> class </keyword>',
       opener: '<symbol> { </symbol>',
@@ -107,41 +107,32 @@ def apply_multi_lines_offsets(tokenized_lines)
       opener: '<symbol> { </symbol>',
       closer: '<symbol> } </symbol>',
       opening_non_terminal_element: '<subroutineDec>',
-      closing_non_terminal_element: '</subroutineDec>'
+      closing_non_terminal_element: '</subroutineDec>',
+      additional_subroutine_body: {
+        keyword: '<symbol> { </symbol>',
+        opener: '<symbol> { </symbol>',
+        closer: '<symbol> } </symbol>',
+        opening_non_terminal_element: '<subroutineBody>',
+        closing_non_terminal_element: '</subroutineBody>',
+        additional_offset: '  '
+      }
     },
   ]
 
   non_terminal_elements.each do |non_terminal_element|
-    begin_index = tokenized_lines.index { |line| line.include?(non_terminal_element[:keyword]) }
-    next unless begin_index
+    begin_indexes = []
+    tokenized_lines.each_with_index { |line, index| begin_indexes << index if line.include?(non_terminal_element[:keyword]) }
 
-    end_index = nil
-    open_close_count = 0
+    begin_indexes.each do |begin_index|
+      tokenized_lines = apply_non_terminal_element(tokenized_lines, begin_index, non_terminal_element)
 
-    tokenized_lines[begin_index..-1].each_with_index do |line, index|
-      if line.include?(non_terminal_element[:opener])
-        open_close_count += 1
-      elsif line.include?(non_terminal_element[:closer])
-        open_close_count -= 1
-        if open_close_count == 0
-          end_index = index + begin_index
-          break
+      if non_terminal_element[:additional_subroutine_body]
+        additional_begin_index = tokenized_lines.index.with_index do |line, index|
+          index > begin_index && line.include?(non_terminal_element[:additional_subroutine_body][:keyword])
         end
+        tokenized_lines = apply_non_terminal_element(tokenized_lines, additional_begin_index, non_terminal_element[:additional_subroutine_body])
       end
     end
-
-    tokenized_lines[begin_index..end_index].each_with_index do |line, index|
-      correct_index = index + begin_index
-      raise "incorrect line offset application for line #{line}" if line != tokenized_lines[correct_index]
-      tokenized_lines[correct_index] = "  #{line}"
-    end
-
-    p '...........'
-    line_after = tokenized_lines[end_index + 1]
-    offset = line_after ? line_after.split('<').first : ''
-
-    tokenized_lines.insert(end_index + 1, "#{offset}#{non_terminal_element[:closing_non_terminal_element]}")
-    tokenized_lines.insert(begin_index, "#{offset}#{non_terminal_element[:opening_non_terminal_element]}")
   end
   # subroutine body
   # var decl
@@ -149,6 +140,38 @@ def apply_multi_lines_offsets(tokenized_lines)
   # letstatement
   # expression
   # term
+
+  return tokenized_lines
+end
+
+def apply_non_terminal_element(tokenized_lines, begin_index, non_terminal_element)
+  end_index = nil
+  open_close_count = 0
+
+  tokenized_lines[begin_index..-1].each_with_index do |line, index|
+    if line.include?(non_terminal_element[:opener])
+      open_close_count += 1
+    elsif line.include?(non_terminal_element[:closer])
+      open_close_count -= 1
+      if open_close_count == 0
+        end_index = index + begin_index
+        break
+      end
+    end
+  end
+
+  tokenized_lines[begin_index..end_index].each_with_index do |line, index|
+    correct_index = index + begin_index
+    raise "incorrect line offset application for line #{line}" if line != tokenized_lines[correct_index]
+    tokenized_lines[correct_index] = "  #{line}"
+  end
+
+  line_after = tokenized_lines[end_index + 1]
+  offset = line_after ? line_after.split('<').first : ''
+  offset = "#{offset}#{non_terminal_element[:additional_offset]}"
+
+  tokenized_lines.insert(end_index + 1, "#{offset}#{non_terminal_element[:closing_non_terminal_element]}")
+  tokenized_lines.insert(begin_index, "#{offset}#{non_terminal_element[:opening_non_terminal_element]}")
 
   return tokenized_lines
 end
