@@ -117,14 +117,23 @@ def apply_multi_lines_offsets(tokenized_lines)
         additional_offset: '  '
       }
     },
+    {
+      keyword: '<keyword> var </keyword>',
+      opener: '<keyword> var </keyword>',
+      closer: '<symbol> ; </symbol>',
+      opening_non_terminal_element: '<varDec>',
+      closing_non_terminal_element: '</varDec>',
+    }
   ]
 
   non_terminal_elements.each do |non_terminal_element|
     begin_indexes = []
     tokenized_lines.each_with_index { |line, index| begin_indexes << index if line.include?(non_terminal_element[:keyword]) }
 
-    begin_indexes.each do |begin_index|
+    begin_indexes.each_with_index do |begin_index, position_in_indexes_array|
       tokenized_lines = apply_non_terminal_element(tokenized_lines, begin_index, non_terminal_element)
+      # recalculating index positions since we are adding more lines for the non_terminal_elements
+      begin_indexes[(position_in_indexes_array + 1)..-1].each{|begin_index| begin_indexes[begin_indexes.index{|bi|bi==begin_index}] += 2}
 
       if non_terminal_element[:additional_subroutine_body]
         additional_begin_index = tokenized_lines.index.with_index do |line, index|
@@ -145,6 +154,7 @@ def apply_multi_lines_offsets(tokenized_lines)
 end
 
 def apply_non_terminal_element(tokenized_lines, begin_index, non_terminal_element)
+  p "... Start apply index #{begin_index} : #{tokenized_lines[begin_index]}"
   end_index = nil
   open_close_count = 0
 
