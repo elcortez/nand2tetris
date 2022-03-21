@@ -123,7 +123,14 @@ def apply_multi_lines_offsets(tokenized_lines)
       closer: '<symbol> ; </symbol>',
       opening_non_terminal_element: '<varDec>',
       closing_non_terminal_element: '</varDec>',
-    }
+    },
+    # {
+    #   keyword: '<keyword> let </keyword>',
+    #   opener: '<keyword> let </keyword>',
+    #   closer: '<symbol> ; </symbol>',
+    #   opening_non_terminal_element: '<letStatement>',
+    #   closing_non_terminal_element: '</letStatement>',
+    # },
   ]
 
   non_terminal_elements.each do |non_terminal_element|
@@ -143,12 +150,6 @@ def apply_multi_lines_offsets(tokenized_lines)
       end
     end
   end
-  # subroutine body
-  # var decl
-  # statements
-  # letstatement
-  # expression
-  # term
 
   return tokenized_lines
 end
@@ -186,6 +187,53 @@ def apply_non_terminal_element(tokenized_lines, begin_index, non_terminal_elemen
   return tokenized_lines
 end
 
+def apply_statements(tokenized_lines)
+  p '--------------------------------------------------'
+  # <symbol> { </symbol>
+  #   ########### <statements> JUST BEFORE THE VERY FIRST OF THESE
+  #   ########### AND JUST
+  # <keyword> let </keyword>
+  # <keyword> if </keyword>
+  # <keyword> while </keyword>
+  # <keyword> do </keyword>
+  # <keyword> return </keyword>
+  # ########## </statements>JUST BEFORE THE VERY NEXT }
+  # ########## <symbol> } </symbol>
+
+  brackets_index = 0
+  brackets = []
+
+  tokenized_lines.each_with_index do |tl, line_index|
+    if tl.include?('<symbol> { </symbol>')
+      brackets.insert(brackets_index, { open: line_index })
+      brackets_index += 1
+    elsif tl.include?('<symbol> } </symbol>')
+      brackets[brackets_index - 1][:close] = line_index
+      brackets_index -= 1
+    end
+  end
+
+  statements_keywords = [
+    '<keyword> let </keyword>',
+    '<keyword> if </keyword>',
+    '<keyword> while </keyword>',
+    '<keyword> do </keyword>',
+    '<keyword> return </keyword>',
+  ]
+
+  brackets.each do |bracket_pair|
+    subset_lines = tokenized_lines[bracket_pair[:open]..bracket_pair[:close]]
+    if subset_lines.any? { |line| statements_keywords.any? {|kw| line.include?(kw) } }
+      # a subset of lines that includes some statement_keywords
+      # but sometimes, although this condition is true, another condition nullifies it
+      # that is, that another subset of lines WITHIN this one also includes this statement
+      p bracket_pair
+    end
+  end
+
+  return tokenized_lines
+end
+
 def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
   tokenized_lines = []
 
@@ -196,6 +244,7 @@ def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
   if !testing_tokenizer_only
     tokenized_lines = apply_single_line_offsets(tokenized_lines)
     tokenized_lines = apply_multi_lines_offsets(tokenized_lines)
+    tokenized_lines = apply_statements(tokenized_lines)
   end
 
   tokenized_lines.flatten.each do |xml_command|
