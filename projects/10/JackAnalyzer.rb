@@ -124,13 +124,41 @@ def apply_multi_lines_offsets(tokenized_lines)
       opening_non_terminal_element: '<varDec>',
       closing_non_terminal_element: '</varDec>',
     },
-    # {
-    #   keyword: '<keyword> let </keyword>',
-    #   opener: '<keyword> let </keyword>',
-    #   closer: '<symbol> ; </symbol>',
-    #   opening_non_terminal_element: '<letStatement>',
-    #   closing_non_terminal_element: '</letStatement>',
-    # },
+    {
+      keyword: '<keyword> let </keyword>',
+      opener: '<keyword> let </keyword>',
+      closer: '<symbol> ; </symbol>',
+      opening_non_terminal_element: '<letStatement>',
+      closing_non_terminal_element: '</letStatement>',
+    },
+    {
+      keyword: '<keyword> if </keyword>',
+      opener: '<keyword> if </keyword>',
+      closer: '<symbol> } </symbol>',
+      opening_non_terminal_element: '<ifStatement>',
+      closing_non_terminal_element: '</ifStatement>',
+    },
+    {
+      keyword: '<keyword> while </keyword>',
+      opener: '<keyword> while </keyword>',
+      closer: '<symbol> } </symbol>',
+      opening_non_terminal_element: '<whileStatement>',
+      closing_non_terminal_element: '</whileStatement>',
+    },
+    {
+      keyword: '<keyword> do </keyword>',
+      opener: '<keyword> do </keyword>',
+      closer: '<symbol> ; </symbol>',
+      opening_non_terminal_element: '<doStatement>',
+      closing_non_terminal_element: '</doStatement>',
+    },
+    {
+      keyword: '<keyword> return </keyword>',
+      opener: '<keyword> return </keyword>',
+      closer: '<symbol> ; </symbol>',
+      opening_non_terminal_element: '<returnStatement>',
+      closing_non_terminal_element: '</returnStatement>',
+    },
   ]
 
   non_terminal_elements.each do |non_terminal_element|
@@ -155,7 +183,6 @@ def apply_multi_lines_offsets(tokenized_lines)
 end
 
 def apply_non_terminal_element(tokenized_lines, begin_index, non_terminal_element)
-  p "... Start apply index #{begin_index} : #{tokenized_lines[begin_index]}"
   end_index = nil
   open_close_count = 0
 
@@ -188,17 +215,8 @@ def apply_non_terminal_element(tokenized_lines, begin_index, non_terminal_elemen
 end
 
 def apply_statements(tokenized_lines)
-  p '--------------------------------------------------'
-  # <symbol> { </symbol>
-  #   ########### <statements> JUST BEFORE THE VERY FIRST OF THESE
-  #   ########### AND JUST
-  # <keyword> let </keyword>
-  # <keyword> if </keyword>
-  # <keyword> while </keyword>
-  # <keyword> do </keyword>
-  # <keyword> return </keyword>
-  # ########## </statements>JUST BEFORE THE VERY NEXT }
-  # ########## <symbol> } </symbol>
+  statements_index = 0
+  statements = []
 
   brackets_index = 0
   brackets = []
@@ -207,27 +225,61 @@ def apply_statements(tokenized_lines)
     if tl.include?('<symbol> { </symbol>')
       brackets.insert(brackets_index, { open: line_index })
       brackets_index += 1
-    elsif tl.include?('<symbol> } </symbol>')
+    elsif tl.include?('<symbol> } </symbol>') && tl.include?('</')  # any closing statement
       brackets[brackets_index - 1][:close] = line_index
       brackets_index -= 1
     end
+
+    if tl.include?('Statement>') && !tl.include?('</') # any opening statement
+      statements.insert(statements_index, { open: line_index })
+      statements_index += 1
+    elsif tl.include?('Statement>') && tl.include?('</')  # any closing statement
+      statements[statements_index - 1][:close] = line_index
+      statements_index -= 1
+    end
   end
 
-  statements_keywords = [
-    '<keyword> let </keyword>',
-    '<keyword> if </keyword>',
-    '<keyword> while </keyword>',
-    '<keyword> do </keyword>',
-    '<keyword> return </keyword>',
-  ]
+
+  brackets.sort_by!{|b|b[:open]}
+  statements.sort_by!{|b|b[:open]}
 
   brackets.each do |bracket_pair|
-    subset_lines = tokenized_lines[bracket_pair[:open]..bracket_pair[:close]]
-    if subset_lines.any? { |line| statements_keywords.any? {|kw| line.include?(kw) } }
-      # a subset of lines that includes some statement_keywords
-      # but sometimes, although this condition is true, another condition nullifies it
-      # that is, that another subset of lines WITHIN this one also includes this statement
-      p bracket_pair
+    this_opening = bracket_pair[:open]
+    closest_next_opening_bracket_index = brackets.map { |b| b[:open] if b[:open] > this_opening }.compact.first
+    closest_next_opening_statement_index = statements.map { |b| b[:open] if b[:open] > this_opening }.compact.first
+    next if closest_next_opening_bracket_index && (closest_next_opening_bracket_index < closest_next_opening_statement_index)
+
+    if closest_next_opening_statement_index
+      current_offset = tokenized_lines[closest_next_opening_statement_index].split('<').first
+      tokenized_lines.insert(closest_next_opening_statement_index, "#{current_offset}<statements>")
+
+      brackets.each do |b|
+        b[:open] += 1 if b[:open] > closest_next_opening_statement_index
+        b[:close] += 1 if b[:close] > closest_next_opening_statement_index
+      end
+
+      statements.each do |s|
+        s[:open] += 1 if s[:open] > closest_next_opening_statement_index
+        s[:close] += 1 if s[:close] > closest_next_opening_statement_index
+      end
+
+      # not sure : only works if the } is right BELOW the closing statement
+      tokenized_lines.insert(bracket_pair[:close], "#{current_offset}</statements>")
+
+      brackets.each do |b|
+        b[:open] += 1 if b[:open] > bracket_pair[:close]
+        b[:close] += 1 if b[:close] > bracket_pair[:close]
+      end
+
+      statements.each do |s|
+        s[:open] += 1 if s[:open] > bracket_pair[:close]
+        s[:close] += 1 if s[:close] > bracket_pair[:close]
+      end
+
+      tokenized_lines.each_with_index do |tl, index|
+        next unless index > closest_next_opening_statement_index && index < bracket_pair[:close]
+        tokenized_lines[index] = "  #{tl}"
+      end
     end
   end
 
