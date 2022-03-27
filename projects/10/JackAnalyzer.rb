@@ -42,16 +42,16 @@ def generate_tokenized_lines(line)
     .reject { |s| s == '' }
     .map(&:strip)
 
-  splitted.each do |word|
-    if word.start_with?('"') # ORDER IS IMPORTANT
+  splitted.each do |word| # ORDER IS IMPORTANT
+    if word.start_with?('"')
       string_started = true
       temp_string << word.split('"').join('')
-    elsif word.end_with?('"') # ORDER IS IMPORTANT
+    elsif word.end_with?('"')
       string_started = false
       temp_string << word.split('"').join('')
       tokenized_lines << "<stringConstant> #{temp_string.join(' ')} </stringConstant>"
       temp_string = []
-    elsif string_started # ORDER IS IMPORTANT
+    elsif string_started
       temp_string << word.split('"').join('')
     elsif is_integer(word)
       tokenized_lines << "<integerConstant> #{word} </integerConstant>"
@@ -61,7 +61,7 @@ def generate_tokenized_lines(line)
       tokenized_lines << "<symbol> #{word} </symbol>"
     elsif KEYWORDS.include?(word)
       tokenized_lines << "<keyword> #{word} </keyword>"
-    else # ORDER IS IMPORTANT
+    else
       tokenized_lines << "<identifier> #{word} </identifier>"
     end
   end
@@ -69,7 +69,7 @@ def generate_tokenized_lines(line)
   return tokenized_lines
 end
 
-def apply_single_line_offsets(tokenized_lines)
+def apply_parameters_lists(tokenized_lines)
   tokenized_lines.each do |single_tokenized_line|
     if single_tokenized_line.any? { |tline| tline.include?('function') }
       open_parameter_index = single_tokenized_line.index { |tline| tline.include?('<symbol> ( </symbol>') }
@@ -91,7 +91,7 @@ def apply_single_line_offsets(tokenized_lines)
   return tokenized_lines
 end
 
-def apply_multi_lines_offsets(tokenized_lines)
+def apply_non_terminal_elements(tokenized_lines)
   tokenized_lines = tokenized_lines.flatten
 
   non_terminal_elements = [
@@ -101,6 +101,13 @@ def apply_multi_lines_offsets(tokenized_lines)
       closer: '<symbol> } </symbol>',
       opening_non_terminal_element: '<class>',
       closing_non_terminal_element: '</class>'
+    },
+    {
+      keyword: '<keyword> field </keyword>',
+      opener: '<keyword> field </keyword>',
+      closer: '<symbol> ; </symbol>',
+      opening_non_terminal_element: '<classVarDec>',
+      closing_non_terminal_element: '</classVarDec>',
     },
     {
       keyword: '<keyword> function </keyword>',
@@ -118,18 +125,34 @@ def apply_multi_lines_offsets(tokenized_lines)
       }
     },
     {
-      keyword: '<keyword> var </keyword>',
-      opener: '<keyword> var </keyword>',
-      closer: '<symbol> ; </symbol>',
-      opening_non_terminal_element: '<varDec>',
-      closing_non_terminal_element: '</varDec>',
+      keyword: '<keyword> constructor </keyword>',
+      opener: '<symbol> { </symbol>',
+      closer: '<symbol> } </symbol>',
+      opening_non_terminal_element: '<subroutineDec>',
+      closing_non_terminal_element: '</subroutineDec>',
+      additional_subroutine_body: {
+        keyword: '<symbol> { </symbol>',
+        opener: '<symbol> { </symbol>',
+        closer: '<symbol> } </symbol>',
+        opening_non_terminal_element: '<subroutineBody>',
+        closing_non_terminal_element: '</subroutineBody>',
+        additional_offset: '  '
+      }
     },
     {
-      keyword: '<keyword> let </keyword>',
-      opener: '<keyword> let </keyword>',
-      closer: '<symbol> ; </symbol>',
-      opening_non_terminal_element: '<letStatement>',
-      closing_non_terminal_element: '</letStatement>',
+      keyword: '<keyword> method </keyword>',
+      opener: '<symbol> { </symbol>',
+      closer: '<symbol> } </symbol>',
+      opening_non_terminal_element: '<subroutineDec>',
+      closing_non_terminal_element: '</subroutineDec>',
+      additional_subroutine_body: {
+        keyword: '<symbol> { </symbol>',
+        opener: '<symbol> { </symbol>',
+        closer: '<symbol> } </symbol>',
+        opening_non_terminal_element: '<subroutineBody>',
+        closing_non_terminal_element: '</subroutineBody>',
+        additional_offset: '  '
+      }
     },
     {
       keyword: '<keyword> if </keyword>',
@@ -144,6 +167,20 @@ def apply_multi_lines_offsets(tokenized_lines)
       closer: '<symbol> } </symbol>',
       opening_non_terminal_element: '<whileStatement>',
       closing_non_terminal_element: '</whileStatement>',
+    },
+    {
+      keyword: '<keyword> var </keyword>',
+      opener: '<keyword> var </keyword>',
+      closer: '<symbol> ; </symbol>',
+      opening_non_terminal_element: '<varDec>',
+      closing_non_terminal_element: '</varDec>',
+    },
+    {
+      keyword: '<keyword> let </keyword>',
+      opener: '<keyword> let </keyword>',
+      closer: '<symbol> ; </symbol>',
+      opening_non_terminal_element: '<letStatement>',
+      closing_non_terminal_element: '</letStatement>',
     },
     {
       keyword: '<keyword> do </keyword>',
@@ -162,56 +199,111 @@ def apply_multi_lines_offsets(tokenized_lines)
   ]
 
   non_terminal_elements.each do |non_terminal_element|
-    begin_indexes = []
-    tokenized_lines.each_with_index { |line, index| begin_indexes << index if line.include?(non_terminal_element[:keyword]) }
+    elements_indexes = []
+    old_indexes = []
+    current_element_index = {}
+    open_close_count = 0
 
-    begin_indexes.each_with_index do |begin_index, position_in_indexes_array|
-      tokenized_lines = apply_non_terminal_element(tokenized_lines, begin_index, non_terminal_element)
-      # recalculating index positions since we are adding more lines for the non_terminal_elements
-      begin_indexes[(position_in_indexes_array + 1)..-1].each{|begin_index| begin_indexes[begin_indexes.index{|bi|bi==begin_index}] += 2}
+    p "--------------------------------------------------- #{non_terminal_element[:keyword]} -------------------------------------"
 
-      if non_terminal_element[:additional_subroutine_body]
-        additional_begin_index = tokenized_lines.index.with_index do |line, index|
-          index > begin_index && line.include?(non_terminal_element[:additional_subroutine_body][:keyword])
+    tokenized_lines.each_with_index do |line, index|
+      if line.include?(non_terminal_element[:keyword])
+        open_close_count = 0
+        current_element_index[:open] = index
+      end
+
+      if line.include?(non_terminal_element[:opener]) && current_element_index[:open]
+        open_close_count += 1
+      elsif line.include?(non_terminal_element[:closer]) && current_element_index[:open]
+        open_close_count -= 1
+        if open_close_count == 0
+          current_element_index[:close] = index
+          elements_indexes << current_element_index
+          current_element_index = {}
         end
-        tokenized_lines = apply_non_terminal_element(tokenized_lines, additional_begin_index, non_terminal_element[:additional_subroutine_body])
       end
     end
+
+    elements_indexes.each do |indexes|
+      p "************* indexes #{indexes[:open]} #{indexes[:close]} #{tokenized_lines[indexes[:open]]} #{tokenized_lines[indexes[:close]]} *************"
+
+      tokenized_lines = apply_non_terminal_element(tokenized_lines, indexes, non_terminal_element)
+
+      # recalculating index positions since we are adding more lines for the non_terminal_elements
+      elements_indexes.each_with_index do |i, index_of_i|
+        elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:open]
+        elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:close]
+        elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:open]
+        elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:close]
+      end
+    end
+    # old_indexes.each_with_index do |begin_index, position_in_indexes_array|
+    #   tokenized_lines = apply_non_terminal_element(tokenized_lines, begin_index, non_terminal_element)
+    #
+    #   old_indexes[(position_in_indexes_array + 1)..-1].each do |begin_index|
+    #     old_indexes[old_indexes.index{|bi|bi==begin_index}] += 2
+    #   end
+    #
+    #   if non_terminal_element[:additional_subroutine_body]
+    #     additional_begin_index = tokenized_lines.index.with_index do |line, index|
+    #       index > begin_index && line.include?(non_terminal_element[:additional_subroutine_body][:keyword])
+    #     end
+    #     tokenized_lines = apply_non_terminal_element(tokenized_lines, additional_begin_index, non_terminal_element[:additional_subroutine_body])
+    #   end
+    # end
   end
 
   return tokenized_lines
 end
 
-def apply_non_terminal_element(tokenized_lines, begin_index, non_terminal_element)
-  end_index = nil
-  open_close_count = 0
+def apply_non_terminal_element(tokenized_lines, indexes, non_terminal_element)
+  p "Applying at indexes #{indexes} lines #{tokenized_lines[indexes[:open]]} #{tokenized_lines[indexes[:close]]}"
 
-  tokenized_lines[begin_index..-1].each_with_index do |line, index|
-    if line.include?(non_terminal_element[:opener])
-      open_close_count += 1
-    elsif line.include?(non_terminal_element[:closer])
-      open_close_count -= 1
-      if open_close_count == 0
-        end_index = index + begin_index
-        break
-      end
-    end
-  end
-
-  tokenized_lines[begin_index..end_index].each_with_index do |line, index|
-    correct_index = index + begin_index
-    raise "incorrect line offset application for line #{line}" if line != tokenized_lines[correct_index]
-    tokenized_lines[correct_index] = "  #{line}"
-  end
-
-  line_after = tokenized_lines[end_index + 1]
+  line_after = tokenized_lines[indexes[:close] + 1]
   offset = line_after ? line_after.split('<').first : ''
-  offset = "#{offset}#{non_terminal_element[:additional_offset]}"
 
-  tokenized_lines.insert(end_index + 1, "#{offset}#{non_terminal_element[:closing_non_terminal_element]}")
-  tokenized_lines.insert(begin_index, "#{offset}#{non_terminal_element[:opening_non_terminal_element]}")
+  tokenized_lines.insert(indexes[:close] + 1, "#{offset}#{non_terminal_element[:closing_non_terminal_element]}")
+  tokenized_lines.insert(indexes[:open], "#{offset}#{non_terminal_element[:opening_non_terminal_element]}")
+
+  tokenized_lines.each_with_index do |tl, index|
+    # we inserted at :close + 1 BUT we also inserted at :open so it's +2, not +1
+    next unless index > indexes[:open] && index < indexes[:close] + 2
+    tokenized_lines[index] = "  #{tl}"
+  end
 
   return tokenized_lines
+
+  # end_index = nil
+  # open_close_count = 0
+
+  # tokenized_lines[begin_index..-1].each_with_index do |line, index|
+  #   if line.include?(non_terminal_element[:opener])
+  #     open_close_count += 1
+  #   elsif line.include?(non_terminal_element[:closer])
+  #     open_close_count -= 1
+  #     if open_close_count == 0
+  #       end_index = index + begin_index
+  #       break
+  #     end
+  #   end
+  # end
+
+  # tokenized_lines[begin_index..end_index].each_with_index do |line, index|
+  #   correct_index = index + begin_index
+  #   raise "incorrect line offset application for line #{line}" if line != tokenized_lines[correct_index]
+  #   tokenized_lines[correct_index] = "  #{line}"
+  # end
+  #
+  # line_after = tokenized_lines[end_index + 1]
+  # offset = line_after ? line_after.split('<').first : ''
+  # offset = "#{offset}#{non_terminal_element[:additional_offset]}"
+
+  # tokenized_lines.insert(end_index + 1, "#{offset}#{non_terminal_element[:closing_non_terminal_element]}")
+  # tokenized_lines.insert(begin_index, "#{offset}#{non_terminal_element[:opening_non_terminal_element]}")
+
+  # add closer at end_index
+  # add opener at begin_index
+  # add offset at all lines between begin_index + 1 and end_index - 1
 end
 
 def apply_statements(tokenized_lines)
@@ -225,7 +317,7 @@ def apply_statements(tokenized_lines)
     if tl.include?('<symbol> { </symbol>')
       brackets.insert(brackets_index, { open: line_index })
       brackets_index += 1
-    elsif tl.include?('<symbol> } </symbol>') && tl.include?('</')  # any closing statement
+    elsif tl.include?('<symbol> } </symbol>')
       brackets[brackets_index - 1][:close] = line_index
       brackets_index -= 1
     end
@@ -238,7 +330,6 @@ def apply_statements(tokenized_lines)
       statements_index -= 1
     end
   end
-
 
   brackets.sort_by!{|b|b[:open]}
   statements.sort_by!{|b|b[:open]}
@@ -294,9 +385,9 @@ def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
   end
 
   if !testing_tokenizer_only
-    tokenized_lines = apply_single_line_offsets(tokenized_lines)
-    tokenized_lines = apply_multi_lines_offsets(tokenized_lines)
-    tokenized_lines = apply_statements(tokenized_lines)
+    tokenized_lines = apply_parameters_lists(tokenized_lines)
+    tokenized_lines = apply_non_terminal_elements(tokenized_lines)
+    # tokenized_lines = apply_statements(tokenized_lines)
   end
 
   tokenized_lines.flatten.each do |xml_command|
@@ -332,6 +423,6 @@ jack_files.each do |jack_file|
 
   xml_file_lines.each_with_index do |line, index|
     next if line == test_file_lines[index]
-    p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
+    # p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
   end
 end
