@@ -71,7 +71,7 @@ end
 
 def apply_parameters_lists(tokenized_lines)
   tokenized_lines.each do |single_tokenized_line|
-    if single_tokenized_line.any? { |tline| tline.include?('function') }
+    if single_tokenized_line.any? { |tline| ['function', 'method', 'constructor'].any? { |m| tline.include?(m) } }
       open_parameter_index = single_tokenized_line.index { |tline| tline.include?('<symbol> ( </symbol>') }
       single_tokenized_line.insert(open_parameter_index + 1, "<parameterList>")
 
@@ -199,12 +199,10 @@ def apply_non_terminal_elements(tokenized_lines)
   ]
 
   non_terminal_elements.each do |non_terminal_element|
+    # p "--------------------------------------------------- #{non_terminal_element[:keyword]} -------------------------------------"
     elements_indexes = []
-    old_indexes = []
     current_element_index = {}
     open_close_count = 0
-
-    p "--------------------------------------------------- #{non_terminal_element[:keyword]} -------------------------------------"
 
     tokenized_lines.each_with_index do |line, index|
       if line.include?(non_terminal_element[:keyword])
@@ -225,7 +223,7 @@ def apply_non_terminal_elements(tokenized_lines)
     end
 
     elements_indexes.each do |indexes|
-      p "************* indexes #{indexes[:open]} #{indexes[:close]} #{tokenized_lines[indexes[:open]]} #{tokenized_lines[indexes[:close]]} *************"
+      # p "************* indexes #{indexes[:open]} #{indexes[:close]} #{tokenized_lines[indexes[:open]]} #{tokenized_lines[indexes[:close]]} *************"
 
       tokenized_lines = apply_non_terminal_element(tokenized_lines, indexes, non_terminal_element)
 
@@ -236,34 +234,43 @@ def apply_non_terminal_elements(tokenized_lines)
         elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:open]
         elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:close]
       end
+
+      if body = non_terminal_element[:additional_subroutine_body]
+        additional_indexes = { close: indexes[:close] }
+
+        tokenized_lines.each_with_index do |line, index|
+          next unless index > indexes[:open]
+
+          if line.include?(body[:opener])
+            open_close_count += 1
+            additional_indexes[:open] = index
+            break
+          end
+        end
+
+        tokenized_lines = apply_non_terminal_element(tokenized_lines, additional_indexes, non_terminal_element[:additional_subroutine_body])
+
+        elements_indexes.each_with_index do |i, index_of_i|
+          elements_indexes[index_of_i][:open] += 1 if i[:open] > additional_indexes[:open]
+          elements_indexes[index_of_i][:open] += 1 if i[:open] > additional_indexes[:close]
+          elements_indexes[index_of_i][:close] += 1 if i[:close] > additional_indexes[:open]
+          elements_indexes[index_of_i][:close] += 1 if i[:close] > additional_indexes[:close]
+        end
+      end
     end
-    # old_indexes.each_with_index do |begin_index, position_in_indexes_array|
-    #   tokenized_lines = apply_non_terminal_element(tokenized_lines, begin_index, non_terminal_element)
-    #
-    #   old_indexes[(position_in_indexes_array + 1)..-1].each do |begin_index|
-    #     old_indexes[old_indexes.index{|bi|bi==begin_index}] += 2
-    #   end
-    #
-    #   if non_terminal_element[:additional_subroutine_body]
-    #     additional_begin_index = tokenized_lines.index.with_index do |line, index|
-    #       index > begin_index && line.include?(non_terminal_element[:additional_subroutine_body][:keyword])
-    #     end
-    #     tokenized_lines = apply_non_terminal_element(tokenized_lines, additional_begin_index, non_terminal_element[:additional_subroutine_body])
-    #   end
-    # end
   end
 
   return tokenized_lines
 end
 
 def apply_non_terminal_element(tokenized_lines, indexes, non_terminal_element)
-  p "Applying at indexes #{indexes} lines #{tokenized_lines[indexes[:open]]} #{tokenized_lines[indexes[:close]]}"
+  # p "Applying at indexes #{indexes} lines #{tokenized_lines[indexes[:open]]} #{tokenized_lines[indexes[:close]]}"
 
   line_after = tokenized_lines[indexes[:close] + 1]
   offset = line_after ? line_after.split('<').first : ''
 
-  tokenized_lines.insert(indexes[:close] + 1, "#{offset}#{non_terminal_element[:closing_non_terminal_element]}")
-  tokenized_lines.insert(indexes[:open], "#{offset}#{non_terminal_element[:opening_non_terminal_element]}")
+  tokenized_lines.insert(indexes[:close] + 1, "#{offset}#{non_terminal_element[:additional_offset]}#{non_terminal_element[:closing_non_terminal_element]}")
+  tokenized_lines.insert(indexes[:open], "#{offset}#{non_terminal_element[:additional_offset]}#{non_terminal_element[:opening_non_terminal_element]}")
 
   tokenized_lines.each_with_index do |tl, index|
     # we inserted at :close + 1 BUT we also inserted at :open so it's +2, not +1
@@ -272,38 +279,6 @@ def apply_non_terminal_element(tokenized_lines, indexes, non_terminal_element)
   end
 
   return tokenized_lines
-
-  # end_index = nil
-  # open_close_count = 0
-
-  # tokenized_lines[begin_index..-1].each_with_index do |line, index|
-  #   if line.include?(non_terminal_element[:opener])
-  #     open_close_count += 1
-  #   elsif line.include?(non_terminal_element[:closer])
-  #     open_close_count -= 1
-  #     if open_close_count == 0
-  #       end_index = index + begin_index
-  #       break
-  #     end
-  #   end
-  # end
-
-  # tokenized_lines[begin_index..end_index].each_with_index do |line, index|
-  #   correct_index = index + begin_index
-  #   raise "incorrect line offset application for line #{line}" if line != tokenized_lines[correct_index]
-  #   tokenized_lines[correct_index] = "  #{line}"
-  # end
-  #
-  # line_after = tokenized_lines[end_index + 1]
-  # offset = line_after ? line_after.split('<').first : ''
-  # offset = "#{offset}#{non_terminal_element[:additional_offset]}"
-
-  # tokenized_lines.insert(end_index + 1, "#{offset}#{non_terminal_element[:closing_non_terminal_element]}")
-  # tokenized_lines.insert(begin_index, "#{offset}#{non_terminal_element[:opening_non_terminal_element]}")
-
-  # add closer at end_index
-  # add opener at begin_index
-  # add offset at all lines between begin_index + 1 and end_index - 1
 end
 
 def apply_statements(tokenized_lines)
