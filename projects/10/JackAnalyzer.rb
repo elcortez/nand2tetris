@@ -110,6 +110,13 @@ def apply_non_terminal_elements(tokenized_lines)
       closing_non_terminal_element: '</classVarDec>',
     },
     {
+      keyword: '<keyword> static </keyword>',
+      opener: '<keyword> static </keyword>',
+      closer: '<symbol> ; </symbol>',
+      opening_non_terminal_element: '<classVarDec>',
+      closing_non_terminal_element: '</classVarDec>',
+    },
+    {
       keyword: '<keyword> function </keyword>',
       opener: '<symbol> { </symbol>',
       closer: '<symbol> } </symbol>',
@@ -362,7 +369,7 @@ def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
   if !testing_tokenizer_only
     tokenized_lines = apply_parameters_lists(tokenized_lines)
     tokenized_lines = apply_non_terminal_elements(tokenized_lines)
-    # tokenized_lines = apply_statements(tokenized_lines)
+    tokenized_lines = apply_statements(tokenized_lines)
   end
 
   tokenized_lines.flatten.each do |xml_command|
@@ -398,6 +405,6 @@ jack_files.each do |jack_file|
 
   xml_file_lines.each_with_index do |line, index|
     next if line == test_file_lines[index]
-    # p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
+    p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
   end
 end
