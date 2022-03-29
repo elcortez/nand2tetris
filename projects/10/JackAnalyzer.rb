@@ -202,11 +202,10 @@ def apply_non_terminal_elements(tokenized_lines)
       closer: '<symbol> ; </symbol>',
       opening_non_terminal_element: '<returnStatement>',
       closing_non_terminal_element: '</returnStatement>',
-    },
+    }
   ]
 
   non_terminal_elements.each do |non_terminal_element|
-    # p "--------------------------------------------------- #{non_terminal_element[:keyword]} -------------------------------------"
     elements_indexes = []
     current_element_index = {}
     open_close_count = 0
@@ -230,8 +229,6 @@ def apply_non_terminal_elements(tokenized_lines)
     end
 
     elements_indexes.each do |indexes|
-      # p "************* indexes #{indexes[:open]} #{indexes[:close]} #{tokenized_lines[indexes[:open]]} #{tokenized_lines[indexes[:close]]} *************"
-
       tokenized_lines = apply_non_terminal_element(tokenized_lines, indexes, non_terminal_element)
 
       # recalculating index positions since we are adding more lines for the non_terminal_elements
@@ -271,7 +268,6 @@ def apply_non_terminal_elements(tokenized_lines)
 end
 
 def apply_non_terminal_element(tokenized_lines, indexes, non_terminal_element)
-  # p "Applying at indexes #{indexes} lines #{tokenized_lines[indexes[:open]]} #{tokenized_lines[indexes[:close]]}"
 
   line_after = tokenized_lines[indexes[:close] + 1]
   offset = line_after ? line_after.split('<').first : ''
@@ -359,6 +355,88 @@ def apply_statements(tokenized_lines)
   return tokenized_lines
 end
 
+def apply_expressions(tokenized_lines)
+  expressions = [
+    {
+      keyword: '<keyword> let </keyword>',
+      opener: '<symbol> = </symbol>',
+      closer: '<symbol> ; </symbol>',
+      opening_element: '<expression>',
+      closing_element: '</expression>',
+    },
+    {
+      keyword: '<keyword> if </keyword>',
+      opener: '<symbol> ( </symbol>',
+      closer: '<symbol> ) </symbol>',
+      opening_element: '<expression>',
+      closing_element: '</expression>',
+    },
+    {
+      keyword: '<keyword> while </keyword>',
+      opener: '<symbol> ( </symbol>',
+      closer: '<symbol> ) </symbol>',
+      opening_element: '<expression>',
+      closing_element: '</expression>',
+    },
+    {
+      keyword: '<symbol> [ </symbol>',
+      opener: '<symbol> [ </symbol>',
+      closer: '<symbol> ] </symbol>',
+      opening_element: '<expression>',
+      closing_element: '</expression>',
+    }
+  ]
+
+  expressions.each do |expression|
+    elements_indexes = []
+    current_element_index = {}
+    open_close_count = 0
+    start_expression = false
+
+    tokenized_lines.each_with_index do |line, index|
+      if line.include?(expression[:keyword])
+        open_close_count = 0
+        start_expression = true
+      end
+
+      if line.include?(expression[:opener]) && start_expression
+        open_close_count += 1
+        current_element_index[:open] = index if open_close_count == 1
+      elsif line.include?(expression[:closer]) && start_expression
+        open_close_count -= 1
+        if open_close_count == 0
+          current_element_index[:close] = index
+          elements_indexes << current_element_index
+          current_element_index = {}
+        end
+      end
+    end
+
+    elements_indexes.each do |indexes|
+      line_after = tokenized_lines[indexes[:close]]
+      offset = line_after.split('<').first || ''
+      tokenized_lines.insert(indexes[:close], "#{offset}</expression>")
+      tokenized_lines.insert(indexes[:open] + 1, "#{offset}<expression>")
+
+      # recalculating index positions since we are adding more lines for the non_terminal_elements
+      elements_indexes.each_with_index do |i, index_of_i|
+        elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:open]
+        elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:close]
+        elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:open]
+        elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:close]
+      end
+
+      tokenized_lines.each_with_index do |tl, index|
+        next unless index > indexes[:open] + 1 && index < indexes[:close]
+        tokenized_lines[index] = "  #{tokenized_lines[index]}"
+      end
+    end
+  end
+
+
+  return tokenized_lines
+end
+
 def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
   tokenized_lines = []
 
@@ -370,6 +448,7 @@ def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
     tokenized_lines = apply_parameters_lists(tokenized_lines)
     tokenized_lines = apply_non_terminal_elements(tokenized_lines)
     tokenized_lines = apply_statements(tokenized_lines)
+    tokenized_lines = apply_expressions(tokenized_lines)
   end
 
   tokenized_lines.flatten.each do |xml_command|
@@ -405,6 +484,6 @@ jack_files.each do |jack_file|
 
   xml_file_lines.each_with_index do |line, index|
     next if line == test_file_lines[index]
-    p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
+    # p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
   end
 end

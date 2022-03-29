@@ -39,21 +39,27 @@
           <keyword> let </keyword>
           <identifier> x </identifier>
           <symbol> = </symbol>
-          <identifier> Ax </identifier>
+          <expression>
+            <identifier> Ax </identifier>
+          </expression>
           <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
           <identifier> y </identifier>
           <symbol> = </symbol>
-          <identifier> Ay </identifier>
+          <expression>
+            <identifier> Ay </identifier>
+          </expression>
           <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
           <identifier> size </identifier>
           <symbol> = </symbol>
-          <identifier> Asize </identifier>
+          <expression>
+            <identifier> Asize </identifier>
+          </expression>
           <symbol> ; </symbol>
         </letStatement>
         <doStatement>
@@ -205,7 +211,9 @@
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
-          <identifier> x </identifier>
+          <expression>
+            <identifier> x </identifier>
+          </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
@@ -213,6 +221,8 @@
               <keyword> do </keyword>
               <identifier> erase </identifier>
               <symbol> ( </symbol>
+              <expression>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -220,13 +230,17 @@
               <keyword> let </keyword>
               <identifier> size </identifier>
               <symbol> = </symbol>
-              <identifier> size </identifier>
+              <expression>
+                <identifier> size </identifier>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
             <doStatement>
               <keyword> do </keyword>
               <identifier> draw </identifier>
               <symbol> ( </symbol>
+              <expression>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -246,8 +260,10 @@
     <keyword> void </keyword>
     <identifier> decSize </identifier>
     <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
+    <expression>
+      <parameterList>
+      </parameterList>
+    </expression>
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
@@ -255,7 +271,9 @@
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
-          <identifier> size </identifier>
+          <expression>
+            <identifier> size </identifier>
+          </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
@@ -263,6 +281,8 @@
               <keyword> do </keyword>
               <identifier> erase </identifier>
               <symbol> ( </symbol>
+              <expression>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -270,13 +290,17 @@
               <keyword> let </keyword>
               <identifier> size </identifier>
               <symbol> = </symbol>
-              <identifier> size </identifier>
+              <expression>
+                <identifier> size </identifier>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
             <doStatement>
               <keyword> do </keyword>
               <identifier> draw </identifier>
               <symbol> ( </symbol>
+              <expression>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -296,8 +320,10 @@
     <keyword> void </keyword>
     <identifier> moveUp </identifier>
     <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
+    <expression>
+      <parameterList>
+      </parameterList>
+    </expression>
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
@@ -305,7 +331,9 @@
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
-          <identifier> y </identifier>
+          <expression>
+            <identifier> y </identifier>
+          </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
@@ -315,7 +343,9 @@
               <symbol> . </symbol>
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
+              <expression>
+                <identifier> x </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -325,13 +355,15 @@
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
-              <symbol> , </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
+              <expression>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+                <symbol> , </symbol>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -339,7 +371,9 @@
               <keyword> let </keyword>
               <identifier> y </identifier>
               <symbol> = </symbol>
-              <identifier> y </identifier>
+              <expression>
+                <identifier> y </identifier>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
             <doStatement>
@@ -348,7 +382,9 @@
               <symbol> . </symbol>
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
+              <expression>
+                <identifier> x </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -358,13 +394,15 @@
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
-              <symbol> , </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
+              <expression>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+                <symbol> , </symbol>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -384,8 +422,10 @@
     <keyword> void </keyword>
     <identifier> moveDown </identifier>
     <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
+    <expression>
+      <parameterList>
+      </parameterList>
+    </expression>
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
@@ -393,7 +433,9 @@
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
-          <identifier> y </identifier>
+          <expression>
+            <identifier> y </identifier>
+          </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
@@ -403,7 +445,9 @@
               <symbol> . </symbol>
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
+              <expression>
+                <identifier> x </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -413,13 +457,15 @@
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
-              <symbol> , </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
+              <expression>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+                <symbol> , </symbol>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -427,7 +473,9 @@
               <keyword> let </keyword>
               <identifier> y </identifier>
               <symbol> = </symbol>
-              <identifier> y </identifier>
+              <expression>
+                <identifier> y </identifier>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
             <doStatement>
@@ -436,7 +484,9 @@
               <symbol> . </symbol>
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
+              <expression>
+                <identifier> x </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -446,13 +496,15 @@
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
-              <symbol> , </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
+              <expression>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+                <symbol> , </symbol>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -472,8 +524,10 @@
     <keyword> void </keyword>
     <identifier> moveLeft </identifier>
     <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
+    <expression>
+      <parameterList>
+      </parameterList>
+    </expression>
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
@@ -481,7 +535,9 @@
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
-          <identifier> x </identifier>
+          <expression>
+            <identifier> x </identifier>
+          </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
@@ -491,7 +547,9 @@
               <symbol> . </symbol>
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
+              <expression>
+                <identifier> x </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -501,13 +559,15 @@
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
-              <symbol> , </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
+              <expression>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+                <symbol> , </symbol>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -515,7 +575,9 @@
               <keyword> let </keyword>
               <identifier> x </identifier>
               <symbol> = </symbol>
-              <identifier> x </identifier>
+              <expression>
+                <identifier> x </identifier>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
             <doStatement>
@@ -524,7 +586,9 @@
               <symbol> . </symbol>
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
+              <expression>
+                <identifier> x </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -534,13 +598,15 @@
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
-              <symbol> , </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
+              <expression>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+                <symbol> , </symbol>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -560,8 +626,10 @@
     <keyword> void </keyword>
     <identifier> moveRight </identifier>
     <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
+    <expression>
+      <parameterList>
+      </parameterList>
+    </expression>
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
@@ -569,7 +637,9 @@
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
-          <identifier> x </identifier>
+          <expression>
+            <identifier> x </identifier>
+          </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
@@ -579,7 +649,9 @@
               <symbol> . </symbol>
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
+              <expression>
+                <identifier> x </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -589,13 +661,15 @@
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
-              <symbol> , </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
+              <expression>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+                <symbol> , </symbol>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -603,7 +677,9 @@
               <keyword> let </keyword>
               <identifier> x </identifier>
               <symbol> = </symbol>
-              <identifier> x </identifier>
+              <expression>
+                <identifier> x </identifier>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
             <doStatement>
@@ -612,7 +688,9 @@
               <symbol> . </symbol>
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
+              <expression>
+                <identifier> x </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -622,13 +700,15 @@
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
-              <symbol> , </symbol>
-              <identifier> x </identifier>
-              <symbol> , </symbol>
-              <identifier> y </identifier>
+              <expression>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+                <symbol> , </symbol>
+                <identifier> x </identifier>
+                <symbol> , </symbol>
+                <identifier> y </identifier>
+              </expression>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>

@@ -29,7 +29,9 @@
           <keyword> let </keyword>
           <identifier> game </identifier>
           <symbol> = </symbol>
-          <identifier> game </identifier>
+          <expression>
+            <identifier> game </identifier>
+          </expression>
           <symbol> ; </symbol>
         </letStatement>
         <doStatement>
@@ -92,7 +94,9 @@
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
-          <identifier> i </identifier>
+          <expression>
+            <identifier> i </identifier>
+          </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
@@ -100,24 +104,32 @@
               <keyword> let </keyword>
               <identifier> s </identifier>
               <symbol> = </symbol>
-              <identifier> i </identifier>
+              <expression>
+                <identifier> i </identifier>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
             <letStatement>
               <keyword> let </keyword>
               <identifier> s </identifier>
               <symbol> = </symbol>
-              <identifier> j </identifier>
+              <expression>
+                <identifier> j </identifier>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
             <letStatement>
               <keyword> let </keyword>
               <identifier> a </identifier>
               <symbol> [ </symbol>
-              <identifier> i </identifier>
+              <expression>
+                <identifier> i </identifier>
+              </expression>
               <symbol> ] </symbol>
               <symbol> = </symbol>
-              <identifier> j </identifier>
+              <expression>
+                <identifier> j </identifier>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
           </statements>
@@ -130,23 +142,29 @@
             <keyword> let </keyword>
             <identifier> i </identifier>
             <symbol> = </symbol>
-            <identifier> i </identifier>
+            <expression>
+              <identifier> i </identifier>
+            </expression>
             <symbol> ; </symbol>
           </letStatement>
           <letStatement>
             <keyword> let </keyword>
             <identifier> j </identifier>
             <symbol> = </symbol>
-            <identifier> j </identifier>
+            <expression>
+              <identifier> j </identifier>
+            </expression>
             <symbol> ; </symbol>
           </letStatement>
           <letStatement>
             <keyword> let </keyword>
             <identifier> i </identifier>
             <symbol> = </symbol>
-            <identifier> i </identifier>
-            <symbol> | </symbol>
-            <identifier> j </identifier>
+            <expression>
+              <identifier> i </identifier>
+              <symbol> | </symbol>
+              <identifier> j </identifier>
+            </expression>
             <symbol> ; </symbol>
           </letStatement>
         </statements>

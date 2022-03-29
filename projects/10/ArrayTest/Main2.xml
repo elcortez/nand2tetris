@@ -37,39 +37,47 @@
           <keyword> let </keyword>
           <identifier> length </identifier>
           <symbol> = </symbol>
-          <identifier> Keyboard </identifier>
-          <symbol> . </symbol>
-          <identifier> readInt </identifier>
-          <symbol> ( </symbol>
-          <stringConstant> HOW MANY NUMBERS?  </stringConstant>
-          <symbol> ) </symbol>
+          <expression>
+            <identifier> Keyboard </identifier>
+            <symbol> . </symbol>
+            <identifier> readInt </identifier>
+            <symbol> ( </symbol>
+            <stringConstant> HOW MANY NUMBERS?  </stringConstant>
+            <symbol> ) </symbol>
+          </expression>
           <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
           <identifier> a </identifier>
           <symbol> = </symbol>
-          <identifier> Array </identifier>
-          <symbol> . </symbol>
-          <identifier> new </identifier>
-          <symbol> ( </symbol>
-          <identifier> length </identifier>
-          <symbol> ) </symbol>
+          <expression>
+            <identifier> Array </identifier>
+            <symbol> . </symbol>
+            <identifier> new </identifier>
+            <symbol> ( </symbol>
+            <identifier> length </identifier>
+            <symbol> ) </symbol>
+          </expression>
           <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
           <identifier> i </identifier>
           <symbol> = </symbol>
-          <integerConstant> 0 </integerConstant>
+          <expression>
+            <integerConstant> 0 </integerConstant>
+          </expression>
           <symbol> ; </symbol>
         </letStatement>
         <whileStatement>
           <keyword> while </keyword>
           <symbol> ( </symbol>
-          <identifier> i </identifier>
-          <symbol> &lt; </symbol>
-          <identifier> length </identifier>
+          <expression>
+            <identifier> i </identifier>
+            <symbol> &lt; </symbol>
+            <identifier> length </identifier>
+          </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
@@ -77,24 +85,32 @@
               <keyword> let </keyword>
               <identifier> a </identifier>
               <symbol> [ </symbol>
-              <identifier> i </identifier>
+              <expression>
+                <identifier> i </identifier>
+              </expression>
               <symbol> ] </symbol>
               <symbol> = </symbol>
-              <identifier> Keyboard </identifier>
-              <symbol> . </symbol>
-              <identifier> readInt </identifier>
-              <symbol> ( </symbol>
-              <stringConstant> ENTER THE NEXT NUMBER:  </stringConstant>
-              <symbol> ) </symbol>
+              <expression>
+                <identifier> Keyboard </identifier>
+                <symbol> . </symbol>
+                <identifier> readInt </identifier>
+                <symbol> ( </symbol>
+                <expression>
+                  <stringConstant> ENTER THE NEXT NUMBER:  </stringConstant>
+                </expression>
+                <symbol> ) </symbol>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
             <letStatement>
               <keyword> let </keyword>
               <identifier> i </identifier>
               <symbol> = </symbol>
-              <identifier> i </identifier>
-              <symbol> + </symbol>
-              <integerConstant> 1 </integerConstant>
+              <expression>
+                <identifier> i </identifier>
+                <symbol> + </symbol>
+                <integerConstant> 1 </integerConstant>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
           </statements>
@@ -104,22 +120,28 @@
           <keyword> let </keyword>
           <identifier> i </identifier>
           <symbol> = </symbol>
-          <integerConstant> 0 </integerConstant>
+          <expression>
+            <integerConstant> 0 </integerConstant>
+          </expression>
           <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
           <identifier> sum </identifier>
           <symbol> = </symbol>
-          <integerConstant> 0 </integerConstant>
+          <expression>
+            <integerConstant> 0 </integerConstant>
+          </expression>
           <symbol> ; </symbol>
         </letStatement>
         <whileStatement>
           <keyword> while </keyword>
           <symbol> ( </symbol>
-          <identifier> i </identifier>
-          <symbol> &lt; </symbol>
-          <identifier> length </identifier>
+          <expression>
+            <identifier> i </identifier>
+            <symbol> &lt; </symbol>
+            <identifier> length </identifier>
+          </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
@@ -127,21 +149,27 @@
               <keyword> let </keyword>
               <identifier> sum </identifier>
               <symbol> = </symbol>
-              <identifier> sum </identifier>
-              <symbol> + </symbol>
-              <identifier> a </identifier>
-              <symbol> [ </symbol>
-              <identifier> i </identifier>
-              <symbol> ] </symbol>
+              <expression>
+                <identifier> sum </identifier>
+                <symbol> + </symbol>
+                <identifier> a </identifier>
+                <symbol> [ </symbol>
+                <expression>
+                  <identifier> i </identifier>
+                </expression>
+                <symbol> ] </symbol>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
             <letStatement>
               <keyword> let </keyword>
               <identifier> i </identifier>
               <symbol> = </symbol>
-              <identifier> i </identifier>
-              <symbol> + </symbol>
-              <integerConstant> 1 </integerConstant>
+              <expression>
+                <identifier> i </identifier>
+                <symbol> + </symbol>
+                <integerConstant> 1 </integerConstant>
+              </expression>
               <symbol> ; </symbol>
             </letStatement>
           </statements>
@@ -153,7 +181,9 @@
           <symbol> . </symbol>
           <identifier> printString </identifier>
           <symbol> ( </symbol>
-          <stringConstant> THE AVERAGE IS:  </stringConstant>
+          <expression>
+            <stringConstant> THE AVERAGE IS:  </stringConstant>
+          </expression>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
@@ -163,9 +193,11 @@
           <symbol> . </symbol>
           <identifier> printInt </identifier>
           <symbol> ( </symbol>
-          <identifier> sum </identifier>
-          <symbol> / </symbol>
-          <identifier> length </identifier>
+          <expression>
+            <identifier> sum </identifier>
+            <symbol> / </symbol>
+            <identifier> length </identifier>
+          </expression>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
@@ -175,6 +207,8 @@
           <symbol> . </symbol>
           <identifier> println </identifier>
           <symbol> ( </symbol>
+          <expression>
+          </expression>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
