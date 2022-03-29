@@ -165,6 +165,7 @@ def apply_non_terminal_elements(tokenized_lines)
       keyword: '<keyword> if </keyword>',
       opener: '<keyword> if </keyword>',
       closer: '<symbol> } </symbol>',
+      next_line_cancelling_one_closer: '<keyword> else </keyword>',
       opening_non_terminal_element: '<ifStatement>',
       closing_non_terminal_element: '</ifStatement>',
     },
@@ -218,7 +219,12 @@ def apply_non_terminal_elements(tokenized_lines)
 
       if line.include?(non_terminal_element[:opener]) && current_element_index[:open]
         open_close_count += 1
-      elsif line.include?(non_terminal_element[:closer]) && current_element_index[:open]
+      elsif line.include?(non_terminal_element[:closer]) &&
+        (
+          (!non_terminal_element[:next_line_cancelling_one_closer]) ||
+          (!tokenized_lines[index + 1].include?(non_terminal_element[:next_line_cancelling_one_closer]))
+        ) && current_element_index[:open]
+
         open_close_count -= 1
         if open_close_count == 0
           current_element_index[:close] = index
@@ -515,6 +521,6 @@ jack_files.each do |jack_file|
 
   xml_file_lines.each_with_index do |line, index|
     next if line == test_file_lines[index]
-    p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
+    break p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
   end
 end
