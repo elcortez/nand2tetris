@@ -30,11 +30,13 @@
           <identifier> game </identifier>
           <symbol> = </symbol>
           <expression>
-          <identifier> SquareGame </identifier>
-          <symbol> . </symbol>
-          <identifier> new </identifier>
-          <symbol> ( </symbol>
-          <symbol> ) </symbol>
+            <identifier> SquareGame </identifier>
+            <symbol> . </symbol>
+            <identifier> new </identifier>
+            <symbol> ( </symbol>
+            <expressionList>
+            </expressionList>
+            <symbol> ) </symbol>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
@@ -44,6 +46,8 @@
           <symbol> . </symbol>
           <identifier> run </identifier>
           <symbol> ( </symbol>
+          <expressionList>
+          </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
@@ -53,6 +57,8 @@
           <symbol> . </symbol>
           <identifier> dispose </identifier>
           <symbol> ( </symbol>
+          <expressionList>
+          </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
@@ -98,7 +104,9 @@
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
-          <keyword> false </keyword>
+          <expression>
+            <keyword> false </keyword>
+          </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
@@ -107,7 +115,7 @@
               <identifier> s </identifier>
               <symbol> = </symbol>
               <expression>
-              <stringConstant> string constant </stringConstant>
+                <stringConstant> string constant </stringConstant>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -116,7 +124,7 @@
               <identifier> s </identifier>
               <symbol> = </symbol>
               <expression>
-              <keyword> null </keyword>
+                <keyword> null </keyword>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -124,14 +132,18 @@
               <keyword> let </keyword>
               <identifier> a </identifier>
               <symbol> [ </symbol>
-              <integerConstant> 1 </integerConstant>
+              <expression>
+                <integerConstant> 1 </integerConstant>
+              </expression>
               <symbol> ] </symbol>
               <symbol> = </symbol>
               <expression>
-              <identifier> a </identifier>
-              <symbol> [ </symbol>
-              <integerConstant> 2 </integerConstant>
-              <symbol> ] </symbol>
+                <identifier> a </identifier>
+                <symbol> [ </symbol>
+                <expression>
+                  <integerConstant> 2 </integerConstant>
+                </expression>
+                <symbol> ] </symbol>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -146,12 +158,12 @@
             <identifier> i </identifier>
             <symbol> = </symbol>
             <expression>
-            <identifier> i </identifier>
-            <symbol> * </symbol>
-            <symbol> ( </symbol>
-            <symbol> - </symbol>
-            <identifier> j </identifier>
-            <symbol> ) </symbol>
+              <identifier> i </identifier>
+              <symbol> * </symbol>
+              <symbol> ( </symbol>
+              <symbol> - </symbol>
+              <identifier> j </identifier>
+              <symbol> ) </symbol>
             </expression>
             <symbol> ; </symbol>
           </letStatement>
@@ -160,12 +172,12 @@
             <identifier> j </identifier>
             <symbol> = </symbol>
             <expression>
-            <identifier> j </identifier>
-            <symbol> / </symbol>
-            <symbol> ( </symbol>
-            <symbol> - </symbol>
-            <integerConstant> 2 </integerConstant>
-            <symbol> ) </symbol>
+              <identifier> j </identifier>
+              <symbol> / </symbol>
+              <symbol> ( </symbol>
+              <symbol> - </symbol>
+              <integerConstant> 2 </integerConstant>
+              <symbol> ) </symbol>
             </expression>
             <symbol> ; </symbol>
           </letStatement>
@@ -174,9 +186,9 @@
             <identifier> i </identifier>
             <symbol> = </symbol>
             <expression>
-            <identifier> i </identifier>
-            <symbol> | </symbol>
-            <identifier> j </identifier>
+              <identifier> i </identifier>
+              <symbol> | </symbol>
+              <identifier> j </identifier>
             </expression>
             <symbol> ; </symbol>
           </letStatement>

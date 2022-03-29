@@ -30,7 +30,9 @@
           <identifier> square </identifier>
           <symbol> = </symbol>
           <expression>
-            <identifier> square </identifier>
+            <term>
+              <identifier> square </identifier>
+            </term>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
@@ -39,7 +41,9 @@
           <identifier> direction </identifier>
           <symbol> = </symbol>
           <expression>
-            <identifier> direction </identifier>
+            <term>
+              <identifier> direction </identifier>
+            </term>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
@@ -69,6 +73,8 @@
           <symbol> . </symbol>
           <identifier> dispose </identifier>
           <symbol> ( </symbol>
+          <expressionList>
+          </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
@@ -78,7 +84,9 @@
           <symbol> . </symbol>
           <identifier> deAlloc </identifier>
           <symbol> ( </symbol>
-          <identifier> square </identifier>
+          <expressionList>
+            <identifier> square </identifier>
+          </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
@@ -105,7 +113,9 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <identifier> direction </identifier>
+            <term>
+              <identifier> direction </identifier>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -116,8 +126,8 @@
               <symbol> . </symbol>
               <identifier> moveUp </identifier>
               <symbol> ( </symbol>
-              <expression>
-              </expression>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -128,7 +138,9 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <identifier> direction </identifier>
+            <term>
+              <identifier> direction </identifier>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -139,8 +151,8 @@
               <symbol> . </symbol>
               <identifier> moveDown </identifier>
               <symbol> ( </symbol>
-              <expression>
-              </expression>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -151,7 +163,9 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <identifier> direction </identifier>
+            <term>
+              <identifier> direction </identifier>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -162,8 +176,8 @@
               <symbol> . </symbol>
               <identifier> moveLeft </identifier>
               <symbol> ( </symbol>
-              <expression>
-              </expression>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -174,7 +188,9 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <identifier> direction </identifier>
+            <term>
+              <identifier> direction </identifier>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -185,8 +201,8 @@
               <symbol> . </symbol>
               <identifier> moveRight </identifier>
               <symbol> ( </symbol>
-              <expression>
-              </expression>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -199,9 +215,9 @@
           <symbol> . </symbol>
           <identifier> wait </identifier>
           <symbol> ( </symbol>
-          <expression>
+          <expressionList>
             <identifier> direction </identifier>
-          </expression>
+          </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
@@ -218,10 +234,8 @@
     <keyword> void </keyword>
     <identifier> run </identifier>
     <symbol> ( </symbol>
-    <expression>
-      <parameterList>
-      </parameterList>
-    </expression>
+    <parameterList>
+    </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
@@ -243,16 +257,18 @@
           <identifier> exit </identifier>
           <symbol> = </symbol>
           <expression>
-            <identifier> key </identifier>
+            <term>
+              <identifier> key </identifier>
+            </term>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
         <keyword> while </keyword>
         <symbol> ( </symbol>
         <expression>
-          <expression>
+          <term>
             <identifier> exit </identifier>
-          </expression>
+          </term>
         </expression>
         <symbol> ) </symbol>
         <symbol> { </symbol>
@@ -261,9 +277,9 @@
             <keyword> while </keyword>
             <symbol> ( </symbol>
             <expression>
-              <expression>
+              <term>
                 <identifier> key </identifier>
-              </expression>
+              </term>
             </expression>
             <symbol> ) </symbol>
             <symbol> { </symbol>
@@ -273,7 +289,9 @@
                 <identifier> key </identifier>
                 <symbol> = </symbol>
                 <expression>
-                  <identifier> key </identifier>
+                  <term>
+                    <identifier> key </identifier>
+                  </term>
                 </expression>
                 <symbol> ; </symbol>
               </letStatement>
@@ -281,10 +299,6 @@
                 <keyword> do </keyword>
                 <identifier> moveSquare </identifier>
                 <symbol> ( </symbol>
-                <expression>
-                  <expression>
-                  </expression>
-                </expression>
                 <symbol> ) </symbol>
                 <symbol> ; </symbol>
               </doStatement>
@@ -295,9 +309,9 @@
             <keyword> if </keyword>
             <symbol> ( </symbol>
             <expression>
-              <expression>
+              <term>
                 <identifier> key </identifier>
-              </expression>
+              </term>
             </expression>
             <symbol> ) </symbol>
             <symbol> { </symbol>
@@ -307,7 +321,9 @@
                 <identifier> exit </identifier>
                 <symbol> = </symbol>
                 <expression>
-                  <identifier> exit </identifier>
+                  <term>
+                    <identifier> exit </identifier>
+                  </term>
                 </expression>
                 <symbol> ; </symbol>
               </letStatement>
@@ -318,9 +334,9 @@
             <keyword> if </keyword>
             <symbol> ( </symbol>
             <expression>
-              <expression>
+              <term>
                 <identifier> key </identifier>
-              </expression>
+              </term>
             </expression>
             <symbol> ) </symbol>
             <symbol> { </symbol>
@@ -331,10 +347,8 @@
                 <symbol> . </symbol>
                 <identifier> decSize </identifier>
                 <symbol> ( </symbol>
-                <expression>
-                  <expression>
-                  </expression>
-                </expression>
+                <expressionList>
+                </expressionList>
                 <symbol> ) </symbol>
                 <symbol> ; </symbol>
               </doStatement>
@@ -345,9 +359,9 @@
             <keyword> if </keyword>
             <symbol> ( </symbol>
             <expression>
-              <expression>
+              <term>
                 <identifier> key </identifier>
-              </expression>
+              </term>
             </expression>
             <symbol> ) </symbol>
             <symbol> { </symbol>
@@ -358,10 +372,8 @@
                 <symbol> . </symbol>
                 <identifier> incSize </identifier>
                 <symbol> ( </symbol>
-                <expression>
-                  <expression>
-                  </expression>
-                </expression>
+                <expressionList>
+                </expressionList>
                 <symbol> ) </symbol>
                 <symbol> ; </symbol>
               </doStatement>
@@ -372,9 +384,9 @@
             <keyword> if </keyword>
             <symbol> ( </symbol>
             <expression>
-              <expression>
+              <term>
                 <identifier> key </identifier>
-              </expression>
+              </term>
             </expression>
             <symbol> ) </symbol>
             <symbol> { </symbol>
@@ -384,7 +396,9 @@
                 <identifier> direction </identifier>
                 <symbol> = </symbol>
                 <expression>
-                  <identifier> exit </identifier>
+                  <term>
+                    <identifier> exit </identifier>
+                  </term>
                 </expression>
                 <symbol> ; </symbol>
               </letStatement>
@@ -395,9 +409,9 @@
             <keyword> if </keyword>
             <symbol> ( </symbol>
             <expression>
-              <expression>
+              <term>
                 <identifier> key </identifier>
-              </expression>
+              </term>
             </expression>
             <symbol> ) </symbol>
             <symbol> { </symbol>
@@ -407,7 +421,9 @@
                 <identifier> direction </identifier>
                 <symbol> = </symbol>
                 <expression>
-                  <identifier> key </identifier>
+                  <term>
+                    <identifier> key </identifier>
+                  </term>
                 </expression>
                 <symbol> ; </symbol>
               </letStatement>
@@ -418,9 +434,9 @@
             <keyword> if </keyword>
             <symbol> ( </symbol>
             <expression>
-              <expression>
+              <term>
                 <identifier> key </identifier>
-              </expression>
+              </term>
             </expression>
             <symbol> ) </symbol>
             <symbol> { </symbol>
@@ -430,7 +446,9 @@
                 <identifier> direction </identifier>
                 <symbol> = </symbol>
                 <expression>
-                  <identifier> square </identifier>
+                  <term>
+                    <identifier> square </identifier>
+                  </term>
                 </expression>
                 <symbol> ; </symbol>
               </letStatement>
@@ -441,9 +459,9 @@
             <keyword> if </keyword>
             <symbol> ( </symbol>
             <expression>
-              <expression>
+              <term>
                 <identifier> key </identifier>
-              </expression>
+              </term>
             </expression>
             <symbol> ) </symbol>
             <symbol> { </symbol>
@@ -453,7 +471,9 @@
                 <identifier> direction </identifier>
                 <symbol> = </symbol>
                 <expression>
-                  <identifier> direction </identifier>
+                  <term>
+                    <identifier> direction </identifier>
+                  </term>
                 </expression>
                 <symbol> ; </symbol>
               </letStatement>
@@ -464,9 +484,9 @@
             <keyword> while </keyword>
             <symbol> ( </symbol>
             <expression>
-              <expression>
+              <term>
                 <identifier> key </identifier>
-              </expression>
+              </term>
             </expression>
             <symbol> ) </symbol>
             <symbol> { </symbol>
@@ -476,7 +496,9 @@
                 <identifier> key </identifier>
                 <symbol> = </symbol>
                 <expression>
-                  <identifier> key </identifier>
+                  <term>
+                    <identifier> key </identifier>
+                  </term>
                 </expression>
                 <symbol> ; </symbol>
               </letStatement>
@@ -484,10 +506,6 @@
                 <keyword> do </keyword>
                 <identifier> moveSquare </identifier>
                 <symbol> ( </symbol>
-                <expression>
-                  <expression>
-                  </expression>
-                </expression>
                 <symbol> ) </symbol>
                 <symbol> ; </symbol>
               </doStatement>

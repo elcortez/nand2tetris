@@ -358,6 +358,13 @@ end
 def apply_expressions(tokenized_lines)
   expressions = [
     {
+      keyword: '<symbol> . </symbol>',
+      opener: '<symbol> ( </symbol>',
+      closer: '<symbol> ) </symbol>',
+      opening_element: '<expressionList>',
+      closing_element: '</expressionList>',
+    },
+    {
       keyword: '<keyword> let </keyword>',
       opener: '<symbol> = </symbol>',
       closer: '<symbol> ; </symbol>',
@@ -393,6 +400,7 @@ def apply_expressions(tokenized_lines)
     open_close_count = 0
     start_expression = false
 
+    # For each expression, find the indexes at which applying them
     tokenized_lines.each_with_index do |line, index|
       if line.include?(expression[:keyword])
         open_close_count = 0
@@ -408,15 +416,17 @@ def apply_expressions(tokenized_lines)
           current_element_index[:close] = index
           elements_indexes << current_element_index
           current_element_index = {}
+          start_expression = false
         end
       end
     end
 
+    # Applying the expressions
     elements_indexes.each do |indexes|
       line_after = tokenized_lines[indexes[:close]]
       offset = line_after.split('<').first || ''
-      tokenized_lines.insert(indexes[:close], "#{offset}</expression>")
-      tokenized_lines.insert(indexes[:open] + 1, "#{offset}<expression>")
+      tokenized_lines.insert(indexes[:close], "#{offset}#{expression[:closing_element]}")
+      tokenized_lines.insert(indexes[:open] + 1, "#{offset}#{expression[:opening_element]}")
 
       # recalculating index positions since we are adding more lines for the non_terminal_elements
       elements_indexes.each_with_index do |i, index_of_i|
@@ -426,9 +436,30 @@ def apply_expressions(tokenized_lines)
         elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:close]
       end
 
+      # Applying an offset between expressions
       tokenized_lines.each_with_index do |tl, index|
         next unless index > indexes[:open] + 1 && index < indexes[:close]
         tokenized_lines[index] = "  #{tokenized_lines[index]}"
+      end
+
+      # Applying term to each expression
+      if expression[:opening_element] == '<expression>'
+        tokenized_lines.insert(indexes[:close], "  #{offset}</term>")
+        tokenized_lines.insert(indexes[:open] + 2, "  #{offset}<term>")
+
+        # again with the index positions
+        elements_indexes.each_with_index do |i, index_of_i|
+          elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:open]
+          elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:close]
+          elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:open]
+          elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:close]
+        end
+
+        # Applying an offset between terms
+        tokenized_lines.each_with_index do |tl, index|
+          next unless index > indexes[:open] + 2 && index < indexes[:close]
+          tokenized_lines[index] = "  #{tokenized_lines[index]}"
+        end
       end
     end
   end
@@ -484,6 +515,6 @@ jack_files.each do |jack_file|
 
   xml_file_lines.each_with_index do |line, index|
     next if line == test_file_lines[index]
-    # p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
+    p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
   end
 end
