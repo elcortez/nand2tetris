@@ -30,9 +30,7 @@
           <identifier> game </identifier>
           <symbol> = </symbol>
           <expression>
-            <term>
-              <identifier> game </identifier>
-            </term>
+            <identifier> game </identifier>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
@@ -101,9 +99,7 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <term>
-              <identifier> i </identifier>
-            </term>
+            <identifier> i </identifier>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -113,9 +109,7 @@
               <identifier> s </identifier>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> i </identifier>
-                </term>
+                <identifier> i </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -124,9 +118,7 @@
               <identifier> s </identifier>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> j </identifier>
-                </term>
+                <identifier> j </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -135,16 +127,12 @@
               <identifier> a </identifier>
               <symbol> [ </symbol>
               <expression>
-                <term>
-                  <identifier> i </identifier>
-                </term>
+                <identifier> i </identifier>
               </expression>
               <symbol> ] </symbol>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> j </identifier>
-                </term>
+                <identifier> j </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -158,9 +146,7 @@
               <identifier> i </identifier>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> i </identifier>
-                </term>
+                <identifier> i </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -169,9 +155,7 @@
               <identifier> j </identifier>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> j </identifier>
-                </term>
+                <identifier> j </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -180,11 +164,9 @@
               <identifier> i </identifier>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> i </identifier>
-                  <symbol> | </symbol>
-                  <identifier> j </identifier>
-                </term>
+                <identifier> i </identifier>
+                <symbol> | </symbol>
+                <identifier> j </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>

@@ -446,30 +446,28 @@ def apply_expressions(tokenized_lines)
       tokenized_lines.each_with_index do |tl, index|
         next unless index > indexes[:open] + 1 && index < indexes[:close]
         tokenized_lines[index] = "  #{tokenized_lines[index]}"
-      end
 
-      # Applying term to each expression
-      if expression[:opening_element] == '<expression>'
-        tokenized_lines.insert(indexes[:close], "  #{offset}</term>")
-        tokenized_lines.insert(indexes[:open] + 2, "  #{offset}<term>")
-
-        # again with the index positions
-        elements_indexes.each_with_index do |i, index_of_i|
-          elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:open]
-          elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:close]
-          elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:open]
-          elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:close]
-        end
-
-        # Applying an offset between terms
-        tokenized_lines.each_with_index do |tl, index|
-          next unless index > indexes[:open] + 2 && index < indexes[:close]
-          tokenized_lines[index] = "  #{tokenized_lines[index]}"
-        end
+        # Applying term to each expression
+        # next unless expression[:opening_element] == '<expression>'
+        # next unless tokenized_lines[index].include?('<identifier>')
+        #
+        # tokenized_lines.insert(index + 1, "  #{offset}</term>")
+        # tokenized_lines.insert(index, "  #{offset}<term>")
+        # # offset between terms
+        # tokenized_lines[index + 1] = "  #{tokenized_lines[index + 1]}"
+        #
+        # # again with the index positions
+        # elements_indexes.each_with_index do |i, index_of_i|
+        #   # we finished working on this current index so no need to recalculate
+        #   next if i[:close] == indexes[:close] && i[:open] == indexes[:open]
+        #   elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:open]
+        #   elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:close]
+        #   elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:open]
+        #   elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:close]
+        # end
       end
     end
   end
-
 
   return tokenized_lines
 end

@@ -40,9 +40,7 @@
           <identifier> x </identifier>
           <symbol> = </symbol>
           <expression>
-            <term>
-              <identifier> Ax </identifier>
-            </term>
+            <identifier> Ax </identifier>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
@@ -51,9 +49,7 @@
           <identifier> y </identifier>
           <symbol> = </symbol>
           <expression>
-            <term>
-              <identifier> Ay </identifier>
-            </term>
+            <identifier> Ay </identifier>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
@@ -62,9 +58,7 @@
           <identifier> size </identifier>
           <symbol> = </symbol>
           <expression>
-            <term>
-              <identifier> Asize </identifier>
-            </term>
+            <identifier> Asize </identifier>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
@@ -228,9 +222,7 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <term>
-              <identifier> x </identifier>
-            </term>
+            <identifier> x </identifier>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -247,9 +239,7 @@
               <identifier> size </identifier>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> size </identifier>
-                </term>
+                <identifier> size </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -286,9 +276,7 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <term>
-              <identifier> size </identifier>
-            </term>
+            <identifier> size </identifier>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -305,9 +293,7 @@
               <identifier> size </identifier>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> size </identifier>
-                </term>
+                <identifier> size </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -344,9 +330,7 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <term>
-              <identifier> y </identifier>
-            </term>
+            <identifier> y </identifier>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -386,9 +370,7 @@
               <identifier> y </identifier>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> y </identifier>
-                </term>
+                <identifier> y </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -448,9 +430,7 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <term>
-              <identifier> y </identifier>
-            </term>
+            <identifier> y </identifier>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -490,9 +470,7 @@
               <identifier> y </identifier>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> y </identifier>
-                </term>
+                <identifier> y </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -552,9 +530,7 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <term>
-              <identifier> x </identifier>
-            </term>
+            <identifier> x </identifier>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -594,9 +570,7 @@
               <identifier> x </identifier>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> x </identifier>
-                </term>
+                <identifier> x </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -656,9 +630,7 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <term>
-              <identifier> x </identifier>
-            </term>
+            <identifier> x </identifier>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -698,9 +670,7 @@
               <identifier> x </identifier>
               <symbol> = </symbol>
               <expression>
-                <term>
-                  <identifier> x </identifier>
-                </term>
+                <identifier> x </identifier>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
