@@ -364,7 +364,7 @@ end
 def apply_expressions(tokenized_lines)
   expressions = [
     {
-      keyword: '<symbol> . </symbol>',
+      keyword: '<keyword> do </keyword>',
       opener: '<symbol> ( </symbol>',
       closer: '<symbol> ) </symbol>',
       opening_element: '<expressionList>',
@@ -397,7 +397,14 @@ def apply_expressions(tokenized_lines)
       closer: '<symbol> ] </symbol>',
       opening_element: '<expression>',
       closing_element: '</expression>',
-    }
+    },
+    {
+      keyword: '<keyword> return </keyword>',
+      opener: '<keyword> return </keyword>',
+      closer: '<symbol> ; </symbol>',
+      opening_element: '<expression>',
+      closing_element: '</expression>',
+    },
   ]
 
   expressions.each do |expression|

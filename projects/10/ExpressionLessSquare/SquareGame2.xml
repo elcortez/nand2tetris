@@ -45,7 +45,9 @@
         </letStatement>
         <returnStatement>
           <keyword> return </keyword>
-          <identifier> square </identifier>
+          <expression>
+            <identifier> square </identifier>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -88,6 +90,8 @@
         </doStatement>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -211,6 +215,8 @@
         </doStatement>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -279,6 +285,8 @@
                 <keyword> do </keyword>
                 <identifier> moveSquare </identifier>
                 <symbol> ( </symbol>
+                <expressionList>
+                </expressionList>
                 <symbol> ) </symbol>
                 <symbol> ; </symbol>
               </doStatement>
@@ -458,6 +466,8 @@
                 <keyword> do </keyword>
                 <identifier> moveSquare </identifier>
                 <symbol> ( </symbol>
+                <expressionList>
+                </expressionList>
                 <symbol> ) </symbol>
                 <symbol> ; </symbol>
               </doStatement>
@@ -468,6 +478,8 @@
         <symbol> } </symbol>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>

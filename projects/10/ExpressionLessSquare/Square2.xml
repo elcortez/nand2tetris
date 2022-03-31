@@ -66,12 +66,16 @@
           <keyword> do </keyword>
           <identifier> draw </identifier>
           <symbol> ( </symbol>
+          <expressionList>
+          </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
         <returnStatement>
           <keyword> return </keyword>
-          <identifier> x </identifier>
+          <expression>
+            <identifier> x </identifier>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -103,6 +107,8 @@
         </doStatement>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -152,6 +158,8 @@
         </doStatement>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -201,6 +209,8 @@
         </doStatement>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -231,6 +241,8 @@
               <keyword> do </keyword>
               <identifier> erase </identifier>
               <symbol> ( </symbol>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -247,6 +259,8 @@
               <keyword> do </keyword>
               <identifier> draw </identifier>
               <symbol> ( </symbol>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -255,6 +269,8 @@
         </ifStatement>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -285,6 +301,8 @@
               <keyword> do </keyword>
               <identifier> erase </identifier>
               <symbol> ( </symbol>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -301,6 +319,8 @@
               <keyword> do </keyword>
               <identifier> draw </identifier>
               <symbol> ( </symbol>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -309,6 +329,8 @@
         </ifStatement>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -409,6 +431,8 @@
         </ifStatement>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -509,6 +533,8 @@
         </ifStatement>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -609,6 +635,8 @@
         </ifStatement>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -709,6 +737,8 @@
         </ifStatement>
         <returnStatement>
           <keyword> return </keyword>
+          <expression>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
