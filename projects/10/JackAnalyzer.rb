@@ -427,6 +427,9 @@ def apply_expressions(tokenized_lines)
       end
     end
 
+    # Preparing to apply (from bottom to top in order to avoid messing up the indexes)
+    elements_indexes = elements_indexes.sort_by{|e|e[:open]}.reverse
+
     # Applying the expressions
     elements_indexes.each do |indexes|
       line_after = tokenized_lines[indexes[:close]]
@@ -434,37 +437,9 @@ def apply_expressions(tokenized_lines)
       tokenized_lines.insert(indexes[:close], "#{offset}#{expression[:closing_element]}")
       tokenized_lines.insert(indexes[:open] + 1, "#{offset}#{expression[:opening_element]}")
 
-      # recalculating index positions since we are adding more lines for the non_terminal_elements
-      elements_indexes.each_with_index do |i, index_of_i|
-        elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:open]
-        elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:close]
-        elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:open]
-        elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:close]
-      end
-
       # Applying an offset between expressions
-      tokenized_lines.each_with_index do |tl, index|
-        next unless index > indexes[:open] + 1 && index < indexes[:close]
+      ((indexes[:open] + 2)..(indexes[:close])).each do |index|
         tokenized_lines[index] = "  #{tokenized_lines[index]}"
-
-        # Applying term to each expression
-        # next unless expression[:opening_element] == '<expression>'
-        # next unless tokenized_lines[index].include?('<identifier>')
-        #
-        # tokenized_lines.insert(index + 1, "  #{offset}</term>")
-        # tokenized_lines.insert(index, "  #{offset}<term>")
-        # # offset between terms
-        # tokenized_lines[index + 1] = "  #{tokenized_lines[index + 1]}"
-        #
-        # # again with the index positions
-        # elements_indexes.each_with_index do |i, index_of_i|
-        #   # we finished working on this current index so no need to recalculate
-        #   next if i[:close] == indexes[:close] && i[:open] == indexes[:open]
-        #   elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:open]
-        #   elements_indexes[index_of_i][:open] += 1 if i[:open] > indexes[:close]
-        #   elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:open]
-        #   elements_indexes[index_of_i][:close] += 1 if i[:close] > indexes[:close]
-        # end
       end
     end
   end
