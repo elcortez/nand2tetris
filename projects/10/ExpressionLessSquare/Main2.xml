@@ -58,8 +58,6 @@
         </doStatement>
         <returnStatement>
           <keyword> return </keyword>
-          <expression>
-          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -177,8 +175,6 @@
         </ifStatement>
         <returnStatement>
           <keyword> return </keyword>
-          <expression>
-          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>

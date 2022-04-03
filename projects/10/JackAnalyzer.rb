@@ -361,7 +361,7 @@ def apply_statements(tokenized_lines)
   return tokenized_lines
 end
 
-def apply_expressions(tokenized_lines)
+def apply_basic_expressions(tokenized_lines)
   expressions = [
     {
       keyword: '<keyword> do </keyword>',
@@ -408,37 +408,13 @@ def apply_expressions(tokenized_lines)
   ]
 
   expressions.each do |expression|
-    elements_indexes = []
-    current_element_index = {}
-    open_close_count = 0
-    start_expression = false
-
-    # For each expression, find the indexes at which applying them
-    tokenized_lines.each_with_index do |line, index|
-      if line.include?(expression[:keyword])
-        open_close_count = 0
-        start_expression = true
-      end
-
-      if line.include?(expression[:opener]) && start_expression
-        open_close_count += 1
-        current_element_index[:open] = index if open_close_count == 1
-      elsif line.include?(expression[:closer]) && start_expression
-        open_close_count -= 1
-        if open_close_count == 0
-          current_element_index[:close] = index
-          elements_indexes << current_element_index
-          current_element_index = {}
-          start_expression = false
-        end
-      end
-    end
-
+    elements_indexes = find_elements_indexes_for_expression(expression, tokenized_lines)
     # Preparing to apply (from bottom to top in order to avoid messing up the indexes)
     elements_indexes = elements_indexes.sort_by{|e|e[:open]}.reverse
 
     # Applying the expressions
     elements_indexes.each do |indexes|
+      next if indexes[:close] == indexes[:open] + 1 && expression[:keyword] == '<keyword> return </keyword>'
       line_after = tokenized_lines[indexes[:close]]
       offset = line_after.split('<').first || ''
       tokenized_lines.insert(indexes[:close], "#{offset}#{expression[:closing_element]}")
@@ -454,6 +430,71 @@ def apply_expressions(tokenized_lines)
   return tokenized_lines
 end
 
+def apply_nested_expressions(tokenized_lines)
+  expression = {
+    keyword: '<keyword> do </keyword>',
+    opener: '<expressionList>',
+    closer: '</expressionList>'
+  }
+  indexes = find_elements_indexes_for_expression(expression, tokenized_lines)
+
+  # finding all indexes of expressionList
+  indexes.each do |index_pair|
+    next if index_pair[:close] == index_pair[:open] + 1
+    commas = []
+    tokenized_lines.each_with_index do |tl, index|
+      next unless index > index_pair[:open] && index < index_pair[:close]
+      # applying offset in advance
+      tokenized_lines[index] = "  #{tl}" unless tl.include?('<symbol> , </symbol>')
+      # finding all commas between expressionList
+      commas << index if tl.include?('<symbol> , </symbol>')
+    end
+    commas = commas.sort!.reverse! # bottom up so as to avoir recalculating indexes
+
+    offset = tokenized_lines[index_pair[:close]].split('<').first
+
+    # inserting
+    tokenized_lines.insert(index_pair[:close], "#{offset}  </expression>")
+    commas.each do |comma|
+      tokenized_lines.insert(comma + 1, "#{offset}  <expression>")
+      tokenized_lines.insert(comma, "#{offset}  </expression>")
+    end
+    tokenized_lines.insert(index_pair[:open] + 1, "#{offset}  <expression>")
+  end
+
+  return tokenized_lines
+end
+
+def find_elements_indexes_for_expression(expression, tokenized_lines)
+  elements_indexes = []
+  current_element_index = {}
+  open_close_count = 0
+  start_expression = false
+
+  # For each expression, find the indexes at which applying them
+  tokenized_lines.each_with_index do |line, index|
+    if line.include?(expression[:keyword])
+      open_close_count = 0
+      start_expression = true
+    end
+
+    if line.include?(expression[:opener]) && start_expression
+      open_close_count += 1
+      current_element_index[:open] = index if open_close_count == 1
+    elsif line.include?(expression[:closer]) && start_expression
+      open_close_count -= 1
+      if open_close_count == 0
+        current_element_index[:close] = index
+        elements_indexes << current_element_index
+        current_element_index = {}
+        start_expression = false
+      end
+    end
+  end
+
+  return elements_indexes.sort_by!{|i|i[:open]}.reverse!
+end
+
 def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
   tokenized_lines = []
 
@@ -465,7 +506,8 @@ def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
     tokenized_lines = apply_parameters_lists(tokenized_lines)
     tokenized_lines = apply_non_terminal_elements(tokenized_lines)
     tokenized_lines = apply_statements(tokenized_lines)
-    tokenized_lines = apply_expressions(tokenized_lines)
+    tokenized_lines = apply_basic_expressions(tokenized_lines)
+    tokenized_lines = apply_nested_expressions(tokenized_lines)
   end
 
   tokenized_lines.flatten.each do |xml_command|

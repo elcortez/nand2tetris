@@ -83,15 +83,15 @@
           <identifier> deAlloc </identifier>
           <symbol> ( </symbol>
           <expressionList>
-            <identifier> square </identifier>
+            <expression>
+              <identifier> square </identifier>
+            </expression>
           </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
         <returnStatement>
           <keyword> return </keyword>
-          <expression>
-          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -208,15 +208,15 @@
           <identifier> wait </identifier>
           <symbol> ( </symbol>
           <expressionList>
-            <identifier> direction </identifier>
+            <expression>
+              <identifier> direction </identifier>
+            </expression>
           </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
         <returnStatement>
           <keyword> return </keyword>
-          <expression>
-          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -478,8 +478,6 @@
         <symbol> } </symbol>
         <returnStatement>
           <keyword> return </keyword>
-          <expression>
-          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
