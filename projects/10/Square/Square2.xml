@@ -40,7 +40,9 @@
           <identifier> x </identifier>
           <symbol> = </symbol>
           <expression>
-            <identifier> Ax </identifier>
+            <term>
+              <identifier> Ax </identifier>
+            </term>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
@@ -49,7 +51,9 @@
           <identifier> y </identifier>
           <symbol> = </symbol>
           <expression>
-            <identifier> Ay </identifier>
+            <term>
+              <identifier> Ay </identifier>
+            </term>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
@@ -58,7 +62,9 @@
           <identifier> size </identifier>
           <symbol> = </symbol>
           <expression>
-            <identifier> Asize </identifier>
+            <term>
+              <identifier> Asize </identifier>
+            </term>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
@@ -66,12 +72,18 @@
           <keyword> do </keyword>
           <identifier> draw </identifier>
           <symbol> ( </symbol>
+          <expressionList>
+          </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
         <returnStatement>
           <keyword> return </keyword>
-          <keyword> this </keyword>
+          <expression>
+            <term>
+              <keyword> this </keyword>
+            </term>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
@@ -96,7 +108,11 @@
           <identifier> deAlloc </identifier>
           <symbol> ( </symbol>
           <expressionList>
-            <keyword> this </keyword>
+            <expression>
+              <term>
+                <keyword> this </keyword>
+              </term>
+            </expression>
           </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
@@ -127,7 +143,11 @@
           <identifier> setColor </identifier>
           <symbol> ( </symbol>
           <expressionList>
-            <keyword> true </keyword>
+            <expression>
+              <term>
+                <keyword> true </keyword>
+              </term>
+            </expression>
           </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
@@ -139,17 +159,37 @@
           <identifier> drawRectangle </identifier>
           <symbol> ( </symbol>
           <expressionList>
-            <identifier> x </identifier>
+            <expression>
+              <term>
+                <identifier> x </identifier>
+              </term>
+            </expression>
             <symbol> , </symbol>
-            <identifier> y </identifier>
+            <expression>
+              <term>
+                <identifier> y </identifier>
+              </term>
+            </expression>
             <symbol> , </symbol>
-            <identifier> x </identifier>
-            <symbol> + </symbol>
-            <identifier> size </identifier>
+            <expression>
+              <term>
+                <identifier> x </identifier>
+              </term>
+              <symbol> + </symbol>
+              <term>
+                <identifier> size </identifier>
+              </term>
+            </expression>
             <symbol> , </symbol>
-            <identifier> y </identifier>
-            <symbol> + </symbol>
-            <identifier> size </identifier>
+            <expression>
+              <term>
+                <identifier> y </identifier>
+              </term>
+              <symbol> + </symbol>
+              <term>
+                <identifier> size </identifier>
+              </term>
+            </expression>
           </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
@@ -180,7 +220,11 @@
           <identifier> setColor </identifier>
           <symbol> ( </symbol>
           <expressionList>
-            <keyword> false </keyword>
+            <expression>
+              <term>
+                <keyword> false </keyword>
+              </term>
+            </expression>
           </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
@@ -192,17 +236,37 @@
           <identifier> drawRectangle </identifier>
           <symbol> ( </symbol>
           <expressionList>
-            <identifier> x </identifier>
+            <expression>
+              <term>
+                <identifier> x </identifier>
+              </term>
+            </expression>
             <symbol> , </symbol>
-            <identifier> y </identifier>
+            <expression>
+              <term>
+                <identifier> y </identifier>
+              </term>
+            </expression>
             <symbol> , </symbol>
-            <identifier> x </identifier>
-            <symbol> + </symbol>
-            <identifier> size </identifier>
+            <expression>
+              <term>
+                <identifier> x </identifier>
+              </term>
+              <symbol> + </symbol>
+              <term>
+                <identifier> size </identifier>
+              </term>
+            </expression>
             <symbol> , </symbol>
-            <identifier> y </identifier>
-            <symbol> + </symbol>
-            <identifier> size </identifier>
+            <expression>
+              <term>
+                <identifier> y </identifier>
+              </term>
+              <symbol> + </symbol>
+              <term>
+                <identifier> size </identifier>
+              </term>
+            </expression>
           </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
@@ -230,25 +294,53 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
+            <term>
+            </term>
             <symbol> ( </symbol>
+            <term>
+            </term>
             <symbol> ( </symbol>
-            <identifier> y </identifier>
+            <term>
+              <identifier> y </identifier>
+            </term>
             <symbol> + </symbol>
-            <identifier> size </identifier>
+            <term>
+              <identifier> size </identifier>
+            </term>
             <symbol> ) </symbol>
+            <term>
+            </term>
             <symbol> &lt; </symbol>
-            <integerConstant> 254 </integerConstant>
+            <term>
+              <integerConstant> 254 </integerConstant>
+            </term>
             <symbol> ) </symbol>
+            <term>
+            </term>
             <symbol> &amp; </symbol>
+            <term>
+            </term>
             <symbol> ( </symbol>
+            <term>
+            </term>
             <symbol> ( </symbol>
-            <identifier> x </identifier>
+            <term>
+              <identifier> x </identifier>
+            </term>
             <symbol> + </symbol>
-            <identifier> size </identifier>
+            <term>
+              <identifier> size </identifier>
+            </term>
             <symbol> ) </symbol>
+            <term>
+            </term>
             <symbol> &lt; </symbol>
-            <integerConstant> 510 </integerConstant>
+            <term>
+              <integerConstant> 510 </integerConstant>
+            </term>
             <symbol> ) </symbol>
+            <term>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -257,6 +349,8 @@
               <keyword> do </keyword>
               <identifier> erase </identifier>
               <symbol> ( </symbol>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -265,9 +359,13 @@
               <identifier> size </identifier>
               <symbol> = </symbol>
               <expression>
-                <identifier> size </identifier>
+                <term>
+                  <identifier> size </identifier>
+                </term>
                 <symbol> + </symbol>
-                <integerConstant> 2 </integerConstant>
+                <term>
+                  <integerConstant> 2 </integerConstant>
+                </term>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -275,6 +373,8 @@
               <keyword> do </keyword>
               <identifier> draw </identifier>
               <symbol> ( </symbol>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -304,9 +404,13 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <identifier> size </identifier>
+            <term>
+              <identifier> size </identifier>
+            </term>
             <symbol> &gt; </symbol>
-            <integerConstant> 2 </integerConstant>
+            <term>
+              <integerConstant> 2 </integerConstant>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -315,6 +419,8 @@
               <keyword> do </keyword>
               <identifier> erase </identifier>
               <symbol> ( </symbol>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -323,9 +429,13 @@
               <identifier> size </identifier>
               <symbol> = </symbol>
               <expression>
-                <identifier> size </identifier>
+                <term>
+                  <identifier> size </identifier>
+                </term>
                 <symbol> - </symbol>
-                <integerConstant> 2 </integerConstant>
+                <term>
+                  <integerConstant> 2 </integerConstant>
+                </term>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -333,6 +443,8 @@
               <keyword> do </keyword>
               <identifier> draw </identifier>
               <symbol> ( </symbol>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
             </doStatement>
@@ -362,9 +474,13 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <identifier> y </identifier>
+            <term>
+              <identifier> y </identifier>
+            </term>
             <symbol> &gt; </symbol>
-            <integerConstant> 1 </integerConstant>
+            <term>
+              <integerConstant> 1 </integerConstant>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -376,7 +492,11 @@
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <keyword> false </keyword>
+                <expression>
+                  <term>
+                    <keyword> false </keyword>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -388,23 +508,51 @@
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <identifier> x </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <symbol> ( </symbol>
-                <identifier> y </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
-                <symbol> ) </symbol>
-                <symbol> - </symbol>
-                <integerConstant> 1 </integerConstant>
+                <expression>
+                  <term>
+                  </term>
+                  <symbol> ( </symbol>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                  <symbol> ) </symbol>
+                  <term>
+                  </term>
+                  <symbol> - </symbol>
+                  <term>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> x </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -414,9 +562,13 @@
               <identifier> y </identifier>
               <symbol> = </symbol>
               <expression>
-                <identifier> y </identifier>
+                <term>
+                  <identifier> y </identifier>
+                </term>
                 <symbol> - </symbol>
-                <integerConstant> 2 </integerConstant>
+                <term>
+                  <integerConstant> 2 </integerConstant>
+                </term>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -427,7 +579,11 @@
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <keyword> true </keyword>
+                <expression>
+                  <term>
+                    <keyword> true </keyword>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -439,17 +595,37 @@
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <identifier> x </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> x </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
-                <symbol> + </symbol>
-                <integerConstant> 1 </integerConstant>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -480,13 +656,23 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
+            <term>
+            </term>
             <symbol> ( </symbol>
-            <identifier> y </identifier>
+            <term>
+              <identifier> y </identifier>
+            </term>
             <symbol> + </symbol>
-            <identifier> size </identifier>
+            <term>
+              <identifier> size </identifier>
+            </term>
             <symbol> ) </symbol>
+            <term>
+            </term>
             <symbol> &lt; </symbol>
-            <integerConstant> 254 </integerConstant>
+            <term>
+              <integerConstant> 254 </integerConstant>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -498,7 +684,11 @@
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <keyword> false </keyword>
+                <expression>
+                  <term>
+                    <keyword> false </keyword>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -510,17 +700,37 @@
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <identifier> x </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> x </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
-                <symbol> + </symbol>
-                <integerConstant> 1 </integerConstant>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -530,9 +740,13 @@
               <identifier> y </identifier>
               <symbol> = </symbol>
               <expression>
-                <identifier> y </identifier>
+                <term>
+                  <identifier> y </identifier>
+                </term>
                 <symbol> + </symbol>
-                <integerConstant> 2 </integerConstant>
+                <term>
+                  <integerConstant> 2 </integerConstant>
+                </term>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -543,7 +757,11 @@
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <keyword> true </keyword>
+                <expression>
+                  <term>
+                    <keyword> true </keyword>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -555,23 +773,51 @@
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <identifier> x </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <symbol> ( </symbol>
-                <identifier> y </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
-                <symbol> ) </symbol>
-                <symbol> - </symbol>
-                <integerConstant> 1 </integerConstant>
+                <expression>
+                  <term>
+                  </term>
+                  <symbol> ( </symbol>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                  <symbol> ) </symbol>
+                  <term>
+                  </term>
+                  <symbol> - </symbol>
+                  <term>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> x </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -602,9 +848,13 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-            <identifier> x </identifier>
+            <term>
+              <identifier> x </identifier>
+            </term>
             <symbol> &gt; </symbol>
-            <integerConstant> 1 </integerConstant>
+            <term>
+              <integerConstant> 1 </integerConstant>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -616,7 +866,11 @@
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <keyword> false </keyword>
+                <expression>
+                  <term>
+                    <keyword> false </keyword>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -628,23 +882,51 @@
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <symbol> ( </symbol>
-                <identifier> x </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
-                <symbol> ) </symbol>
-                <symbol> - </symbol>
-                <integerConstant> 1 </integerConstant>
+                <expression>
+                  <term>
+                  </term>
+                  <symbol> ( </symbol>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                  <symbol> ) </symbol>
+                  <term>
+                  </term>
+                  <symbol> - </symbol>
+                  <term>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> x </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -654,9 +936,13 @@
               <identifier> x </identifier>
               <symbol> = </symbol>
               <expression>
-                <identifier> x </identifier>
+                <term>
+                  <identifier> x </identifier>
+                </term>
                 <symbol> - </symbol>
-                <integerConstant> 2 </integerConstant>
+                <term>
+                  <integerConstant> 2 </integerConstant>
+                </term>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -667,7 +953,11 @@
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <keyword> true </keyword>
+                <expression>
+                  <term>
+                    <keyword> true </keyword>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -679,17 +969,37 @@
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <identifier> x </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> x </identifier>
-                <symbol> + </symbol>
-                <integerConstant> 1 </integerConstant>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -720,13 +1030,23 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
+            <term>
+            </term>
             <symbol> ( </symbol>
-            <identifier> x </identifier>
+            <term>
+              <identifier> x </identifier>
+            </term>
             <symbol> + </symbol>
-            <identifier> size </identifier>
+            <term>
+              <identifier> size </identifier>
+            </term>
             <symbol> ) </symbol>
+            <term>
+            </term>
             <symbol> &lt; </symbol>
-            <integerConstant> 510 </integerConstant>
+            <term>
+              <integerConstant> 510 </integerConstant>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -738,7 +1058,11 @@
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <keyword> false </keyword>
+                <expression>
+                  <term>
+                    <keyword> false </keyword>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -750,17 +1074,37 @@
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <identifier> x </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> x </identifier>
-                <symbol> + </symbol>
-                <integerConstant> 1 </integerConstant>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -770,9 +1114,13 @@
               <identifier> x </identifier>
               <symbol> = </symbol>
               <expression>
-                <identifier> x </identifier>
+                <term>
+                  <identifier> x </identifier>
+                </term>
                 <symbol> + </symbol>
-                <integerConstant> 2 </integerConstant>
+                <term>
+                  <integerConstant> 2 </integerConstant>
+                </term>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
@@ -783,7 +1131,11 @@
               <identifier> setColor </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <keyword> true </keyword>
+                <expression>
+                  <term>
+                    <keyword> true </keyword>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
@@ -795,23 +1147,51 @@
               <identifier> drawRectangle </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <symbol> ( </symbol>
-                <identifier> x </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
-                <symbol> ) </symbol>
-                <symbol> - </symbol>
-                <integerConstant> 1 </integerConstant>
+                <expression>
+                  <term>
+                  </term>
+                  <symbol> ( </symbol>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                  <symbol> ) </symbol>
+                  <term>
+                  </term>
+                  <symbol> - </symbol>
+                  <term>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> x </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> x </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
                 <symbol> , </symbol>
-                <identifier> y </identifier>
-                <symbol> + </symbol>
-                <identifier> size </identifier>
+                <expression>
+                  <term>
+                    <identifier> y </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <identifier> size </identifier>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
               <symbol> ; </symbol>
