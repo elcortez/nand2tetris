@@ -35,6 +35,8 @@
               <symbol> . </symbol>
               <identifier> new </identifier>
               <symbol> ( </symbol>
+              <expressionList>
+              </expressionList>
               <symbol> ) </symbol>
             </term>
           </expression>

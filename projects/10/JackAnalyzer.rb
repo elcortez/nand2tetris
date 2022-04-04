@@ -378,6 +378,14 @@ def apply_basic_expressions(tokenized_lines)
       closing_element: '</expressionList>',
     },
     {
+      keyword: '<symbol> . </symbol>',
+      additional_keyword: '<identifier> new </identifier>',
+      opener: '<symbol> ( </symbol>',
+      closer: '<symbol> ) </symbol>',
+      opening_element: '<expressionList>',
+      closing_element: '</expressionList>',
+    },
+    {
       keyword: '<keyword> let </keyword>',
       opener: '<symbol> = </symbol>',
       closer: '<symbol> ; </symbol>',
@@ -419,7 +427,9 @@ def apply_basic_expressions(tokenized_lines)
 
     # Applying the expressions
     elements_indexes.each do |indexes|
+      next if expression[:additional_keyword] && !tokenized_lines[indexes[:open] - 1].include?(expression[:additional_keyword])
       next if indexes[:close] == indexes[:open] + 1 && expression[:keyword] == '<keyword> return </keyword>'
+
       line_after = tokenized_lines[indexes[:close]]
       offset = line_after.split('<').first || ''
       tokenized_lines.insert(indexes[:close], "#{offset}#{expression[:closing_element]}")

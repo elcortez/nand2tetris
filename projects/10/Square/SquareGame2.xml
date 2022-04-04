@@ -35,15 +35,17 @@
               <symbol> . </symbol>
               <identifier> new </identifier>
               <symbol> ( </symbol>
-              <integerConstant> 0 </integerConstant>
+              <expressionList>
+                <integerConstant> 0 </integerConstant>
             </term>
-            <symbol> , </symbol>
+              <symbol> , </symbol>
             <term>
-              <integerConstant> 0 </integerConstant>
+                <integerConstant> 0 </integerConstant>
             </term>
-            <symbol> , </symbol>
+              <symbol> , </symbol>
             <term>
-              <integerConstant> 30 </integerConstant>
+                <integerConstant> 30 </integerConstant>
+              </expressionList>
               <symbol> ) </symbol>
             </term>
           </expression>
