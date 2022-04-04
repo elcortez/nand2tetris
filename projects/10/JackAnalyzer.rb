@@ -199,7 +199,7 @@ def apply_non_terminal_elements(tokenized_lines)
     },
     {
       keyword: '<keyword> while </keyword>',
-      opener: '<keyword> while </keyword>',
+      opener: '<symbol> { </symbol>',
       closer: '<symbol> } </symbol>',
       opening_non_terminal_element: '<whileStatement>',
       closing_non_terminal_element: '</whileStatement>',
@@ -225,6 +225,7 @@ def apply_non_terminal_elements(tokenized_lines)
           (!non_terminal_element[:next_line_cancelling_one_closer]) ||
           (!tokenized_lines[index + 1].include?(non_terminal_element[:next_line_cancelling_one_closer]))
         )
+
 
         current_element[:open_close_count] -= 1
 
