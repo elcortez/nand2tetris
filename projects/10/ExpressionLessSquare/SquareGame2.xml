@@ -275,74 +275,76 @@
           </expression>
           <symbol> ; </symbol>
         </letStatement>
-        <keyword> while </keyword>
-        <symbol> ( </symbol>
-        <expression>
-          <term>
-            <identifier> exit </identifier>
-          </term>
-        </expression>
-        <symbol> ) </symbol>
-        <symbol> { </symbol>
-        <statements>
-          <whileStatement>
-            <keyword> while </keyword>
-            <symbol> ( </symbol>
-            <expression>
-              <term>
-                <identifier> key </identifier>
-              </term>
-            </expression>
-            <symbol> ) </symbol>
-            <symbol> { </symbol>
-            <statements>
-              <letStatement>
-                <keyword> let </keyword>
-                <identifier> key </identifier>
-                <symbol> = </symbol>
-                <expression>
-                  <term>
-                    <identifier> key </identifier>
-                  </term>
-                </expression>
-                <symbol> ; </symbol>
-              </letStatement>
-              <doStatement>
-                <keyword> do </keyword>
-                <identifier> moveSquare </identifier>
-                <symbol> ( </symbol>
-                <expressionList>
-                </expressionList>
-                <symbol> ) </symbol>
-                <symbol> ; </symbol>
-              </doStatement>
-            </statements>
-            <symbol> } </symbol>
+        <whileStatement>
+          <keyword> while </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <identifier> exit </identifier>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+          <statements>
+            <whileStatement>
+              <keyword> while </keyword>
+              <symbol> ( </symbol>
+              <expression>
+                <term>
+                  <identifier> key </identifier>
+                </term>
+              </expression>
+              <symbol> ) </symbol>
+              <symbol> { </symbol>
+              <statements>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <identifier> key </identifier>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <identifier> key </identifier>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+                <doStatement>
+                  <keyword> do </keyword>
+                  <identifier> moveSquare </identifier>
+                  <symbol> ( </symbol>
+                  <expressionList>
+                  </expressionList>
+                  <symbol> ) </symbol>
+                  <symbol> ; </symbol>
+                </doStatement>
+              </statements>
+              <symbol> } </symbol>
+            </whileStatement>
+            <ifStatement>
+              <keyword> if </keyword>
+              <symbol> ( </symbol>
+              <expression>
+                <term>
+                  <identifier> key </identifier>
+                </term>
+              </expression>
+              <symbol> ) </symbol>
+              <symbol> { </symbol>
+              <statements>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <identifier> exit </identifier>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <identifier> exit </identifier>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+              </statements>
+              <symbol> } </symbol>
           </whileStatement>
-          <ifStatement>
-            <keyword> if </keyword>
-            <symbol> ( </symbol>
-            <expression>
-              <term>
-                <identifier> key </identifier>
-              </term>
-            </expression>
-            <symbol> ) </symbol>
-            <symbol> { </symbol>
-            <statements>
-              <letStatement>
-                <keyword> let </keyword>
-                <identifier> exit </identifier>
-                <symbol> = </symbol>
-                <expression>
-                  <term>
-                    <identifier> exit </identifier>
-                  </term>
-                </expression>
-                <symbol> ; </symbol>
-              </letStatement>
-            </statements>
-            <symbol> } </symbol>
           </ifStatement>
           <ifStatement>
             <keyword> if </keyword>
@@ -528,7 +530,7 @@
             </statements>
             <symbol> } </symbol>
           </whileStatement>
-        </statements>
+          </statements>
         <symbol> } </symbol>
         <returnStatement>
           <keyword> return </keyword>

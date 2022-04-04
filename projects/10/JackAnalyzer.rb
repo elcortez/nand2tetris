@@ -162,21 +162,6 @@ def apply_non_terminal_elements(tokenized_lines)
       }
     },
     {
-      keyword: '<keyword> if </keyword>',
-      opener: '<keyword> if </keyword>',
-      closer: '<symbol> } </symbol>',
-      next_line_cancelling_one_closer: '<keyword> else </keyword>',
-      opening_non_terminal_element: '<ifStatement>',
-      closing_non_terminal_element: '</ifStatement>',
-    },
-    {
-      keyword: '<keyword> while </keyword>',
-      opener: '<keyword> while </keyword>',
-      closer: '<symbol> } </symbol>',
-      opening_non_terminal_element: '<whileStatement>',
-      closing_non_terminal_element: '</whileStatement>',
-    },
-    {
       keyword: '<keyword> var </keyword>',
       opener: '<keyword> var </keyword>',
       closer: '<symbol> ; </symbol>',
@@ -203,33 +188,48 @@ def apply_non_terminal_elements(tokenized_lines)
       closer: '<symbol> ; </symbol>',
       opening_non_terminal_element: '<returnStatement>',
       closing_non_terminal_element: '</returnStatement>',
-    }
+    },
+    {
+      keyword: '<keyword> if </keyword>',
+      opener: '<keyword> if </keyword>',
+      closer: '<symbol> } </symbol>',
+      next_line_cancelling_one_closer: '<keyword> else </keyword>',
+      opening_non_terminal_element: '<ifStatement>',
+      closing_non_terminal_element: '</ifStatement>',
+    },
+    {
+      keyword: '<keyword> while </keyword>',
+      opener: '<keyword> while </keyword>',
+      closer: '<symbol> } </symbol>',
+      opening_non_terminal_element: '<whileStatement>',
+      closing_non_terminal_element: '</whileStatement>',
+    },
   ]
 
   non_terminal_elements.each do |non_terminal_element|
     elements_indexes = []
-    current_element_index = {}
-    open_close_count = 0
 
     tokenized_lines.each_with_index do |line, index|
       if line.include?(non_terminal_element[:keyword])
-        open_close_count = 0
-        current_element_index[:open] = index
+        elements_indexes << { open: index, open_close_count: 0 }
       end
 
-      if line.include?(non_terminal_element[:opener]) && current_element_index[:open]
-        open_close_count += 1
-      elsif line.include?(non_terminal_element[:closer]) &&
+      # getting the latest opening element
+      current_element = elements_indexes.select { |e| !e[:close] }.sort_by { |e|e[:open] }.last
+
+      if line.include?(non_terminal_element[:opener]) && current_element
+        current_element[:open_close_count] += 1
+
+      elsif line.include?(non_terminal_element[:closer]) && current_element &&
         (
           (!non_terminal_element[:next_line_cancelling_one_closer]) ||
           (!tokenized_lines[index + 1].include?(non_terminal_element[:next_line_cancelling_one_closer]))
-        ) && current_element_index[:open]
+        )
 
-        open_close_count -= 1
-        if open_close_count == 0
-          current_element_index[:close] = index
-          elements_indexes << current_element_index
-          current_element_index = {}
+        current_element[:open_close_count] -= 1
+
+        if current_element[:open_close_count] == 0
+          current_element[:close] = index
         end
       end
     end
@@ -252,7 +252,6 @@ def apply_non_terminal_elements(tokenized_lines)
           next unless index > indexes[:open]
 
           if line.include?(body[:opener])
-            open_close_count += 1
             additional_indexes[:open] = index
             break
           end
