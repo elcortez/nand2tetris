@@ -32,16 +32,10 @@
           <expression>
             <term>
               <identifier> SquareGame </identifier>
-            </term>
-            <symbol> . </symbol>
-            <term>
+              <symbol> . </symbol>
               <identifier> new </identifier>
-            </term>
-            <symbol> ( </symbol>
-            <term>
-            </term>
-            <symbol> ) </symbol>
-            <term>
+              <symbol> ( </symbol>
+              <symbol> ) </symbol>
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -175,19 +169,11 @@
               <expression>
                 <term>
                   <identifier> i </identifier>
-                </term>
-                <symbol> * </symbol>
-                <term>
-                </term>
-                <symbol> ( </symbol>
-                <term>
-                </term>
-                <symbol> - </symbol>
-                <term>
+                  <symbol> * </symbol>
+                  <symbol> ( </symbol>
+                  <symbol> - </symbol>
                   <identifier> j </identifier>
-                </term>
-                <symbol> ) </symbol>
-                <term>
+                  <symbol> ) </symbol>
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -199,19 +185,11 @@
               <expression>
                 <term>
                   <identifier> j </identifier>
-                </term>
-                <symbol> / </symbol>
-                <term>
-                </term>
-                <symbol> ( </symbol>
-                <term>
-                </term>
-                <symbol> - </symbol>
-                <term>
+                  <symbol> / </symbol>
+                  <symbol> ( </symbol>
+                  <symbol> - </symbol>
                   <integerConstant> 2 </integerConstant>
-                </term>
-                <symbol> ) </symbol>
-                <term>
+                  <symbol> ) </symbol>
                 </term>
               </expression>
               <symbol> ; </symbol>

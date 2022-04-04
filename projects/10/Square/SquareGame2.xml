@@ -32,13 +32,9 @@
           <expression>
             <term>
               <identifier> Square </identifier>
-            </term>
-            <symbol> . </symbol>
-            <term>
+              <symbol> . </symbol>
               <identifier> new </identifier>
-            </term>
-            <symbol> ( </symbol>
-            <term>
+              <symbol> ( </symbol>
               <integerConstant> 0 </integerConstant>
             </term>
             <symbol> , </symbol>
@@ -48,9 +44,7 @@
             <symbol> , </symbol>
             <term>
               <integerConstant> 30 </integerConstant>
-            </term>
-            <symbol> ) </symbol>
-            <term>
+              <symbol> ) </symbol>
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -142,9 +136,7 @@
           <expression>
             <term>
               <identifier> direction </identifier>
-            </term>
-            <symbol> = </symbol>
-            <term>
+              <symbol> = </symbol>
               <integerConstant> 1 </integerConstant>
             </term>
           </expression>
@@ -171,9 +163,7 @@
           <expression>
             <term>
               <identifier> direction </identifier>
-            </term>
-            <symbol> = </symbol>
-            <term>
+              <symbol> = </symbol>
               <integerConstant> 2 </integerConstant>
             </term>
           </expression>
@@ -200,9 +190,7 @@
           <expression>
             <term>
               <identifier> direction </identifier>
-            </term>
-            <symbol> = </symbol>
-            <term>
+              <symbol> = </symbol>
               <integerConstant> 3 </integerConstant>
             </term>
           </expression>
@@ -229,9 +217,7 @@
           <expression>
             <term>
               <identifier> direction </identifier>
-            </term>
-            <symbol> = </symbol>
-            <term>
+              <symbol> = </symbol>
               <integerConstant> 4 </integerConstant>
             </term>
           </expression>
@@ -315,9 +301,7 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-            </term>
-            <symbol> ~ </symbol>
-            <term>
+              <symbol> ~ </symbol>
               <identifier> exit </identifier>
             </term>
           </expression>
@@ -330,9 +314,7 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                </term>
-                <symbol> = </symbol>
-                <term>
+                  <symbol> = </symbol>
                   <integerConstant> 0 </integerConstant>
                 </term>
               </expression>
@@ -346,16 +328,10 @@
                   <expression>
                     <term>
                       <identifier> Keyboard </identifier>
-                    </term>
-                    <symbol> . </symbol>
-                    <term>
+                      <symbol> . </symbol>
                       <identifier> keyPressed </identifier>
-                    </term>
-                    <symbol> ( </symbol>
-                    <term>
-                    </term>
-                    <symbol> ) </symbol>
-                    <term>
+                      <symbol> ( </symbol>
+                      <symbol> ) </symbol>
                     </term>
                   </expression>
                   <symbol> ; </symbol>
@@ -378,9 +354,7 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                </term>
-                <symbol> = </symbol>
-                <term>
+                  <symbol> = </symbol>
                   <integerConstant> 81 </integerConstant>
                 </term>
               </expression>
@@ -407,9 +381,7 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                </term>
-                <symbol> = </symbol>
-                <term>
+                  <symbol> = </symbol>
                   <integerConstant> 90 </integerConstant>
                 </term>
               </expression>
@@ -436,9 +408,7 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                </term>
-                <symbol> = </symbol>
-                <term>
+                  <symbol> = </symbol>
                   <integerConstant> 88 </integerConstant>
                 </term>
               </expression>
@@ -465,9 +435,7 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                </term>
-                <symbol> = </symbol>
-                <term>
+                  <symbol> = </symbol>
                   <integerConstant> 131 </integerConstant>
                 </term>
               </expression>
@@ -494,9 +462,7 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                </term>
-                <symbol> = </symbol>
-                <term>
+                  <symbol> = </symbol>
                   <integerConstant> 133 </integerConstant>
                 </term>
               </expression>
@@ -523,9 +489,7 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                </term>
-                <symbol> = </symbol>
-                <term>
+                  <symbol> = </symbol>
                   <integerConstant> 130 </integerConstant>
                 </term>
               </expression>
@@ -552,9 +516,7 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                </term>
-                <symbol> = </symbol>
-                <term>
+                  <symbol> = </symbol>
                   <integerConstant> 132 </integerConstant>
                 </term>
               </expression>
@@ -580,20 +542,12 @@
               <symbol> ( </symbol>
               <expression>
                 <term>
-                </term>
-                <symbol> ~ </symbol>
-                <term>
-                </term>
-                <symbol> ( </symbol>
-                <term>
+                  <symbol> ~ </symbol>
+                  <symbol> ( </symbol>
                   <identifier> key </identifier>
-                </term>
-                <symbol> = </symbol>
-                <term>
+                  <symbol> = </symbol>
                   <integerConstant> 0 </integerConstant>
-                </term>
-                <symbol> ) </symbol>
-                <term>
+                  <symbol> ) </symbol>
                 </term>
               </expression>
               <symbol> ) </symbol>
@@ -606,16 +560,10 @@
                   <expression>
                     <term>
                       <identifier> Keyboard </identifier>
-                    </term>
-                    <symbol> . </symbol>
-                    <term>
+                      <symbol> . </symbol>
                       <identifier> keyPressed </identifier>
-                    </term>
-                    <symbol> ( </symbol>
-                    <term>
-                    </term>
-                    <symbol> ) </symbol>
-                    <term>
+                      <symbol> ( </symbol>
+                      <symbol> ) </symbol>
                     </term>
                   </expression>
                   <symbol> ; </symbol>

@@ -10,6 +10,13 @@ XML_IDENTIFIERS = {
   '&' => '&amp;'
 }
 
+TERMS_SEPARATORS = [
+  '<symbol> , </symbol>',
+  '<symbol> &gt; </symbol>',
+  '<symbol> &lt; </symbol>',
+  '<symbol> | </symbol>',
+]
+
 KEYWORDS = [
   'class', 'constructor', 'function', 'method', 'field', 'static', 'var', 'int',
   'char', 'boolean', 'void', 'true', 'false', 'null', 'this', 'let', 'do', 'if',
@@ -443,9 +450,9 @@ def apply_nested_expressions(tokenized_lines)
     tokenized_lines.each_with_index do |tl, index|
       next unless index > index_pair[:open] && index < index_pair[:close]
       # applying offset in advance
-      tokenized_lines[index] = "  #{tl}" unless tl.include?('<symbol> , </symbol>')
+      tokenized_lines[index] = "  #{tl}" unless TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
       # finding all commas between expressionList
-      commas << index if tl.include?('<symbol> , </symbol>')
+      commas << index if TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
     end
     commas = commas.sort!.reverse! # bottom up so as to avoir recalculating indexes
 
@@ -478,9 +485,9 @@ def apply_terms(tokenized_lines)
     tokenized_lines.each_with_index do |tl, index|
       next unless index > index_pair[:open] && index < index_pair[:close]
       # applying offset in advance
-      tokenized_lines[index] = "  #{tl}" unless tl.include?('<symbol>')
+      tokenized_lines[index] = "  #{tl}" unless TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
       # finding all commas between expressionList
-      commas << index if tl.include?('<symbol>')
+      commas << index if TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
     end
     commas = commas.sort!.reverse! # bottom up so as to avoir recalculating indexes
 
