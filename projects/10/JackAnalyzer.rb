@@ -214,33 +214,7 @@ def apply_non_terminal_elements(tokenized_lines)
   ]
 
   non_terminal_elements.each do |non_terminal_element|
-    elements_indexes = []
-
-    tokenized_lines.each_with_index do |line, index|
-      if line.include?(non_terminal_element[:keyword])
-        elements_indexes << { open: index, open_close_count: 0 }
-      end
-
-      # getting the latest opening element
-      current_element = elements_indexes.select { |e| !e[:close] }.sort_by { |e|e[:open] }.last
-
-      if line.include?(non_terminal_element[:opener]) && current_element
-        current_element[:open_close_count] += 1
-
-      elsif line.include?(non_terminal_element[:closer]) && current_element &&
-        (
-          (!non_terminal_element[:next_line_cancelling_one_closer]) ||
-          (!tokenized_lines[index + 1].include?(non_terminal_element[:next_line_cancelling_one_closer]))
-        )
-
-
-        current_element[:open_close_count] -= 1
-
-        if current_element[:open_close_count] == 0
-          current_element[:close] = index
-        end
-      end
-    end
+    elements_indexes = find_elements_indexes(non_terminal_element, tokenized_lines)
 
     elements_indexes.each do |indexes|
       tokenized_lines = apply_non_terminal_element(tokenized_lines, indexes, non_terminal_element)
@@ -515,6 +489,37 @@ def apply_terms(tokenized_lines)
   return tokenized_lines
 end
 
+def find_elements_indexes(non_terminal_element, tokenized_lines)
+  elements_indexes = []
+
+  tokenized_lines.each_with_index do |line, index|
+    if line.include?(non_terminal_element[:keyword])
+      elements_indexes << { open: index, open_close_count: 0 }
+    end
+
+    # getting the latest opening element
+    current_element = elements_indexes.select { |e| !e[:close] }.sort_by { |e|e[:open] }.last
+
+    if line.include?(non_terminal_element[:opener]) && current_element
+      current_element[:open_close_count] += 1
+
+    elsif line.include?(non_terminal_element[:closer]) && current_element &&
+      (
+        (!non_terminal_element[:next_line_cancelling_one_closer]) ||
+        (!tokenized_lines[index + 1].include?(non_terminal_element[:next_line_cancelling_one_closer]))
+      )
+
+
+      current_element[:open_close_count] -= 1
+
+      if current_element[:open_close_count] == 0
+        current_element[:close] = index
+      end
+    end
+  end
+
+  return elements_indexes.map{|e|{open: e[:open], close: e[:close]}}.sort_by{|e|e[:open]}.reverse!
+end
 
 def find_elements_indexes_for_expression(expression, tokenized_lines)
   elements_indexes = []
