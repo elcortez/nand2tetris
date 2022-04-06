@@ -173,10 +173,16 @@
               <expression>
                 <term>
                   <identifier> i </identifier>
-                  <symbol> * </symbol>
+                </term>
+                <symbol> * </symbol>
+                <term>
                   <symbol> ( </symbol>
-                  <symbol> - </symbol>
-                  <identifier> j </identifier>
+                  <expression>
+                    <term>
+                      <symbol> - </symbol>
+                      <identifier> j </identifier>
+                    </term>
+                  </expression>
                   <symbol> ) </symbol>
                 </term>
               </expression>

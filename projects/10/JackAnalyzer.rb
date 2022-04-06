@@ -15,6 +15,7 @@ TERMS_SEPARATORS = [
   '<symbol> &gt; </symbol>',
   '<symbol> &lt; </symbol>',
   '<symbol> | </symbol>',
+  '<symbol> * </symbol>'
 ]
 
 KEYWORDS = [
@@ -394,6 +395,13 @@ def apply_basic_expressions(tokenized_lines)
       opening_element: '<expression>',
       closing_element: '</expression>',
     },
+    {
+      keyword: '<symbol> * </symbol>',
+      opener: '<symbol> ( </symbol>',
+      closer: '<symbol> ) </symbol>',
+      opening_element: '<expression>',
+      closing_element: '</expression>',
+    },
   ]
 
   expressions.each do |expression|
@@ -505,7 +513,6 @@ def find_elements_indexes(non_terminal_element, tokenized_lines)
   tokenized_lines.each_with_index do |line, index|
     if line.include?(non_terminal_element[:keyword])
       elements_indexes << { open: index, open_close_count: 0 }
-      # p "----------------- OPEN #{non_terminal_element[:keyword]} index #{index} line #{line} elements #{elements_indexes.select { |e| !e[:close] }}" if non_terminal_element[:opener] == '<expression>'
     end
 
     # getting the latest opening element
@@ -513,21 +520,16 @@ def find_elements_indexes(non_terminal_element, tokenized_lines)
 
     if line.include?(non_terminal_element[:opener]) && current_element
       current_element[:open_close_count] += 1
-      # p "+ #{non_terminal_element[:opener]} index #{index} line #{line} elements #{current_element}" if non_terminal_element[:opener] == '<expression>'
 
     elsif line.include?(non_terminal_element[:closer]) && current_element &&
       (
         (!non_terminal_element[:next_line_cancelling_one_closer]) ||
         (!tokenized_lines[index + 1].include?(non_terminal_element[:next_line_cancelling_one_closer]))
       )
-
-
       current_element[:open_close_count] -= 1
-      # p "- #{non_terminal_element[:closer]} index #{index} line #{line} elements #{current_element}" if non_terminal_element[:opener] == '<expression>'
 
       if current_element[:open_close_count] == 0
         current_element[:close] = index
-        # p "CLOSE #{non_terminal_element[:closer]} index #{index} line #{line} elements #{current_element}" if non_terminal_element[:opener] == '<expression>'
       end
     end
   end
