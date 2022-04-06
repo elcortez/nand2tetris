@@ -595,11 +595,11 @@ jack_files.each do |jack_file|
   extension = testing_tokenizer_only ? 'T.xml' : '.xml'
   test_file_name = jack_file.gsub(/.jack/, extension)
   p "Testing file #{test_file_name} vs #{xml_file_name}"
-  test_file_lines = File.open(test_file_name).each_line.to_a.map(&:strip)
-  xml_file_lines = File.open(xml_file_name).each_line.to_a.map(&:strip)
+  test_file_lines = File.open(test_file_name).each_line.to_a
+  xml_file_lines = File.open(xml_file_name).each_line.to_a
 
   xml_file_lines.each_with_index do |line, index|
-    next if line == test_file_lines[index]
+    next if line.delete("\r\n") == test_file_lines[index].delete("\r\n")
     break p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
   end
 end
