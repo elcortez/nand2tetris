@@ -195,7 +195,9 @@
               <expression>
                 <term>
                   <identifier> j </identifier>
-                  <symbol> / </symbol>
+                </term>
+                <symbol> / </symbol>
+                <term>
                   <symbol> ( </symbol>
                   <symbol> - </symbol>
                   <integerConstant> 2 </integerConstant>

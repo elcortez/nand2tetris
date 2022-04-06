@@ -15,7 +15,8 @@ TERMS_SEPARATORS = [
   '<symbol> &gt; </symbol>',
   '<symbol> &lt; </symbol>',
   '<symbol> | </symbol>',
-  '<symbol> * </symbol>'
+  '<symbol> * </symbol>',
+  '<symbol> / </symbol>'
 ]
 
 KEYWORDS = [
