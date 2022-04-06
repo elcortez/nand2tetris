@@ -148,14 +148,16 @@
               <symbol> ] </symbol>
               <symbol> = </symbol>
               <expression>
-                <identifier> a </identifier>
-                <symbol> [ </symbol>
-                <expression>
-                  <term>
-                    <integerConstant> 2 </integerConstant>
-                  </term>
-                </expression>
-                <symbol> ] </symbol>
+                <term>
+                  <identifier> a </identifier>
+                  <symbol> [ </symbol>
+                  <expression>
+                    <term>
+                      <integerConstant> 2 </integerConstant>
+                    </term>
+                  </expression>
+                  <symbol> ] </symbol>
+                </term>
               </expression>
               <symbol> ; </symbol>
             </letStatement>

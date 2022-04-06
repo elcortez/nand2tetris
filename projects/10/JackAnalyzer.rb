@@ -460,7 +460,17 @@ def apply_terms(tokenized_lines)
     opener: '<expression>',
     closer: '</expression>'
   }
-  indexes = find_elements_indexes_for_expression(expression, tokenized_lines)
+
+  indexes = find_elements_indexes(expression, tokenized_lines)
+
+  indexes.each do |i|
+    nested = indexes.select {|i2| i2[:close] < i[:close] && i2[:open] > i[:open] }
+    next if nested.empty?
+    # We already sorted indexes by [:open], so we start by the nested expression
+    # If there is a nested expression, we need to add +2 to the [:close] index
+    # of the nestING expression, because we will add two lines for the nestED one
+    nested.each { |_nested| i[:close] += 2 }
+  end
 
   # finding all indexes of expressionList
   indexes.each do |index_pair|
@@ -495,6 +505,7 @@ def find_elements_indexes(non_terminal_element, tokenized_lines)
   tokenized_lines.each_with_index do |line, index|
     if line.include?(non_terminal_element[:keyword])
       elements_indexes << { open: index, open_close_count: 0 }
+      # p "----------------- OPEN #{non_terminal_element[:keyword]} index #{index} line #{line} elements #{elements_indexes.select { |e| !e[:close] }}" if non_terminal_element[:opener] == '<expression>'
     end
 
     # getting the latest opening element
@@ -502,6 +513,7 @@ def find_elements_indexes(non_terminal_element, tokenized_lines)
 
     if line.include?(non_terminal_element[:opener]) && current_element
       current_element[:open_close_count] += 1
+      # p "+ #{non_terminal_element[:opener]} index #{index} line #{line} elements #{current_element}" if non_terminal_element[:opener] == '<expression>'
 
     elsif line.include?(non_terminal_element[:closer]) && current_element &&
       (
@@ -511,9 +523,11 @@ def find_elements_indexes(non_terminal_element, tokenized_lines)
 
 
       current_element[:open_close_count] -= 1
+      # p "- #{non_terminal_element[:closer]} index #{index} line #{line} elements #{current_element}" if non_terminal_element[:opener] == '<expression>'
 
       if current_element[:open_close_count] == 0
         current_element[:close] = index
+        # p "CLOSE #{non_terminal_element[:closer]} index #{index} line #{line} elements #{current_element}" if non_terminal_element[:opener] == '<expression>'
       end
     end
   end
@@ -600,6 +614,6 @@ jack_files.each do |jack_file|
 
   xml_file_lines.each_with_index do |line, index|
     next if line.delete("\r\n") == test_file_lines[index].delete("\r\n")
-    break p "Discrepancy found on line #{index + 1} : #{line} vs #{test_file_lines[index]}"
+    break p "Discrepancy found on line #{index + 1} : #{line} ---------- vs ---------- #{test_file_lines[index]}"
   end
 end
