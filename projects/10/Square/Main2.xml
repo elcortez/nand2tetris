@@ -199,8 +199,12 @@
                 <symbol> / </symbol>
                 <term>
                   <symbol> ( </symbol>
-                  <symbol> - </symbol>
-                  <integerConstant> 2 </integerConstant>
+                  <expression>
+                    <term>
+                      <symbol> - </symbol>
+                      <integerConstant> 2 </integerConstant>
+                    </term>
+                  </expression>
                   <symbol> ) </symbol>
                 </term>
               </expression>

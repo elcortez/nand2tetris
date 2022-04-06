@@ -368,6 +368,13 @@ def apply_basic_expressions(tokenized_lines)
       opening_element: '<expression>',
       closing_element: '</expression>',
     },
+    { # not 100% sure about this one
+      keyword: '<symbol> / </symbol>',
+      opener: '<symbol> ( </symbol>',
+      closer: '<symbol> ) </symbol>',
+      opening_element: '<expression>',
+      closing_element: '</expression>',
+    },
     {
       keyword: '<keyword> if </keyword>',
       opener: '<symbol> ( </symbol>',
