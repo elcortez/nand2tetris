@@ -180,7 +180,9 @@
                   <expression>
                     <term>
                       <symbol> - </symbol>
-                      <identifier> j </identifier>
+                      <term>
+                        <identifier> j </identifier>
+                      </term>
                     </term>
                   </expression>
                   <symbol> ) </symbol>
@@ -202,7 +204,9 @@
                   <expression>
                     <term>
                       <symbol> - </symbol>
-                      <integerConstant> 2 </integerConstant>
+                      <term>
+                        <integerConstant> 2 </integerConstant>
+                      </term>
                     </term>
                   </expression>
                   <symbol> ) </symbol>

@@ -515,6 +515,57 @@ def apply_terms(tokenized_lines)
   return tokenized_lines
 end
 
+def apply_specific_minus_terms(tokenized_lines)
+  terms = [
+    {
+      opener: '<symbol> = </symbol>',
+      opener_bis: '<symbol> ( </symbol>',
+      closer: '<symbol> - </symbol>',
+      closer_bis: '<symbol> ; </symbol>'
+    }
+  ]
+
+  terms_indexes = []
+
+  terms.each do |term|
+    opened = false
+    open_close_count = 0
+    open_close_count_bis = 0
+    potential_index = nil
+    tokenized_lines.each_with_index do |tl, index|
+      if tl.include?(term[:opener])
+        open_close_count += 1
+        opened = true
+      elsif tl.include?(term[:opener_bis]) && opened
+        open_close_count_bis += 1
+      elsif tl.include?(term[:closer]) && open_close_count > 0 && opened
+        potential_index = index
+        open_close_count -= 1
+      elsif tl.include?(term[:closer_bis]) && open_close_count_bis > 0 && opened
+        open_close_count_bis -= 1
+        if open_close_count == 0 && open_close_count_bis == 0
+          terms_indexes << potential_index
+          potential_index = nil
+        end
+      elsif tl.include?(term[:closer_bis])
+        opened = false
+        open_close_count = 0
+        open_close_count_bis = 0
+        potential_index = nil
+      end
+    end
+  end
+
+  terms_indexes.sort!.reverse!.each do |term_index|
+    offset = tokenized_lines[term_index].split('<').first
+    tokenized_lines.insert(term_index + 2, "#{offset}</term>")
+    tokenized_lines.insert(term_index + 1, "#{offset}<term>")
+    tokenized_lines[term_index + 2] = "  #{tokenized_lines[term_index + 2]}"
+  end
+
+  return tokenized_lines
+end
+
 def find_elements_indexes(non_terminal_element, tokenized_lines)
   elements_indexes = []
 
@@ -589,6 +640,7 @@ def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
     tokenized_lines = apply_basic_expressions(tokenized_lines)
     tokenized_lines = apply_nested_expressions(tokenized_lines)
     tokenized_lines = apply_terms(tokenized_lines)
+    tokenized_lines = apply_specific_minus_terms(tokenized_lines)
   end
 
   tokenized_lines.flatten.each do |xml_command|
