@@ -362,6 +362,14 @@ def apply_basic_expressions(tokenized_lines)
       closing_element: '</expressionList>',
     },
     {
+      keyword: '<symbol> . </symbol>',
+      additional_keyword: '<identifier> readInt </identifier>',
+      opener: '<symbol> ( </symbol>',
+      closer: '<symbol> ) </symbol>',
+      opening_element: '<expressionList>',
+      closing_element: '</expressionList>',
+    },
+    {
       keyword: '<keyword> let </keyword>',
       opener: '<symbol> = </symbol>',
       closer: '<symbol> ; </symbol>',
