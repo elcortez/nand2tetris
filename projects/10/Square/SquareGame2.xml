@@ -36,15 +36,27 @@
               <identifier> new </identifier>
               <symbol> ( </symbol>
               <expressionList>
-                <integerConstant> 0 </integerConstant>
+                <expression>
+                  <term>
+                    <integerConstant> 0 </integerConstant>
+                  </term>
+                </expression>
             </term>
               <symbol> , </symbol>
             <term>
-                <integerConstant> 0 </integerConstant>
+                <expression>
+                  <term>
+                    <integerConstant> 0 </integerConstant>
+                  </term>
+                </expression>
             </term>
               <symbol> , </symbol>
             <term>
-                <integerConstant> 30 </integerConstant>
+                <expression>
+                  <term>
+                    <integerConstant> 30 </integerConstant>
+                  </term>
+                </expression>
               </expressionList>
               <symbol> ) </symbol>
             </term>

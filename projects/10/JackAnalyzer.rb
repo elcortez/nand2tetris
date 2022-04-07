@@ -444,35 +444,50 @@ def apply_basic_expressions(tokenized_lines)
 end
 
 def apply_nested_expressions(tokenized_lines)
-  expression = {
-    keyword: '<keyword> do </keyword>',
-    opener: '<expressionList>',
-    closer: '</expressionList>'
-  }
-  indexes = find_elements_indexes_for_expression(expression, tokenized_lines)
+  expressions = [
+    {
+      keyword: '<keyword> do </keyword>',
+      opener: '<expressionList>',
+      closer: '</expressionList>'
+    },
+    {
+      keyword: '<identifier> readInt </identifier>',
+      opener: '<expressionList>',
+      closer: '</expressionList>'
+    },
+    {
+      keyword: '<identifier> new </identifier>',
+      opener: '<expressionList>',
+      closer: '</expressionList>'
+    }
+  ]
 
-  # finding all indexes of expressionList
-  indexes.each do |index_pair|
-    next if index_pair[:close] == index_pair[:open] + 1
-    commas = []
-    tokenized_lines.each_with_index do |tl, index|
-      next unless index > index_pair[:open] && index < index_pair[:close]
-      # applying offset in advance
-      tokenized_lines[index] = "  #{tl}" unless TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
-      # finding all commas between expressionList
-      commas << index if TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
+  expressions.each do |expression|
+    indexes = find_elements_indexes_for_expression(expression, tokenized_lines)
+
+    # finding all indexes of expressionList
+    indexes.each do |index_pair|
+      next if index_pair[:close] == index_pair[:open] + 1
+      commas = []
+      tokenized_lines.each_with_index do |tl, index|
+        next unless index > index_pair[:open] && index < index_pair[:close]
+        # applying offset in advance
+        tokenized_lines[index] = "  #{tl}" unless TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
+        # finding all commas between expressionList
+        commas << index if TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
+      end
+      commas = commas.sort!.reverse! # bottom up so as to avoir recalculating indexes
+
+      offset = tokenized_lines[index_pair[:close]].split('<').first
+
+      # inserting
+      tokenized_lines.insert(index_pair[:close], "#{offset}  </expression>")
+      commas.each do |comma|
+        tokenized_lines.insert(comma + 1, "#{offset}  <expression>")
+        tokenized_lines.insert(comma, "#{offset}  </expression>")
+      end
+      tokenized_lines.insert(index_pair[:open] + 1, "#{offset}  <expression>")
     end
-    commas = commas.sort!.reverse! # bottom up so as to avoir recalculating indexes
-
-    offset = tokenized_lines[index_pair[:close]].split('<').first
-
-    # inserting
-    tokenized_lines.insert(index_pair[:close], "#{offset}  </expression>")
-    commas.each do |comma|
-      tokenized_lines.insert(comma + 1, "#{offset}  <expression>")
-      tokenized_lines.insert(comma, "#{offset}  </expression>")
-    end
-    tokenized_lines.insert(index_pair[:open] + 1, "#{offset}  <expression>")
   end
 
   return tokenized_lines
