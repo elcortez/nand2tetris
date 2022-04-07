@@ -254,9 +254,7 @@
               <term>
                 <identifier> sum </identifier>
               </term>
-            </expression>
-            <symbol> / </symbol>
-            <expression>
+              <symbol> / </symbol>
               <term>
                 <identifier> length </identifier>
               </term>

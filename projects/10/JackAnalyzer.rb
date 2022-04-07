@@ -10,6 +10,10 @@ XML_IDENTIFIERS = {
   '&' => '&amp;'
 }
 
+EXPRESSIONS_SEPARATORS = [
+  '<symbol> , </symbol>',
+]
+
 TERMS_SEPARATORS = [
   '<symbol> , </symbol>',
   '<symbol> &gt; </symbol>',
@@ -473,9 +477,9 @@ def apply_nested_expressions(tokenized_lines)
       tokenized_lines.each_with_index do |tl, index|
         next unless index > index_pair[:open] && index < index_pair[:close]
         # applying offset in advance
-        tokenized_lines[index] = "  #{tl}" unless TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
+        tokenized_lines[index] = "  #{tl}" unless EXPRESSIONS_SEPARATORS.any?{|ts|tl.include?(ts)}
         # finding all commas between expressionList
-        commas << index if TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
+        commas << index if EXPRESSIONS_SEPARATORS.any?{|ts|tl.include?(ts)}
       end
       commas = commas.sort!.reverse! # bottom up so as to avoir recalculating indexes
 
