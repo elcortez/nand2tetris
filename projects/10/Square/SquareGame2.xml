@@ -340,15 +340,17 @@
                   <identifier> key </identifier>
                   <symbol> = </symbol>
                   <expression>
-                    <term>
+                  <term>
                       <identifier> Keyboard </identifier>
                       <symbol> . </symbol>
                       <identifier> keyPressed </identifier>
                       <symbol> ( </symbol>
+                        <expression>
+                        </expression>
                       <symbol> ) </symbol>
-                    </term>
-                  </expression>
-                  <symbol> ; </symbol>
+                    </expression>
+                    <symbol> ; </symbol>
+                  </term>
                 </letStatement>
                 <doStatement>
                   <keyword> do </keyword>
@@ -558,9 +560,13 @@
                 <term>
                   <symbol> ~ </symbol>
                   <symbol> ( </symbol>
-                  <identifier> key </identifier>
-                  <symbol> = </symbol>
-                  <integerConstant> 0 </integerConstant>
+                    <expression>
+                      <term>
+                      <identifier> key </identifier>
+                      <symbol> = </symbol>
+                      <integerConstant> 0 </integerConstant>
+                      </term>
+                    </expression>
                   <symbol> ) </symbol>
                 </term>
               </expression>
@@ -572,15 +578,17 @@
                   <identifier> key </identifier>
                   <symbol> = </symbol>
                   <expression>
-                    <term>
+                  <term>
                       <identifier> Keyboard </identifier>
                       <symbol> . </symbol>
                       <identifier> keyPressed </identifier>
                       <symbol> ( </symbol>
+                        <expression>
+                        </expression>
                       <symbol> ) </symbol>
-                    </term>
-                  </expression>
-                  <symbol> ; </symbol>
+                    </expression>
+                    <symbol> ; </symbol>
+                  </term>
                 </letStatement>
                 <doStatement>
                   <keyword> do </keyword>

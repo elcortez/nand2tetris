@@ -498,6 +498,65 @@ def apply_nested_expressions(tokenized_lines)
   return tokenized_lines
 end
 
+def apply_nested_parenthesis_expressions(tokenized_lines)
+  indexes = find_nested_parenthesis_indexes(tokenized_lines)
+
+  indexes.each do |i|
+    nested = indexes.select { |i2| i2[:close] < i[:close] && i2[:open] > i[:open] }
+    next if nested.empty?
+    # We already sorted indexes by [:open], so we start by the nested expression
+    # If there is a nested expression, we need to add +2 to the [:close] index
+    # of the nestING expression, because we will add two lines for the nestED one
+    nested.each { |_nested| i[:close] += 2 }
+  end
+
+  indexes.each do |index_pair|
+    offset = tokenized_lines[index_pair[:close]].split('<').first
+
+    # inserting
+    tokenized_lines.insert(index_pair[:close], "#{offset}</expression>")
+    tokenized_lines.insert(index_pair[:open] + 1, "#{offset}<expression>")
+    tokenized_lines.each_with_index do |tl, index|
+      next unless index > index_pair[:open] && index < index_pair[:close] + 2
+      tokenized_lines[index] = "  #{tokenized_lines[index]}"
+    end
+  end
+
+  return tokenized_lines
+end
+
+def find_nested_parenthesis_indexes(tokenized_lines)
+  indexes = []
+
+  should_be_after_parenthesis = [
+    '<expressionList>',
+    '<parameterList>',
+    '<expression>'
+  ]
+
+  tokenized_lines.each_with_index do |tl, index|
+    if tl.include?('<symbol> ( </symbol>') && !should_be_after_parenthesis.any? { |sb| tokenized_lines[index + 1].include?(sb) }
+      indexes << { open: index, open_close_count: 0 }
+    end
+
+    current_element = indexes.select { |e| !e[:close] }.sort_by { |e|e[:open] }.last
+
+    if tl.include?('<symbol> ( </symbol>') && current_element
+      current_element[:open_close_count] += 1
+
+    elsif tl.include?('<symbol> ) </symbol>') && current_element
+      current_element[:open_close_count] -= 1
+
+      if current_element[:open_close_count] == 0
+        current_element[:close] = index
+        current_element = nil
+      end
+    end
+  end
+
+  return indexes.sort_by!{|e|e[:open]}.reverse!
+end
+
 def apply_terms(tokenized_lines)
   expression = {
     keyword: '<expression>',
@@ -506,7 +565,6 @@ def apply_terms(tokenized_lines)
   }
 
   indexes = find_elements_indexes(expression, tokenized_lines)
-
   indexes.each do |i|
     nested = indexes.select {|i2| i2[:close] < i[:close] && i2[:open] > i[:open] }
     next if nested.empty?
@@ -667,6 +725,7 @@ def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
     tokenized_lines = apply_statements(tokenized_lines)
     tokenized_lines = apply_basic_expressions(tokenized_lines)
     tokenized_lines = apply_nested_expressions(tokenized_lines)
+    tokenized_lines = apply_nested_parenthesis_expressions(tokenized_lines)
     tokenized_lines = apply_terms(tokenized_lines)
     tokenized_lines = apply_specific_minus_terms(tokenized_lines)
   end
