@@ -345,8 +345,8 @@
                       <symbol> . </symbol>
                       <identifier> keyPressed </identifier>
                       <symbol> ( </symbol>
-                        <expression>
-                        </expression>
+                      <expression>
+                      </expression>
                       <symbol> ) </symbol>
                     </expression>
                     <symbol> ; </symbol>
@@ -560,13 +560,13 @@
                 <term>
                   <symbol> ~ </symbol>
                   <symbol> ( </symbol>
-                    <expression>
-                      <term>
+                  <expression>
+                    <term>
                       <identifier> key </identifier>
                       <symbol> = </symbol>
                       <integerConstant> 0 </integerConstant>
-                      </term>
-                    </expression>
+                    </term>
+                  </expression>
                   <symbol> ) </symbol>
                 </term>
               </expression>
@@ -583,8 +583,8 @@
                       <symbol> . </symbol>
                       <identifier> keyPressed </identifier>
                       <symbol> ( </symbol>
-                        <expression>
-                        </expression>
+                      <expression>
+                      </expression>
                       <symbol> ) </symbol>
                     </expression>
                     <symbol> ; </symbol>

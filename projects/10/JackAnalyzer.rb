@@ -517,7 +517,7 @@ def apply_nested_parenthesis_expressions(tokenized_lines)
     tokenized_lines.insert(index_pair[:close], "#{offset}</expression>")
     tokenized_lines.insert(index_pair[:open] + 1, "#{offset}<expression>")
     tokenized_lines.each_with_index do |tl, index|
-      next unless index > index_pair[:open] && index < index_pair[:close] + 2
+      next unless index > index_pair[:open] + 1 && index < index_pair[:close] + 1
       tokenized_lines[index] = "  #{tokenized_lines[index]}"
     end
   end
