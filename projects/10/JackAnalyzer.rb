@@ -829,7 +829,7 @@ jack_files.each do |jack_file|
     xml_file.puts('</tokens>') if testing_tokenizer_only
   end
 
-  return unless testing
+  next unless testing
 
   extension = testing_tokenizer_only ? 'T.xml' : '.xml'
   test_file_name = jack_file.gsub(/.jack/, extension)
