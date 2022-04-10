@@ -173,9 +173,7 @@
               <expression>
                 <term>
                   <identifier> i </identifier>
-                </term>
-                <symbol> * </symbol>
-                <term>
+                  <symbol> * </symbol>
                   <symbol> ( </symbol>
                   <expression>
                     <term>
@@ -197,9 +195,7 @@
               <expression>
                 <term>
                   <identifier> j </identifier>
-                </term>
-                <symbol> / </symbol>
-                <term>
+                  <symbol> / </symbol>
                   <symbol> ( </symbol>
                   <expression>
                     <term>
@@ -221,9 +217,7 @@
               <expression>
                 <term>
                   <identifier> i </identifier>
-                </term>
-                <symbol> | </symbol>
-                <term>
+                  <symbol> | </symbol>
                   <identifier> j </identifier>
                 </term>
               </expression>

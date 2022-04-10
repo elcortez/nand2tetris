@@ -182,9 +182,7 @@
               <expression>
                 <term>
                   <identifier> i </identifier>
-                </term>
-                <symbol> | </symbol>
-                <term>
+                  <symbol> | </symbol>
                   <identifier> j </identifier>
                 </term>
               </expression>

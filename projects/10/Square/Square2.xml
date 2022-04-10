@@ -174,9 +174,7 @@
             <expression>
               <term>
                 <identifier> x </identifier>
-              </term>
-              <symbol> + </symbol>
-              <term>
+                <symbol> + </symbol>
                 <identifier> size </identifier>
               </term>
             </expression>
@@ -184,9 +182,7 @@
             <expression>
               <term>
                 <identifier> y </identifier>
-              </term>
-              <symbol> + </symbol>
-              <term>
+                <symbol> + </symbol>
                 <identifier> size </identifier>
               </term>
             </expression>
@@ -251,9 +247,7 @@
             <expression>
               <term>
                 <identifier> x </identifier>
-              </term>
-              <symbol> + </symbol>
-              <term>
+                <symbol> + </symbol>
                 <identifier> size </identifier>
               </term>
             </expression>
@@ -261,9 +255,7 @@
             <expression>
               <term>
                 <identifier> y </identifier>
-              </term>
-              <symbol> + </symbol>
-              <term>
+                <symbol> + </symbol>
                 <identifier> size </identifier>
               </term>
             </expression>
@@ -294,55 +286,41 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-                    <term>
+              <term>
               <symbol> ( </symbol>
               <expression>
-                  <term>
+                <term>
                   <symbol> ( </symbol>
                   <expression>
                     <term>
                       <identifier> y </identifier>
-                    </term>
-                  </term>
-                    </term>
-                <symbol> + </symbol>
-                    <term>
-                  <term>
-                    <term>
+                      <symbol> + </symbol>
                       <identifier> size </identifier>
                     </term>
                   </expression>
                   <symbol> ) </symbol>
-                  </term>
-                    </term>
-              <symbol> &lt; </symbol>
-                    <term>
-                <integerConstant> 254 </integerConstant>
+                  <symbol> &lt; </symbol>
+                  <integerConstant> 254 </integerConstant>
+                </term>
               </expression>
               <symbol> ) </symbol>
               <symbol> &amp; </symbol>
               <symbol> ( </symbol>
               <expression>
-                  <term>
+                <term>
                   <symbol> ( </symbol>
                   <expression>
                     <term>
                       <identifier> x </identifier>
+                      <symbol> + </symbol>
+                      <identifier> size </identifier>
                     </term>
-                  </term>
-                    </term>
-                <symbol> + </symbol>
-                    <term>
-                  <term>
-                    </term>
-                  <term>
-                    <identifier> size </identifier>
-                  </term>
-                </expression>
-                <symbol> ) </symbol>
+                  </expression>
+                  <symbol> ) </symbol>
+                  <symbol> &lt; </symbol>
+                  <integerConstant> 510 </integerConstant>
                 </term>
-              <symbol> &lt; </symbol>
-              <integerConstant> 510 </integerConstant>
+              </term>
             </expression>
             <symbol> ) </symbol>
           </expression>
@@ -365,9 +343,7 @@
               <expression>
                 <term>
                   <identifier> size </identifier>
-                </term>
-                <symbol> + </symbol>
-                <term>
+                  <symbol> + </symbol>
                   <integerConstant> 2 </integerConstant>
                 </term>
               </expression>
@@ -410,9 +386,7 @@
           <expression>
             <term>
               <identifier> size </identifier>
-            </term>
-            <symbol> &gt; </symbol>
-            <term>
+              <symbol> &gt; </symbol>
               <integerConstant> 2 </integerConstant>
             </term>
           </expression>
@@ -478,9 +452,7 @@
           <expression>
             <term>
               <identifier> y </identifier>
-            </term>
-            <symbol> &gt; </symbol>
-            <term>
+              <symbol> &gt; </symbol>
               <integerConstant> 1 </integerConstant>
             </term>
           </expression>
@@ -517,31 +489,25 @@
                 </expression>
                 <symbol> , </symbol>
                 <expression>
-                    <term>
+                  <term>
                     <symbol> ( </symbol>
                     <expression>
                       <term>
                         <identifier> y </identifier>
-                      </term>
-                    </term>
-                    <symbol> + </symbol>
-                    <term>
-                      <term>
+                        <symbol> + </symbol>
                         <identifier> size </identifier>
                       </term>
                     </expression>
                     <symbol> ) </symbol>
-                    </term>
-                  <symbol> - </symbol>
-                  <integerConstant> 1 </integerConstant>
+                    <symbol> - </symbol>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
                     <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>
@@ -549,9 +515,7 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>
@@ -610,9 +574,7 @@
                 <expression>
                   <term>
                     <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>
@@ -620,9 +582,7 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <integerConstant> 1 </integerConstant>
                   </term>
                 </expression>
@@ -656,23 +616,19 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-              <term>
+            <term>
               <symbol> ( </symbol>
               <expression>
                 <term>
                   <identifier> y </identifier>
-                </term>
-              </term>
-              <symbol> + </symbol>
-              <term>
-                <term>
+                  <symbol> + </symbol>
                   <identifier> size </identifier>
                 </term>
               </expression>
               <symbol> ) </symbol>
-              </term>
-            <symbol> &lt; </symbol>
-            <integerConstant> 254 </integerConstant>
+              <symbol> &lt; </symbol>
+              <integerConstant> 254 </integerConstant>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -715,9 +671,7 @@
                 <expression>
                   <term>
                     <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>
@@ -725,9 +679,7 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <integerConstant> 1 </integerConstant>
                   </term>
                 </expression>
@@ -742,9 +694,7 @@
               <expression>
                 <term>
                   <identifier> y </identifier>
-                </term>
-                <symbol> + </symbol>
-                <term>
+                  <symbol> + </symbol>
                   <integerConstant> 2 </integerConstant>
                 </term>
               </expression>
@@ -780,31 +730,25 @@
                 </expression>
                 <symbol> , </symbol>
                 <expression>
-                    <term>
+                  <term>
                     <symbol> ( </symbol>
                     <expression>
                       <term>
                         <identifier> y </identifier>
-                      </term>
-                    </term>
-                    <symbol> + </symbol>
-                    <term>
-                      <term>
+                        <symbol> + </symbol>
                         <identifier> size </identifier>
                       </term>
                     </expression>
                     <symbol> ) </symbol>
-                    </term>
-                  <symbol> - </symbol>
-                  <integerConstant> 1 </integerConstant>
+                    <symbol> - </symbol>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
                     <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>
@@ -812,9 +756,7 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>
@@ -850,9 +792,7 @@
           <expression>
             <term>
               <identifier> x </identifier>
-            </term>
-            <symbol> &gt; </symbol>
-            <term>
+              <symbol> &gt; </symbol>
               <integerConstant> 1 </integerConstant>
             </term>
           </expression>
@@ -883,23 +823,19 @@
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
-                    <term>
+                  <term>
                     <symbol> ( </symbol>
                     <expression>
                       <term>
                         <identifier> x </identifier>
-                      </term>
-                    </term>
-                    <symbol> + </symbol>
-                    <term>
-                      <term>
+                        <symbol> + </symbol>
                         <identifier> size </identifier>
                       </term>
                     </expression>
                     <symbol> ) </symbol>
-                    </term>
-                  <symbol> - </symbol>
-                  <integerConstant> 1 </integerConstant>
+                    <symbol> - </symbol>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
@@ -911,9 +847,7 @@
                 <expression>
                   <term>
                     <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>
@@ -921,9 +855,7 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>
@@ -982,9 +914,7 @@
                 <expression>
                   <term>
                     <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <integerConstant> 1 </integerConstant>
                   </term>
                 </expression>
@@ -992,9 +922,7 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>
@@ -1028,23 +956,19 @@
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
-              <term>
+            <term>
               <symbol> ( </symbol>
               <expression>
                 <term>
                   <identifier> x </identifier>
-                </term>
-              </term>
-              <symbol> + </symbol>
-              <term>
-                <term>
+                  <symbol> + </symbol>
                   <identifier> size </identifier>
                 </term>
               </expression>
               <symbol> ) </symbol>
-              </term>
-            <symbol> &lt; </symbol>
-            <integerConstant> 510 </integerConstant>
+              <symbol> &lt; </symbol>
+              <integerConstant> 510 </integerConstant>
+            </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
@@ -1087,9 +1011,7 @@
                 <expression>
                   <term>
                     <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <integerConstant> 1 </integerConstant>
                   </term>
                 </expression>
@@ -1097,9 +1019,7 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>
@@ -1114,9 +1034,7 @@
               <expression>
                 <term>
                   <identifier> x </identifier>
-                </term>
-                <symbol> + </symbol>
-                <term>
+                  <symbol> + </symbol>
                   <integerConstant> 2 </integerConstant>
                 </term>
               </expression>
@@ -1146,23 +1064,19 @@
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
-                    <term>
+                  <term>
                     <symbol> ( </symbol>
                     <expression>
                       <term>
                         <identifier> x </identifier>
-                      </term>
-                    </term>
-                    <symbol> + </symbol>
-                    <term>
-                      <term>
+                        <symbol> + </symbol>
                         <identifier> size </identifier>
                       </term>
                     </expression>
                     <symbol> ) </symbol>
-                    </term>
-                  <symbol> - </symbol>
-                  <integerConstant> 1 </integerConstant>
+                    <symbol> - </symbol>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
@@ -1174,9 +1088,7 @@
                 <expression>
                   <term>
                     <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>
@@ -1184,9 +1096,7 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
+                    <symbol> + </symbol>
                     <identifier> size </identifier>
                   </term>
                 </expression>

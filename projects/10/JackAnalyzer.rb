@@ -577,28 +577,82 @@ def apply_terms(tokenized_lines)
   # finding all indexes of expressionList
   indexes.each do |index_pair|
     next if index_pair[:close] == index_pair[:open] + 1
-    commas = []
     tokenized_lines.each_with_index do |tl, index|
       next unless index > index_pair[:open] && index < index_pair[:close]
-      # applying offset in advance
-      tokenized_lines[index] = "  #{tl}" unless TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
-      # finding all commas between expressionList
-      commas << index if TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
+      tokenized_lines[index] = "  #{tl}" # applying offset in advance
     end
-    commas = commas.sort!.reverse! # bottom up so as to avoir recalculating indexes
 
     offset = tokenized_lines[index_pair[:close]].split('<').first
-
-    # inserting
     tokenized_lines.insert(index_pair[:close], "#{offset}  </term>")
-    commas.each do |comma|
-      tokenized_lines.insert(comma + 1, "#{offset}  <term>")
-      tokenized_lines.insert(comma, "#{offset}  </term>")
-    end
     tokenized_lines.insert(index_pair[:open] + 1, "#{offset}  <term>")
   end
 
   return tokenized_lines
+end
+
+
+def apply_nested_terms(tokenized_lines)
+  expression = {
+    keyword: '<term>',
+    opener: '<term>',
+    closer: '</term>'
+  }
+
+  indexes = find_elements_indexes(expression, tokenized_lines)
+  separators = []
+
+  indexes.each do |index_pair|
+    tokenized_lines.each_with_index do |tl, index|
+      next unless index >= index_pair[:open] && index <= index_pair[:close]
+      separators << index if TERMS_SEPARATORS.any?{ |ts| tl.include?(ts) }
+    end
+  end
+
+  return tokenized_lines if separators.length == 0
+  separators = separators.uniq.sort.reverse
+
+  # separators.each do |sep|
+  #   offset = tokenized_lines[sep].split('<').first[0..-3]
+  #   tokenized_lines[sep] = tokenized_lines[sep][2..-1]
+  #   tokenized_lines.insert(sep + 1, "#{offset}<term>")
+  #   tokenized_lines.insert(sep, "#{offset}</term>")
+  # end
+
+  # indexes.each do |i|
+  #   nested = indexes.select {|i2| i2[:close] < i[:close] && i2[:open] > i[:open] }
+  #   next if nested.empty?
+  #   # We already sorted indexes by [:open], so we start by the nested expression
+  #   # If there is a nested expression, we need to add +2 to the [:close] index
+  #   # of the nestING expression, because we will add two lines for the nestED one
+  #   nested.each { |_nested| i[:close] += 2 }
+  # end
+  #
+  # # finding all indexes of expressionList
+  # indexes.each do |index_pair|
+  #   next if index_pair[:close] == index_pair[:open] + 1
+  #   commas = []
+  #   tokenized_lines.each_with_index do |tl, index|
+  #     next unless index > index_pair[:open] && index < index_pair[:close]
+  #     # applying offset in advance
+  #     tokenized_lines[index] = "  #{tl}" unless TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
+  #     # finding all commas between expressionList
+  #     commas << index if TERMS_SEPARATORS.any?{|ts|tl.include?(ts)}
+  #   end
+  #   commas = commas.sort!.reverse! # bottom up so as to avoir recalculating indexes
+  #
+  #   offset = tokenized_lines[index_pair[:close]].split('<').first
+  #
+  #   # inserting
+  #   tokenized_lines.insert(index_pair[:close], "#{offset}  </term>")
+  #   commas.each do |comma|
+  #     tokenized_lines.insert(comma + 1, "#{offset}  <term>")
+  #     tokenized_lines.insert(comma, "#{offset}  </term>")
+  #   end
+  #   tokenized_lines.insert(index_pair[:open] + 1, "#{offset}  <term>")
+  # end
+
+  return tokenized_lines
+
 end
 
 def apply_specific_minus_terms(tokenized_lines)
@@ -728,6 +782,7 @@ def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
     tokenized_lines = apply_nested_parenthesis_expressions(tokenized_lines)
     tokenized_lines = apply_terms(tokenized_lines)
     tokenized_lines = apply_specific_minus_terms(tokenized_lines)
+    tokenized_lines = apply_nested_terms(tokenized_lines)
   end
 
   tokenized_lines.flatten.each do |xml_command|

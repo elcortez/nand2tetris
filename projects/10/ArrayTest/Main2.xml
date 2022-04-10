@@ -94,9 +94,7 @@
           <expression>
             <term>
               <identifier> i </identifier>
-            </term>
-            <symbol> &lt; </symbol>
-            <term>
+              <symbol> &lt; </symbol>
               <identifier> length </identifier>
             </term>
           </expression>
@@ -139,9 +137,7 @@
               <expression>
                 <term>
                   <identifier> i </identifier>
-                </term>
-                <symbol> + </symbol>
-                <term>
+                  <symbol> + </symbol>
                   <integerConstant> 1 </integerConstant>
                 </term>
               </expression>
@@ -178,9 +174,7 @@
           <expression>
             <term>
               <identifier> i </identifier>
-            </term>
-            <symbol> &lt; </symbol>
-            <term>
+              <symbol> &lt; </symbol>
               <identifier> length </identifier>
             </term>
           </expression>
@@ -194,9 +188,7 @@
               <expression>
                 <term>
                   <identifier> sum </identifier>
-                </term>
-                <symbol> + </symbol>
-                <term>
+                  <symbol> + </symbol>
                   <identifier> a </identifier>
                   <symbol> [ </symbol>
                   <expression>
@@ -216,9 +208,7 @@
               <expression>
                 <term>
                   <identifier> i </identifier>
-                </term>
-                <symbol> + </symbol>
-                <term>
+                  <symbol> + </symbol>
                   <integerConstant> 1 </integerConstant>
                 </term>
               </expression>
@@ -253,9 +243,7 @@
             <expression>
               <term>
                 <identifier> sum </identifier>
-              </term>
-              <symbol> / </symbol>
-              <term>
+                <symbol> / </symbol>
                 <identifier> length </identifier>
               </term>
             </expression>
