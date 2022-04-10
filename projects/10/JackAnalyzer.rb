@@ -652,12 +652,6 @@ def apply_specific_minus_terms(tokenized_lines)
       opener_bis: '<symbol> ( </symbol>',
       closer: '<symbol> - </symbol>',
       closer_bis: '<symbol> ; </symbol>'
-    },
-    {
-      opener: '<keyword> while </keyword>',
-      opener_bis: '<symbol> ( </symbol>',
-      closer: '<symbol> ~ </symbol>',
-      closer_bis: '<symbol> ) </symbol>'
     }
   ]
 
@@ -699,6 +693,36 @@ def apply_specific_minus_terms(tokenized_lines)
     tokenized_lines[term_index + 2] = "  #{tokenized_lines[term_index + 2]}"
   end
 
+  return tokenized_lines
+end
+
+def apply_specific_tilde_term(tokenized_lines)
+  indexes = tokenized_lines.each_index.select { |i| tokenized_lines[i].include?('<symbol> ~ </symbol>') }
+  indexes.sort.reverse.each do |i|
+    if tokenized_lines[i + 1].include?('<symbol> ( </symbol>')
+      # the whole set of lines between ( and ) are a term
+      opening_term_index = i + 1
+      closing_term_index = tokenized_lines.each_index.find {|i| i > opening_term_index && tokenized_lines[i].include?('<symbol> ) </symbol>') }
+
+      offset = tokenized_lines[closing_term_index].split('<').first
+
+      tokenized_lines.each_with_index do |tl, index|
+        next unless index >= opening_term_index && index <= closing_term_index
+        tokenized_lines[index] = "  #{tokenized_lines[index]}"
+      end
+
+      tokenized_lines.insert(closing_term_index + 1, "#{offset}</term>")
+      tokenized_lines.insert(opening_term_index, "#{offset}<term>")
+
+    else
+      # only the next element is a term in this case
+      next_term_index = i + 1
+      offset = tokenized_lines[next_term_index].split('<').first
+      tokenized_lines[next_term_index] = "  #{tokenized_lines[next_term_index]}"
+      tokenized_lines.insert(next_term_index + 1, "#{offset}</term>")
+      tokenized_lines.insert(next_term_index, "#{offset}<term>")
+    end
+  end
   return tokenized_lines
 end
 
@@ -777,8 +801,9 @@ def translate_jack_file_content(jack_file, xml_file, testing_tokenizer_only)
     tokenized_lines = apply_nested_expressions(tokenized_lines)
     tokenized_lines = apply_nested_parenthesis_expressions(tokenized_lines)
     tokenized_lines = apply_terms(tokenized_lines)
-    tokenized_lines = apply_specific_minus_terms(tokenized_lines)
     tokenized_lines = apply_nested_terms(tokenized_lines)
+    tokenized_lines = apply_specific_minus_terms(tokenized_lines)
+    tokenized_lines = apply_specific_tilde_term(tokenized_lines)
   end
 
   tokenized_lines.flatten.each do |xml_command|
