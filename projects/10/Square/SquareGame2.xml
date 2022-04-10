@@ -320,7 +320,9 @@
           <expression>
             <term>
               <symbol> ~ </symbol>
-              <identifier> exit </identifier>
+              <term>
+                <identifier> exit </identifier>
+              </term>
             </term>
           </expression>
           <symbol> ) </symbol>

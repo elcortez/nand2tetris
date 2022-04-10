@@ -644,6 +644,12 @@ def apply_specific_minus_terms(tokenized_lines)
       opener_bis: '<symbol> ( </symbol>',
       closer: '<symbol> - </symbol>',
       closer_bis: '<symbol> ; </symbol>'
+    },
+    {
+      opener: '<keyword> while </keyword>',
+      opener_bis: '<symbol> ( </symbol>',
+      closer: '<symbol> ~ </symbol>',
+      closer_bis: '<symbol> ) </symbol>'
     }
   ]
 
