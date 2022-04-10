@@ -146,7 +146,9 @@
           <expression>
             <term>
               <identifier> direction </identifier>
-              <symbol> = </symbol>
+            </term>
+            <symbol> = </symbol>
+            <term>
               <integerConstant> 1 </integerConstant>
             </term>
           </expression>
@@ -173,7 +175,9 @@
           <expression>
             <term>
               <identifier> direction </identifier>
-              <symbol> = </symbol>
+            </term>
+            <symbol> = </symbol>
+            <term>
               <integerConstant> 2 </integerConstant>
             </term>
           </expression>
@@ -200,7 +204,9 @@
           <expression>
             <term>
               <identifier> direction </identifier>
-              <symbol> = </symbol>
+            </term>
+            <symbol> = </symbol>
+            <term>
               <integerConstant> 3 </integerConstant>
             </term>
           </expression>
@@ -227,7 +233,9 @@
           <expression>
             <term>
               <identifier> direction </identifier>
-              <symbol> = </symbol>
+            </term>
+            <symbol> = </symbol>
+            <term>
               <integerConstant> 4 </integerConstant>
             </term>
           </expression>
@@ -324,7 +332,9 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                  <symbol> = </symbol>
+                </term>
+                <symbol> = </symbol>
+                <term>
                   <integerConstant> 0 </integerConstant>
                 </term>
               </expression>
@@ -366,7 +376,9 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                  <symbol> = </symbol>
+                </term>
+                <symbol> = </symbol>
+                <term>
                   <integerConstant> 81 </integerConstant>
                 </term>
               </expression>
@@ -393,7 +405,9 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                  <symbol> = </symbol>
+                </term>
+                <symbol> = </symbol>
+                <term>
                   <integerConstant> 90 </integerConstant>
                 </term>
               </expression>
@@ -420,7 +434,9 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                  <symbol> = </symbol>
+                </term>
+                <symbol> = </symbol>
+                <term>
                   <integerConstant> 88 </integerConstant>
                 </term>
               </expression>
@@ -447,7 +463,9 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                  <symbol> = </symbol>
+                </term>
+                <symbol> = </symbol>
+                <term>
                   <integerConstant> 131 </integerConstant>
                 </term>
               </expression>
@@ -474,7 +492,9 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                  <symbol> = </symbol>
+                </term>
+                <symbol> = </symbol>
+                <term>
                   <integerConstant> 133 </integerConstant>
                 </term>
               </expression>
@@ -501,7 +521,9 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                  <symbol> = </symbol>
+                </term>
+                <symbol> = </symbol>
+                <term>
                   <integerConstant> 130 </integerConstant>
                 </term>
               </expression>
@@ -528,7 +550,9 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
-                  <symbol> = </symbol>
+                </term>
+                <symbol> = </symbol>
+                <term>
                   <integerConstant> 132 </integerConstant>
                 </term>
               </expression>
@@ -559,7 +583,9 @@
                   <expression>
                     <term>
                       <identifier> key </identifier>
-                      <symbol> = </symbol>
+                    </term>
+                    <symbol> = </symbol>
+                    <term>
                       <integerConstant> 0 </integerConstant>
                     </term>
                   </expression>
