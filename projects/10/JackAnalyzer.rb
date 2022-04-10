@@ -378,6 +378,14 @@ def apply_basic_expressions(tokenized_lines)
       closing_element: '</expressionList>',
     },
     {
+      keyword: '<symbol> . </symbol>',
+      additional_keyword: '<identifier> keyPressed </identifier>',
+      opener: '<symbol> ( </symbol>',
+      closer: '<symbol> ) </symbol>',
+      opening_element: '<expressionList>',
+      closing_element: '</expressionList>',
+    },
+    {
       keyword: '<keyword> let </keyword>',
       opener: '<symbol> = </symbol>',
       closer: '<symbol> ; </symbol>',
@@ -569,7 +577,7 @@ def apply_terms(tokenized_lines)
 
   indexes = find_elements_indexes(expression, tokenized_lines)
   indexes.each do |i|
-    nested = indexes.select {|i2| i2[:close] < i[:close] && i2[:open] > i[:open] }
+    nested = indexes.select { |i2| i2[:close] < i[:close] && i2[:open] > i[:open] && (i2[:close] != i2[:open] + 1) }
     next if nested.empty?
     # We already sorted indexes by [:open], so we start by the nested expression
     # If there is a nested expression, we need to add +2 to the [:close] index

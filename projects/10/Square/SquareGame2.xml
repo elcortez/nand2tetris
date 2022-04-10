@@ -348,17 +348,17 @@
                   <identifier> key </identifier>
                   <symbol> = </symbol>
                   <expression>
-                  <term>
+                    <term>
                       <identifier> Keyboard </identifier>
                       <symbol> . </symbol>
                       <identifier> keyPressed </identifier>
                       <symbol> ( </symbol>
-                      <expression>
-                      </expression>
+                      <expressionList>
+                      </expressionList>
                       <symbol> ) </symbol>
-                    </expression>
-                    <symbol> ; </symbol>
-                  </term>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
                 </letStatement>
                 <doStatement>
                   <keyword> do </keyword>
@@ -602,17 +602,17 @@
                   <identifier> key </identifier>
                   <symbol> = </symbol>
                   <expression>
-                  <term>
+                    <term>
                       <identifier> Keyboard </identifier>
                       <symbol> . </symbol>
                       <identifier> keyPressed </identifier>
                       <symbol> ( </symbol>
-                      <expression>
-                      </expression>
+                      <expressionList>
+                      </expressionList>
                       <symbol> ) </symbol>
-                    </expression>
-                    <symbol> ; </symbol>
-                  </term>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
                 </letStatement>
                 <doStatement>
                   <keyword> do </keyword>
